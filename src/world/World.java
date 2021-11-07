@@ -57,7 +57,7 @@ public class World {
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_FLOOR);
                         break;
                     case 0xFFFFFFFF:
-                        tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_WALL);
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_WALL);
                         break;
                     case 0xFF4CFF00: // player
                         Game.player.setX(xx * TILE_SIZE);
