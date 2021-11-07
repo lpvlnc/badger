@@ -20,7 +20,7 @@ public class InitFrame {
     private JFrame frame;
     
     public InitFrame(Game game){
-        frame = new JFrame("Game #1");
+        frame = new JFrame("Badger");
         frame.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         frame.add(game);
         frame.setResizable(false);
