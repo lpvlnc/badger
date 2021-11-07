@@ -16,34 +16,38 @@ import world.World;
  * @author Leonardo
  */
 public class Player extends Entity {
-    // PLAYER GRAPHICS
     // sprites
     public BufferedImage[] playerUp;
     public BufferedImage[] playerLeft;
     public BufferedImage[] playerDown;
     public BufferedImage[] playerRight;
+    public BufferedImage[] playerUpDamaged;
+    public BufferedImage[] playerLeftDamaged;
+    public BufferedImage[] playerDownDamaged;
+    public BufferedImage[] playerRightDamaged;
 
-    // animation logic
+    // movement animation logic
+    public boolean up;
+    public boolean down;
+    public boolean left;
+    public boolean right;
     public boolean isMoving = false;
     public int index = 0;
     public int maxIndex = 5;
     public int frames = 0;
     public int maxFrames = 5;
     
-    // PLAYER POSITION
-    public boolean up;
-    public boolean down;
-    public boolean left;
-    public boolean right;
-    
+    // damage animation logic
+    public boolean damaged = true;
+    public boolean canBeDamaged = true;
+    public int damagedFrames = 0;
+    public int maxDamagedFrames = 60;
+
+    // attributes
     public int maxLife = 3;
     public int life = maxLife;
     public static int speed = 2;
     public boolean dead = false;
-    public boolean damaged = false;
-    public boolean canBeDamaged = true;
-    public int damagedFrames = 0;
-    public int maxDamagedFrames = 60;
     public int score = 0;
     public int highScore = 0;
     
@@ -51,10 +55,18 @@ public class Player extends Entity {
         super(x, y, width, height, sprite);
         
         setDepth(0);
+        initSprites();
+    }
+    
+    private void initSprites() {
         playerUp = new BufferedImage[4];
         playerLeft = new BufferedImage[6];
         playerDown = new BufferedImage[4];
         playerRight = new BufferedImage[6];
+        playerUpDamaged = new BufferedImage[4];
+        playerLeftDamaged = new BufferedImage[6];
+        playerDownDamaged = new BufferedImage[4];
+        playerRightDamaged = new BufferedImage[6];
         
         for (int i = 0; i < 4; i++) {
             playerUp[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 0, World.TILE_SIZE, World.TILE_SIZE);
@@ -65,11 +77,27 @@ public class Player extends Entity {
         }
         
         for (int i = 0; i < 4; i++){
-            playerDown[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 64, World.TILE_SIZE, World.TILE_SIZE);
+            playerDown[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 66, World.TILE_SIZE, World.TILE_SIZE);
         }
         
         for(int i = 0; i < 6; i++){
-            playerRight[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 96, World.TILE_SIZE, World.TILE_SIZE);
+            playerRight[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 98, World.TILE_SIZE, World.TILE_SIZE -2);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            playerUpDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 128, World.TILE_SIZE, World.TILE_SIZE);
+        }
+        
+        for (int i = 0; i < 6; i++) {
+            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 160, World.TILE_SIZE, World.TILE_SIZE);
+        }
+        
+        for (int i = 0; i < 4; i++){
+            playerDownDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 192, World.TILE_SIZE, World.TILE_SIZE);
+        }
+        
+        for(int i = 0; i < 6; i++){
+            playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 224, World.TILE_SIZE, World.TILE_SIZE);
         }
     }
     
@@ -111,8 +139,24 @@ public class Player extends Entity {
         }
     }
     
+    public void updateCamera(){
+        Camera.x = Camera.clamp(getX() - Game.WIDTH/ 2, 0, World.mapWidth * World.TILE_SIZE - Game.WIDTH);
+        Camera.y = Camera.clamp(getY() - Game.HEIGHT/ 2, 0, World.mapHeight * World.TILE_SIZE - Game.HEIGHT);
+    }
+    
     @Override
     public void update(){
+        if(score > highScore){
+            highScore = score;
+        }
+        
+        damageHandler();
+        movement();
+        animation();
+        updateCamera();
+    }
+    
+    public void damageHandler() {
         
         if(canBeDamaged){
             if(damaged){
@@ -128,65 +172,60 @@ public class Player extends Entity {
                 damagedFrames = 0;
                 canBeDamaged = true;
             }
-        
         }
         
         if(life <= 0){
             life = 0;
            Game.gameOver = true;
         }
-        
-        if(score > highScore){
-            highScore = score;
-        }
-
-        movement();
-        animation();
-        updateCamera();
+    }
+    
+    public void renderPlayerUp(Graphics g) {
+        if(isMoving) {
+            if (index > 3)
+                index = 0;
+            g.drawImage(playerUp[index], getX() - Camera.x, getY() - Camera.y, null);
+        } else
+            g.drawImage(playerUp[0], getX() - Camera.x, getY() - Camera.y, null);
+    }
+    
+    public void renderPlayerLeft(Graphics g) {
+        if(isMoving)
+            g.drawImage(playerLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+        else
+            g.drawImage(playerLeft[0], getX() - Camera.x, getY() - Camera.y, null);
+    }
+    
+    public void renderPlayerDown(Graphics g) {
+        if(isMoving) {
+            if (index > 3)
+                index = 0;
+            g.drawImage(playerDown[index], getX() - Camera.x, getY() - Camera.y, null);
+        } else
+            g.drawImage(playerDown[0], getX() - Camera.x, getY() - Camera.y, null);
+    }
+    
+    public void renderPlayerRight(Graphics g) {
+        if(isMoving)
+            g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
+        else
+            g.drawImage(playerRight[0], getX() - Camera.x, getY() - Camera.y, null);
     }
     
     @Override
-    public void render(Graphics g){
-        if(this.direction == Direction.UP) {
-            if(isMoving)
-            {
-                if (index > 3)
-                    index = 0;
-                g.drawImage(playerUp[index], getX() - Camera.x, getY() - Camera.y, null);
-            } else
-                g.drawImage(playerUp[0], getX() - Camera.x, getY() - Camera.y, null);
-        }
+    public void render(Graphics g) {
+        if(this.direction == Direction.UP)
+            renderPlayerUp(g);
         
-        if(this.direction == Direction.LEFT) {
-            if(isMoving)
-            {
-                g.drawImage(playerLeft[index], getX() - Camera.x, getY() - Camera.y, null);
-            }
-            else
-            {
-                g.drawImage(playerLeft[0], getX() - Camera.x, getY() - Camera.y, null);
-            }
-        }
+        if(this.direction == Direction.LEFT)
+            renderPlayerLeft(g);
             
-        if(this.direction == Direction.DOWN){
-            if(isMoving) {
-                if (index > 3)
-                    index = 0;
-                g.drawImage(playerDown[index], getX() - Camera.x, getY() - Camera.y, null);
-            } else
-                g.drawImage(playerDown[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(this.direction == Direction.DOWN) {
+            renderPlayerDown(g);
         }
         
-        if(this.direction == Direction.RIGHT){
-            if(isMoving)
-                g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
-            else
-                g.drawImage(playerRight[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(this.direction == Direction.RIGHT) {
+            renderPlayerRight(g);
         }
-    }
-    
-    public void updateCamera(){
-        Camera.x = Camera.clamp(getX() - Game.WIDTH/ 2, 0, World.mapWidth * World.TILE_SIZE - Game.WIDTH);
-        Camera.y = Camera.clamp(getY() - Game.HEIGHT/ 2, 0, World.mapHeight * World.TILE_SIZE - Game.HEIGHT);
     }
 }

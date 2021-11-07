@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable {
     private final InitFrame frame;
     public final static int WIDTH = 480;
     public final static int HEIGHT = 320;
-    public final  static int SCALE =  3;
+    public final  static int SCALE =  2;
     
     // Graphics
     private final BufferedImage image;

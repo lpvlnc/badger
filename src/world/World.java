@@ -5,6 +5,9 @@
  */
 package world;
 
+import entity.Chocolate;
+import entity.Parchment;
+import entity.Steroid;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -59,6 +62,15 @@ public class World {
                     case 0xFF4CFF00: // player
                         Game.player.setX(xx * TILE_SIZE);
                         Game.player.setY(yy * TILE_SIZE);
+                        break;
+                    case 0xFF72413b: // chocolate
+                        Game.entities.add(new Chocolate(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
+                    case 0xFFffd26d:
+                        Game.entities.add(new Parchment(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
+                    case 0xFF7507e2:
+                        Game.entities.add(new Steroid(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
                     default: // chão
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_FLOOR);
