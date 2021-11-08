@@ -19,4 +19,13 @@ public class Chocolate extends Entity {
         super(x, y, width, height, sprite);
         this.sprite = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
+    
+    public void update()
+    {
+        if(isColliding(this, Game.player))
+        {
+            Game.player.chocolate++;
+            Game.entities.remove(this);
+        }
+    }
 }

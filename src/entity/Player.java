@@ -44,12 +44,13 @@ public class Player extends Entity {
     public int maxDamagedFrames = 60;
 
     // attributes
-    public int maxLife = 3;
+    public int maxLife = 5;
     public int life = maxLife;
     public static int speed = 2;
     public boolean dead = false;
     public int score = 0;
     public int highScore = 0;
+    public int chocolate = 0;
     
     public Player(double x,double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);

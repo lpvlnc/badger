@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable {
     public static boolean restart = false;
     
     //Config
-    public static boolean showFps = false;
+    public static boolean showFps = true;
     public static boolean showHitBox = false;
     
     // KEYLISTENER 
@@ -125,11 +125,12 @@ public class Game extends Canvas implements Runnable {
             e.render(g);
         }
         
-        ui.render(g);
+        //ui.render(g);
         /* Game render end */
         g.dispose();
         g = bs.getDrawGraphics();
         g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+        ui.render(g);
         bs.show();
     }
     
