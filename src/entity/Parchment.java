@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
 import world.World;
@@ -28,5 +29,9 @@ public class Parchment extends Entity {
             Entity.addSparkle(this);
             Game.entities.remove(this);
         }
+    }
+    
+    public void render(Graphics g) {
+        
     }
 }
