@@ -23,6 +23,7 @@ public class Steroid extends Entity{
     public void update() {
         if (isColliding(this, Game.player)) {
             Game.player.steroid = true;
+            Entity.addSparkle(this);
             Game.entities.remove(this);
         }
     }

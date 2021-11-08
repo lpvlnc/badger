@@ -27,6 +27,7 @@ public class Chocolate extends Entity {
             Game.player.chocolate++;
             if (Game.player.life < 5)
                 Game.player.life++;
+            Entity.addSparkle(this);
             Game.entities.remove(this);
         }
     }

@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
+import main.Game;
 import world.Camera;
 import world.World;
 
@@ -84,6 +85,10 @@ public class Entity {
             return 0;
         }
     };
+    
+    public static void addSparkle(Entity e){
+        Game.entities.add(new Sparkle(e.getX(), e.getY(), World.TILE_SIZE, World.TILE_SIZE, null));
+    }
     
     public int getDepth() {
         return depth;
