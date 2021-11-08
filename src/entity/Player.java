@@ -57,6 +57,7 @@ public class Player extends Entity {
     public int score = 0;
     public int highScore = 0;
     public int chocolate = 0;
+    public int parchment = 0;
     
     // on steroid attributes
     public boolean steroid = false;
@@ -67,7 +68,7 @@ public class Player extends Entity {
     // weak attributes
     public boolean weak = false;
     public int weakSpeed = 1;
-    public int weakMaxTime = steroidMaxTime / 2;
+    public int weakMaxTime = steroidMaxTime;
     public int weakTime = 0;
     
     public Player(double x,double y, int width, int height, BufferedImage sprite) {
