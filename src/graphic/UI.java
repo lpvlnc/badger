@@ -16,6 +16,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.Spring.height;
 import main.Game;
+import world.World;
 
 /**
  *
@@ -31,38 +33,47 @@ import main.Game;
  */
 public class UI {
     private Graphics g;
+    public static BufferedImage heartBack;
     public static BufferedImage heart;
+    public static BufferedImage weakHeartBack;
+    public static BufferedImage weakHeart;
     public static boolean updateFps;
     public static int frames = 0;
     
+    public int heartFrames = 0;
+    public int heartMaxFrames = 5;
+    public int heartPos = 0;
+    
     // font
     public static InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("./font/prstart.ttf");
-    public static Font pixel_font;
+    public static Font pixelFont;
     Color fontOutlineColor = Color.black;
     Color fontFillColor = Color.white;
     
     
     public UI() throws IOException{
-        heart = Game.spritesheet.getSprite(608, 0, 15, 13);
+        initSprites();
         
         try {
-            pixel_font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(16f);
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(16f);
         } catch (FontFormatException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    public void initSprites() {
+        heartBack = Game.spritesheet.getSprite(608, 32, World.TILE_SIZE, World.TILE_SIZE);
+        heart = Game.spritesheet.getSprite(608, 0, World.TILE_SIZE, World.TILE_SIZE);
+        
+        weakHeartBack = Game.spritesheet.getSprite(608, 96, World.TILE_SIZE, World.TILE_SIZE);
+        weakHeart = Game.spritesheet.getSprite(608, 64, World.TILE_SIZE, World.TILE_SIZE);
+    }
+    
     public void render(Graphics graphics){
         this.g = graphics;
-        g.setFont(pixel_font);
+        g.setFont(pixelFont);
         renderLife();
         showFPS();
-        
-        
-        
-        
-        //drawText("CHOCOLATE: " + Game.player.chocolate, 20, 20);
-        
     }
     
     public void showFPS(){
@@ -73,6 +84,33 @@ public class UI {
     
     public void renderLife() {
         drawText("LIFE:", 4, 20);
+        if(Game.player.steroid) {
+            for(int i = 0; i < 5; i++){
+                g.drawImage(heartBack, 79 +  (i * 24), -15, null);
+            }
+            g.drawImage(heart, 79 + (heartPos * 24), -15, null);
+            heartFrames++;
+            if(heartFrames == heartMaxFrames) {
+                heartFrames = 0;
+                heartPos++;
+                if(heartPos > 4){
+                    heartPos = 0; 
+                }
+            }
+        } else if(Game.player.weak) {
+            for(int i = 0; i < 5; i++){
+                g.drawImage(weakHeartBack, 79 +  (i * 24), -15, null);
+            }
+            g.drawImage(weakHeart, 79, -15, null);
+        } else {
+            for(int i = 0; i < 5; i++){
+                g.drawImage(heartBack, 79 +  (i * 24), -15, null);
+            }
+            for(int i = 0; i <= Game.player.life; i++){
+                g.drawImage(heart, 79 + (i * 24), -15, null);
+            }
+        }
+        
     }
     
     public void drawText(String text, int x, int y) {

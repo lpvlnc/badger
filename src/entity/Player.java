@@ -35,7 +35,12 @@ public class Player extends Entity {
     public int index = 0;
     public int maxIndex = 5;
     public int frames = 0;
-    public int maxFrames = 5;
+    public int defaultMaxFrames = 5;
+    public int steroidMaxFrames =  3;
+    public int weakMaxFrames = 7;
+    public int maxFrames = defaultMaxFrames;
+    public boolean maxFramesChanged = false;
+    
     
     // damage animation logic
     public boolean damaged = true;
@@ -43,14 +48,27 @@ public class Player extends Entity {
     public int damagedFrames = 0;
     public int maxDamagedFrames = 60;
 
-    // attributes
-    public int maxLife = 5;
+    // general attributes
+    public int maxLife = 2;
     public int life = maxLife;
-    public static int speed = 2;
+    public int defaultSpeed = 2;
+    public int speed = defaultSpeed;
     public boolean dead = false;
     public int score = 0;
     public int highScore = 0;
     public int chocolate = 0;
+    
+    // on steroid attributes
+    public boolean steroid = false;
+    public int steroidSpeed = 4;
+    public int steroidMaxTime = 400;
+    public int steroidTime = 0;
+    
+    // weak attributes
+    public boolean weak = false;
+    public int weakSpeed = 1;
+    public int weakMaxTime = steroidMaxTime / 2;
+    public int weakTime = 0;
     
     public Player(double x,double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
@@ -110,15 +128,16 @@ public class Player extends Entity {
             y -= speed;
         }
         
-        if(left) {
-            this.direction = Direction.LEFT;
-            isMoving = true;
-            x -= speed;
-        }
         if(down) {
             this.direction = Direction.DOWN;
             isMoving = true;
             y += speed;
+        }
+        
+        if(left) {
+            this.direction = Direction.LEFT;
+            isMoving = true;
+            x -= speed;
         }
         
         if(right) {
@@ -151,10 +170,56 @@ public class Player extends Entity {
             highScore = score;
         }
         
-        damageHandler();
+        if(steroid) {
+            steroidHandler();
+        }else {
+            damageHandler();
+        }
+        
+        if(weak) {
+            weakHandler();
+        }
+        
         movement();
         animation();
         updateCamera();
+    }
+    
+    public void weakHandler() {
+        maxFrames = weakMaxFrames;
+        if(maxFramesChanged == false) {
+            frames = 0;
+            maxFramesChanged = true;
+        }
+        
+        canBeDamaged = true;
+        speed = weakSpeed;
+        weakTime++;
+        if(weakTime == weakMaxTime) {
+            weak = false;
+            weakTime = 0;
+            speed = defaultSpeed;
+            maxFramesChanged = false;
+        }
+    }
+    
+    public void steroidHandler() {
+        maxFrames = steroidMaxFrames;
+        if(maxFramesChanged == false) {
+            frames = 0;
+            maxFramesChanged = true;
+        }
+        
+        canBeDamaged = false;
+        speed = steroidSpeed;
+        steroidTime++;
+        if(steroidTime == steroidMaxTime) {
+            steroid = false;
+            steroidTime = 0;
+            speed = defaultSpeed;
+            weak = true;
+            maxFramesChanged = false;
+        }
     }
     
     public void damageHandler() {

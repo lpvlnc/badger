@@ -20,4 +20,10 @@ public class Steroid extends Entity{
         this.sprite = Game.spritesheet.getSprite(512, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
     
+    public void update() {
+        if (isColliding(this, Game.player)) {
+            Game.player.steroid = true;
+            Game.entities.remove(this);
+        }
+    }
 }

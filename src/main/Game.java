@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable {
     public static boolean restart = false;
     
     //Config
-    public static boolean showFps = true;
+    public static boolean showFps = false;
     public static boolean showHitBox = false;
     
     // KEYLISTENER 
