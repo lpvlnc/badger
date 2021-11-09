@@ -20,6 +20,7 @@ public class Chocolate extends Entity {
         this.sprite = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
     
+    @Override
     public void update()
     {
         if(isColliding(this, Game.player))
