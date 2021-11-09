@@ -36,6 +36,8 @@ public class UI {
     public static BufferedImage weakHeart;
     public static BufferedImage chocolateBack;
     public static BufferedImage chocolate;
+    public static BufferedImage energyBack;
+    public static BufferedImage energy;
     public static boolean updateFps;
     public static int frames = 0;
     
@@ -70,12 +72,16 @@ public class UI {
         
         chocolateBack = Game.spritesheet.getSprite(576, 32, World.TILE_SIZE, World.TILE_SIZE);
         chocolate = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
+        
+        energyBack = Game.spritesheet.getSprite(416, 32, World.TILE_SIZE, World.TILE_SIZE);
+        energy = Game.spritesheet.getSprite(416, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
     
     public void render(Graphics graphics){
         this.g = graphics;
         g.setFont(pixelFont);
         renderLife();
+        renderEnergy();
         renderChocolate();
         showFPS();
     }
@@ -87,13 +93,24 @@ public class UI {
     }
     
     public void renderChocolate() {
-        drawText("CHOCOLATE:", 303, 20);
+        drawText("CHOCOLATE:", 437, 20);
         for(int i = 0; i < 5; i++) {
             g.drawImage(chocolateBack, 154 + (i * 30), -24, null);
         }
         
         for(int i = 0; i < Game.player.chocolate; i++) {
             g.drawImage(chocolate, 154, -24, null);
+        }
+    }
+    
+    public void renderEnergy() {
+        drawText("ENERGY:", 221, 20);
+        for(int i = 0; i < 5; i++) {
+            g.drawImage(energyBack, 101 + (i * 17), -24, null);
+        }
+        
+        for(int i = 0; i < 5 * Game.player.energy / 100; i++) {
+            g.drawImage(energy, 101 + (i * 17), -24, null);
         }
     }
     

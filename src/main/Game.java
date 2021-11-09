@@ -6,7 +6,7 @@
 package main;
 
 import entity.Entity;
-import entity.Particle.playerWeakParticle;
+import entity.Particle.PlayerWeakParticle;
 import entity.Player;
 import graphic.Spritesheet;
 import graphic.UI;
@@ -77,7 +77,7 @@ public class Game extends Canvas implements Runnable {
         player = new Player(0, 0, 16, 16, null);
         entities.add(player);
         
-        entities.add(new playerWeakParticle( 20, 20, World.TILE_SIZE, World.TILE_SIZE, null));
+        entities.add(new PlayerWeakParticle( 20, 20, World.TILE_SIZE, World.TILE_SIZE, null));
         
         world = new World("/map/level1.png");
         ui = new UI();
