@@ -20,3 +20,4 @@ nb-configuration.xml
 *.ear
 
 badger.txt
+res/spritesheet/spritesheet.psd
