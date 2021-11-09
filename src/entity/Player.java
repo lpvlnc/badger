@@ -5,7 +5,8 @@
  */
 package entity;
 
-import entity.Particle.playerWeakParticle;
+import entity.Particle.PlayerRunningParticle;
+import entity.Particle.PlayerWeakParticle;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
@@ -53,29 +54,34 @@ public class Player extends Entity {
     public int maxLife = 2;
     public int life = maxLife;
     public int defaultSpeed = 2;
+    public int runningSpeed = 4;
     public int speed = defaultSpeed;
     public boolean dead = false;
     public int score = 0;
     public int highScore = 0;
     public int chocolate = 0;
     public int parchment = 0;
+    public boolean isRunning = false;
+    public int energy = 100;
     
     // on steroid attributes
     public boolean steroid = false;
-    public int steroidSpeed = 4;
     public int steroidMaxTime = 400;
     public int steroidTime = 0;
     
+    // running attributes
+    public int runningMaxFrames = 10;
+    public int runningFrames = 0;
+    
     // weak attributes
-    public playerWeakParticle steroidParticle;
-    public boolean weak = true;
+    public PlayerWeakParticle steroidParticle;
+    public boolean weak = false;
     public int weakSpeed = 1;
     public int weakMaxTime = steroidMaxTime;
     public int weakTime = 0;
     
     public Player(double x,double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
-        
         setDepth(0);
         initSprites();
     }
@@ -127,6 +133,7 @@ public class Player extends Entity {
     
     public void movement() {
         isMoving = false;
+        
         if(up) {
             this.direction = Direction.UP;
             isMoving = true;
@@ -174,15 +181,20 @@ public class Player extends Entity {
         if(score > highScore){
             highScore = score;
         }
+        if(isRunning && !weak && energy > 0)
+            running();
+        else {
+            speed = defaultSpeed;
+        }
         
         if(steroid) {
-            steroidHandler();
+            steroid();
         }else {
-            damageHandler();
+            damage();
         }
         
         if(weak) {
-            weakHandler();
+            weak();
         }
         
         movement();
@@ -190,10 +202,10 @@ public class Player extends Entity {
         updateCamera();
     }
     
-    public void weakHandler() {
+    public void weak() {
         
         if(steroidParticle == null)
-            steroidParticle = new playerWeakParticle(this.getX(), this.getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+            steroidParticle = new PlayerWeakParticle(this.getX(), this.getY(), World.TILE_SIZE, World.TILE_SIZE, null);
         
         maxFrames = weakMaxFrames;
         if(maxFramesChanged == false) {
@@ -213,26 +225,47 @@ public class Player extends Entity {
         }
     }
     
-    public void steroidHandler() {
+    public void running (){
+        if(!steroid){
+            runningFrames++;
+            if(runningFrames == runningMaxFrames) {
+                runningFrames = 0;
+                energy-=10;
+                if(energy <= 0) {
+                    isRunning = false;
+                    maxFrames = defaultMaxFrames;
+                    maxFramesChanged = false;
+                    return;
+                }
+                System.out.println(energy);
+            }
+        }
+            
         maxFrames = steroidMaxFrames;
         if(maxFramesChanged == false) {
             frames = 0;
             maxFramesChanged = true;
         }
-        
+        speed = runningSpeed;
+    }
+    
+    public void steroid() {
+        energy = 100;
+        isRunning = true;
+        running();
         canBeDamaged = false;
-        speed = steroidSpeed;
         steroidTime++;
         if(steroidTime == steroidMaxTime) {
             steroid = false;
             steroidTime = 0;
             speed = defaultSpeed;
             weak = true;
+            isRunning = false;
             maxFramesChanged = false;
         }
     }
     
-    public void damageHandler() {
+    public void damage() {
         
         if(canBeDamaged){
             if(damaged){

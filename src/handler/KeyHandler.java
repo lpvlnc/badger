@@ -41,6 +41,9 @@ public class KeyHandler implements KeyListener {
             player.right = true;
         }
         
+        if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+            player.isRunning = true;
+        }
         
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             Game.restart = true;
@@ -70,6 +73,10 @@ public class KeyHandler implements KeyListener {
         
         if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT){
             player.right = false;
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+            player.isRunning = false;
         }
     }
 }

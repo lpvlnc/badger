@@ -16,7 +16,7 @@ import world.World;
  *
  * @author Leonardo
  */
-public class playerWeakParticle extends Entity {
+public class PlayerWeakParticle extends Entity {
     
     public BufferedImage[] playerWeakParticle;
     public int index = 0;
@@ -24,7 +24,7 @@ public class playerWeakParticle extends Entity {
     public int maxFrames = 10;
     public int frames = 0;
     
-    public playerWeakParticle(double x, double y, int width, int height, BufferedImage sprite) {
+    public PlayerWeakParticle(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         playerWeakParticle = new BufferedImage[5];
         for (int i = 0; i < 5; i ++) {
