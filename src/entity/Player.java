@@ -68,7 +68,7 @@ public class Player extends Entity {
     
     // weak attributes
     public playerWeakParticle steroidParticle;
-    public boolean weak = true;
+    public boolean weak = false;
     public int weakSpeed = 1;
     public int weakMaxTime = steroidMaxTime;
     public int weakTime = 0;
