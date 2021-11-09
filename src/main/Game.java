@@ -123,6 +123,7 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
         
         /* Game render start */
+        Collections.sort(entities, Entity.nodeSorter);
         world.render(g);
         for(int i = 0; i < entities.size(); i++){
             Entity e = entities.get(i);
