@@ -5,7 +5,6 @@
  */
 package entity;
 
-import entity.Particle.PlayerRunningParticle;
 import entity.Particle.PlayerWeakParticle;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

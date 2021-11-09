@@ -41,9 +41,10 @@ public class UI {
     public static boolean updateFps;
     public static int frames = 0;
     
-    public int heartFrames = 0;
-    public int heartMaxFrames = 5;
-    public int heartPos = 0;
+    public int animationFrames = 0;
+    public int animationMaxFrames = 5;
+    public int animationPos = 0;
+
     
     
     // font
@@ -105,12 +106,28 @@ public class UI {
     
     public void renderEnergy() {
         drawText("ENERGY:", 221, 20);
-        for(int i = 0; i < 5; i++) {
-            g.drawImage(energyBack, 101 + (i * 17), -24, null);
-        }
-        
-        for(int i = 0; i < 5 * Game.player.energy / 100; i++) {
-            g.drawImage(energy, 101 + (i * 17), -24, null);
+        if (Game.player.steroid){
+            for(int i = 0; i < 5; i++) {
+                g.drawImage(energyBack, 101 + (i * 17), -24, null);
+            }
+            g.drawImage(energy, 101 + (animationPos * 17), -24, null);
+            animationFrames++;
+            if(animationFrames == animationMaxFrames) {
+                animationFrames = 0;
+                animationPos++;
+                if(animationPos > 4){
+                    animationPos = 0; 
+                }
+            }
+        }else {
+            for(int i = 0; i < 5; i++) {
+                g.drawImage(energyBack, 101 + (i * 17), -24, null);
+            }
+            if(!Game.player.weak){
+                for(int i = 0; i < 5 * Game.player.energy / 100; i++) {
+                    g.drawImage(energy, 101 + (i * 17), -24, null);
+                }
+            }
         }
     }
     
@@ -120,13 +137,13 @@ public class UI {
             for(int i = 0; i < 5; i++){
                 g.drawImage(heartBack, 79 +  (i * 24), -15, null);
             }
-            g.drawImage(heart, 79 + (heartPos * 24), -15, null);
-            heartFrames++;
-            if(heartFrames == heartMaxFrames) {
-                heartFrames = 0;
-                heartPos++;
-                if(heartPos > 4){
-                    heartPos = 0; 
+            g.drawImage(heart, 79 + (animationPos * 24), -15, null);
+            animationFrames++;
+            if(animationFrames == animationMaxFrames) {
+                animationFrames = 0;
+                animationPos++;
+                if(animationPos > 4){
+                    animationPos = 0; 
                 }
             }
         } else if(Game.player.weak) {
