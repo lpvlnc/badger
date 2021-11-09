@@ -17,6 +17,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import world.World;
@@ -54,6 +55,7 @@ public class Game extends Canvas implements Runnable {
     
     //UI
     public static UI ui;
+    public static InputStream stream;
     
     // Entities
     public static Player player;
@@ -80,6 +82,7 @@ public class Game extends Canvas implements Runnable {
         entities.add(new PlayerWeakParticle( 20, 20, World.TILE_SIZE, World.TILE_SIZE, null));
         
         world = new World("/map/level1.png");
+        stream = ClassLoader.getSystemClassLoader().getResourceAsStream("font/prstart.ttf");
         ui = new UI();
         // initializing objects end //
     }

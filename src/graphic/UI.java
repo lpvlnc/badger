@@ -42,13 +42,12 @@ public class UI {
     public static int frames = 0;
     
     public int animationFrames = 0;
-    public int animationMaxFrames = 5;
+    public int animationMaxFrames = 10;
     public int animationPos = 0;
 
     
     
     // font
-    public static InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("./font/prstart.ttf");
     public static Font pixelFont;
     Color fontOutlineColor = Color.black;
     Color fontFillColor = Color.white;
@@ -58,7 +57,7 @@ public class UI {
         initSprites();
         
         try {
-            pixelFont = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(16f);
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, Game.stream).deriveFont(16f);
         } catch (FontFormatException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
