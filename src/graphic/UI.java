@@ -16,14 +16,11 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import static java.util.Arrays.stream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.Spring.height;
 import main.Game;
 import world.World;
 
@@ -37,12 +34,15 @@ public class UI {
     public static BufferedImage heart;
     public static BufferedImage weakHeartBack;
     public static BufferedImage weakHeart;
+    public static BufferedImage chocolateBack;
+    public static BufferedImage chocolate;
     public static boolean updateFps;
     public static int frames = 0;
     
     public int heartFrames = 0;
     public int heartMaxFrames = 5;
     public int heartPos = 0;
+    
     
     // font
     public static InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("./font/prstart.ttf");
@@ -67,18 +67,33 @@ public class UI {
         
         weakHeartBack = Game.spritesheet.getSprite(608, 96, World.TILE_SIZE, World.TILE_SIZE);
         weakHeart = Game.spritesheet.getSprite(608, 64, World.TILE_SIZE, World.TILE_SIZE);
+        
+        chocolateBack = Game.spritesheet.getSprite(576, 32, World.TILE_SIZE, World.TILE_SIZE);
+        chocolate = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
     
     public void render(Graphics graphics){
         this.g = graphics;
         g.setFont(pixelFont);
         renderLife();
+        renderChocolate();
         showFPS();
     }
     
     public void showFPS(){
         if(Game.showFps) {
             drawText("FPS:" + frames, 854, 20);
+        }
+    }
+    
+    public void renderChocolate() {
+        drawText("CHOCOLATE:", 303, 20);
+        for(int i = 0; i < 5; i++) {
+            g.drawImage(chocolateBack, 154 + (i * 30), -24, null);
+        }
+        
+        for(int i = 0; i < Game.player.chocolate; i++) {
+            g.drawImage(chocolate, 154, -24, null);
         }
     }
     
