@@ -26,9 +26,9 @@ public class Chocolate extends Entity {
         if(isColliding(this, Game.player))
         {
             if(Game.player.chocolate < 5) {
-                Game.player.chocolate++;
-                Entity.addParticle(this);
-                Game.entities.remove(this);
+                //Game.player.chocolate++;
+                //Entity.addParticle(this);
+                //Game.entities.remove(this);
             }
         }
     }

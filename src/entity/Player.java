@@ -68,7 +68,7 @@ public class Player extends Entity {
     
     // weak attributes
     public playerWeakParticle steroidParticle;
-    public boolean weak = false;
+    public boolean weak = true;
     public int weakSpeed = 1;
     public int weakMaxTime = steroidMaxTime;
     public int weakTime = 0;
@@ -209,6 +209,7 @@ public class Player extends Entity {
             weakTime = 0;
             speed = defaultSpeed;
             maxFramesChanged = false;
+            maxFrames = defaultMaxFrames;
         }
     }
     

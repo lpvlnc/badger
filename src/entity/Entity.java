@@ -61,6 +61,13 @@ public class Entity {
     
     public void render(Graphics g){
         g.drawImage(sprite, getX() - Camera.x, getY() - Camera.y, null);
+        if(Game.showHitBox)
+            showHitBox(g);
+        
+    }
+    
+    public void showHitBox(Graphics g){
+        g.fillRect(this.getX() - Camera.x, this.getY() - Camera.y, this.getWidth(), this.getHeight());
     }
     
     public static boolean isColliding(Entity e1, Entity e2){

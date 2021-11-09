@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import main.Game;
 import static main.Game.player;
+import static main.Game.showFps;
 import static main.Game.showHitBox;
 
 /**
@@ -49,15 +50,8 @@ public class KeyHandler implements KeyListener {
             showHitBox = !showHitBox;
         }
         
-        if(e.getKeyCode() == KeyEvent.VK_F){
-            if(Game.showFps){
-                Game.showFps = false;
-                System.out.println("Ocultando FPS");
-            } else{
-                Game.showFps = true;
-                System.out.println("Exibindo FPS");
-            }
-        }
+        if(e.getKeyCode() == KeyEvent.VK_F)
+            showFps = !showFps;
     }
 
     @Override

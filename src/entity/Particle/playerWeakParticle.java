@@ -48,7 +48,7 @@ public class playerWeakParticle extends Entity {
     public void render(Graphics g) {
         if(Game.player.weak) {
             if(Game.player.direction == Direction.RIGHT)
-                g.drawImage(playerWeakParticle[index], Game.player.getX() + 7 - Camera.x, Game.player.getY() - Camera.y, null);
+                g.drawImage(playerWeakParticle[index], Game.player.getX() + 8 - Camera.x, Game.player.getY() - Camera.y, null);
         
             if(Game.player.direction == Direction.LEFT)
                 g.drawImage(playerWeakParticle[index], Game.player.getX() - 7 - Camera.x, Game.player.getY() - Camera.y, null);
