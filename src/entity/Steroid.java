@@ -20,10 +20,11 @@ public class Steroid extends Entity{
         this.sprite = Game.spritesheet.getSprite(512, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
     
+    @Override
     public void update() {
         if (isColliding(this, Game.player)) {
             Game.player.steroid = true;
-            Entity.addSparkle(this);
+            Entity.addParticle(this);
             Game.entities.remove(this);
         }
     }

@@ -5,6 +5,7 @@
  */
 package entity;
 
+import entity.Particle.Particle;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -86,8 +87,8 @@ public class Entity {
         }
     };
     
-    public static void addSparkle(Entity e){
-        Game.entities.add(new Sparkle(e.getX(), e.getY(), World.TILE_SIZE, World.TILE_SIZE, null));
+    public static void addParticle(Entity e){
+        Game.entities.add(new Particle(e.getX(), e.getY(), World.TILE_SIZE, World.TILE_SIZE, null));
     }
     
     public int getDepth() {

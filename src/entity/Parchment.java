@@ -26,12 +26,8 @@ public class Parchment extends Entity {
         if(isColliding(this, Game.player))
         {
             Game.player.parchment++;
-            Entity.addSparkle(this);
+            Entity.addParticle(this);
             Game.entities.remove(this);
         }
-    }
-    
-    public void render(Graphics g) {
-        
     }
 }

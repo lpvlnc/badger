@@ -5,6 +5,7 @@
  */
 package entity;
 
+import entity.Particle.playerWeakParticle;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
@@ -66,6 +67,7 @@ public class Player extends Entity {
     public int steroidTime = 0;
     
     // weak attributes
+    public playerWeakParticle steroidParticle;
     public boolean weak = false;
     public int weakSpeed = 1;
     public int weakMaxTime = steroidMaxTime;
@@ -119,6 +121,8 @@ public class Player extends Entity {
         for(int i = 0; i < 6; i++){
             playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 224, World.TILE_SIZE, World.TILE_SIZE);
         }
+        
+        steroidParticle = null;
     }
     
     public void movement() {
@@ -187,6 +191,10 @@ public class Player extends Entity {
     }
     
     public void weakHandler() {
+        
+        if(steroidParticle == null)
+            steroidParticle = new playerWeakParticle(this.getX(), this.getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+        
         maxFrames = weakMaxFrames;
         if(maxFramesChanged == false) {
             frames = 0;

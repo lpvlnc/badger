@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package entity.Particle;
 
+import entity.Entity;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
@@ -15,7 +16,7 @@ import world.World;
  *
  * @author Leonardo
  */
-public class Sparkle extends Entity {
+public class Particle extends Entity {
     
     public BufferedImage[] sparkle;
     public int index = 0;
@@ -23,7 +24,7 @@ public class Sparkle extends Entity {
     public int maxFrames = 5;
     public int frames = 0;
     
-    public Sparkle(double x, double y, int width, int height, BufferedImage sprite) {
+    public Particle(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         this.setDepth(-1);
         sparkle = new BufferedImage[7];
