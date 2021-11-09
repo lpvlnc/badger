@@ -125,7 +125,6 @@ public class UI {
                 g.drawImage(heart, 79 + (i * 24), -15, null);
             }
         }
-        
     }
     
     public void drawText(String text, int x, int y) {

@@ -34,7 +34,7 @@ public class Player extends Entity {
     public boolean right;
     public boolean isMoving = false;
     public int index = 0;
-    public int maxIndex = 5;
+    public int maxIndex = 6;
     public int frames = 0;
     public int defaultMaxFrames = 5;
     public int steroidMaxFrames =  3;

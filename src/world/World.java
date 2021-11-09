@@ -6,6 +6,7 @@
 package world;
 
 import entity.Chocolate;
+import entity.Life;
 import entity.Parchment;
 import entity.Steroid;
 import java.awt.Graphics;
@@ -32,7 +33,6 @@ public class World {
     
     public World(String path) throws IOException {
 
-        
         // ALGORITMO DE RENDERIZACAO DE MAPA A PARTIR DE UMA IMAGEM BIT MAP //
         BufferedImage map = ImageIO.read(getClass().getResource(path));
 
@@ -63,6 +63,9 @@ public class World {
                         Game.player.setX(xx * TILE_SIZE);
                         Game.player.setY(yy * TILE_SIZE);
                         break;
+                    case 0xFFff0000: // life
+                        Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
                     case 0xFF72413b: // chocolate
                         Game.entities.add(new Chocolate(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
@@ -80,7 +83,6 @@ public class World {
             }
         }
     }
-    
     
     public static boolean isFree(int xNext, int yNext){
         int x1 = xNext / TILE_SIZE;
@@ -123,7 +125,6 @@ public class World {
                 (tiles[x4 + (y4 * World.mapWidth)] instanceof TileWall)
                 );
     }
-    
     
     public void render(Graphics g){
     
