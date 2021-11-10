@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package world;
+package world.Tile;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
+import world.Camera;
+import world.World;
 
 /**
  *
@@ -24,8 +26,17 @@ public class Tile {
     public boolean show = false;
     public boolean solid = false;
     
-    public static BufferedImage TILE_WALL = Game.spritesheet.getSprite(0, 0, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage TILE_FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
+    
+    // WALL
+    public static BufferedImage WALL_TOP = Game.spritesheet.getSprite(160, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_TOP_LEFT_CORNER = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL = Game.spritesheet.getSprite(96, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_TOP_RIGHT_CORNER = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_BOTTOM_LEFT_CORNER = Game.spritesheet.getSprite(64, 608, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
+    
     
     public Tile(int x, int y, int width, int height, BufferedImage sprite){
         this.x = x;

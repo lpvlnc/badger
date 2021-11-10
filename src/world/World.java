@@ -5,6 +5,9 @@
  */
 package world;
 
+import world.Tile.Tile;
+import world.Tile.TileFloor;
+import world.Tile.TileWall;
 import entity.Chocolate;
 import entity.Entity;
 import entity.Life;
@@ -52,7 +55,7 @@ public class World {
 
                 int pos = xx + (yy * mapWidth);
 
-                tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_FLOOR);
+                tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
 
                 switch(pixelAtual){
                     case 0xFF00ff00: // player
@@ -63,12 +66,30 @@ public class World {
                             Game.player.setY(yy * TILE_SIZE);
                         }
                         break;
-                    case 0xFF000000: // chão
-                        tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_FLOOR);
+                    case 0xFF000000: // floor
+                        tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
-                    case 0xFFFFFFFF:
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_WALL);
+                    case 0xFFFFFFFF: // wall
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL);
                         break;
+                    case 0xFFe6e6e6: // WALL bottom left corner
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_LEFT_CORNER);
+                        break;
+                    case 0xFFd2d2d2: // WALL bottom center wall
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_CENTER);
+                        break;
+                    case 0xFFbebebe: // WALL bottom right corner
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_RIGHT_CORNER);
+                        break;
+                    case 0xFFafafaf: // WALL top left corner
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP_LEFT_CORNER);
+                        break;
+                    case 0xFF9b9b9b: // WALL top right corner
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP_RIGHT_CORNER);
+                        break;
+                    case 0xFF7e7e7e: // WALL top
+                    tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP);
+                    break;
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
@@ -81,8 +102,8 @@ public class World {
                     case 0xFF7507e2:
                         Game.entities.add(new Steroid(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
-                    default: // chão
-                        tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_FLOOR);
+                    default: // floor
+                        tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
                 }
 
@@ -104,10 +125,10 @@ public class World {
         int y4 = (yNext + TILE_SIZE - 1) / TILE_SIZE;
         
         return !(
-                (tiles[x1 + (y1 * World.mapWidth)] instanceof TileFloor) ||
-                (tiles[x2 + (y2 * World.mapWidth)] instanceof TileFloor) ||
-                (tiles[x3 + (y3 * World.mapWidth)] instanceof TileFloor) ||
-                (tiles[x4 + (y4 * World.mapWidth)] instanceof TileFloor)
+                (tiles[x1 + (y1 * World.mapWidth)] instanceof TileWall) ||
+                (tiles[x2 + (y2 * World.mapWidth)] instanceof TileWall) ||
+                (tiles[x3 + (y3 * World.mapWidth)] instanceof TileWall) ||
+                (tiles[x4 + (y4 * World.mapWidth)] instanceof TileWall)
                 );
     }
     
