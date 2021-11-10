@@ -142,7 +142,7 @@ public class World {
         int x3 = xNext / TILE_SIZE;
         int y3 = (yNext + height - 1) / TILE_SIZE;
         
-        int x4 = (xNext + width - 1) / TILE_SIZE;
+        int x4 = (xNext + width - 1) /  TILE_SIZE;
         int y4 = (yNext + height - 1) / TILE_SIZE;
         
         return !(

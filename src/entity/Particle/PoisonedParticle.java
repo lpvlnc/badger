@@ -48,10 +48,10 @@ public class PoisonedParticle extends Entity {
     @Override
     public void render(Graphics g) {
         if(Game.player.direction == Direction.RIGHT)
-            g.drawImage(playerWeakParticle[index], Game.player.getX() + 8 - Camera.x, Game.player.getY() - Camera.y, null);
+            g.drawImage(playerWeakParticle[index], Game.player.getX() + 11 - Camera.x, Game.player.getY() - Camera.y, null);
 
         if(Game.player.direction == Direction.LEFT)
-            g.drawImage(playerWeakParticle[index], Game.player.getX() - 7 - Camera.x, Game.player.getY() - Camera.y, null);
+            g.drawImage(playerWeakParticle[index], Game.player.getX() - 11 - Camera.x, Game.player.getY() - Camera.y, null);
 
         if(Game.player.direction == Direction.DOWN)
             g.drawImage(playerWeakParticle[index], Game.player.getX() - Camera.x, Game.player.getY() + 7 - Camera.y, null);

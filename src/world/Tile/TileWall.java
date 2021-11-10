@@ -5,11 +5,7 @@
  */
 package world.Tile;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import main.Game;
-import world.Camera;
-import world.World;
 
 /**
  *

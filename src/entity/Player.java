@@ -140,8 +140,8 @@ public class Player extends Entity {
         
         if(up) {
             this.direction = Direction.UP;
-            setMask(9, 2, 13, 29);
-            if(World.isFreeDynamic(getX() + xMask, getY() - yMask + speed, wMask, hMask)) {
+            setMask(9, 0, 13, 28);
+            if(World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask)) {
                 isMoving = true;
                 y -= speed;
             }
@@ -149,8 +149,8 @@ public class Player extends Entity {
         
         if(down) {
             this.direction = Direction.DOWN;
-            setMask(10, 0, 14, 30);
-            if(World.isFreeDynamic(getX() + xMask, getY() - yMask - speed, wMask, hMask)){
+            setMask(10, 1, 14, 29);
+            if(World.isFreeDynamic(getX() + xMask, getY() + yMask + speed, wMask, hMask)){
                 isMoving = true;
                 y += speed;
             }
