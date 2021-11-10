@@ -86,8 +86,8 @@ public class Player extends Entity {
     public Player(double x,double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(0);
+        setMask(8, 6, 24, 17);
         initSprites();
-        this.setMask(5, 0, 22, 32);
     }
     
     private void initSprites() {
@@ -105,7 +105,7 @@ public class Player extends Entity {
         }
         
         for (int i = 0; i < 6; i++) {
-            playerLeft[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 32, World.TILE_SIZE, World.TILE_SIZE);
+            playerLeft[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 34, World.TILE_SIZE, World.TILE_SIZE -2);
         }
         
         for (int i = 0; i < 4; i++){
@@ -140,7 +140,8 @@ public class Player extends Entity {
         
         if(up) {
             this.direction = Direction.UP;
-            if(World.isFree(this.getX(), this.getY() + speed)) {
+            setMask(9, 2, 13, 29);
+            if(World.isFreeDynamic(getX() + xMask, getY() - yMask + speed, wMask, hMask)) {
                 isMoving = true;
                 y -= speed;
             }
@@ -148,7 +149,8 @@ public class Player extends Entity {
         
         if(down) {
             this.direction = Direction.DOWN;
-            if(World.isFree(this.getX(), this.getY() - speed)){
+            setMask(10, 0, 14, 30);
+            if(World.isFreeDynamic(getX() + xMask, getY() - yMask - speed, wMask, hMask)){
                 isMoving = true;
                 y += speed;
             }
@@ -156,7 +158,8 @@ public class Player extends Entity {
         
         if(left) {
             this.direction = Direction.LEFT;
-            if(World.isFree(this.getX() - speed, this.getY())) {
+            setMask(0, 6, 24, 17);
+            if(World.isFreeDynamic(getX() + xMask - speed, getY() + yMask, wMask, hMask)) {
                 isMoving = true;
                 x -= speed;
             }
@@ -164,7 +167,8 @@ public class Player extends Entity {
         
         if(right) {
             this.direction = Direction.RIGHT;
-            if(World.isFree(this.getX() + speed, this.getY())) {
+            setMask(8, 6, 24, 17);
+            if(World.isFreeDynamic(getX() + xMask + speed, getY() + yMask, wMask, hMask)) {
                 isMoving = true;
                 x += speed;
             }
@@ -328,6 +332,7 @@ public class Player extends Entity {
             running();
         else {
             speed = defaultSpeed;
+            maxFrames = defaultMaxFrames;
         }
         
         if(steroid) {

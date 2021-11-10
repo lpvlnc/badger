@@ -33,7 +33,6 @@ public class Life extends Entity {
     }
     
     public void update(){
-        
         frames++;
         if(frames == maxFrames){
             frames = 0;

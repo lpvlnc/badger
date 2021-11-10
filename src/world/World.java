@@ -136,11 +136,11 @@ public class World {
         int x1 = xNext / TILE_SIZE;
         int y1 = yNext / TILE_SIZE;
         
-        int x2 = (xNext+width - 1) / TILE_SIZE;
+        int x2 = (xNext + width - 1) / TILE_SIZE;
         int y2 = yNext / TILE_SIZE;
         
         int x3 = xNext / TILE_SIZE;
-        int y3 = (yNext+height - 1) / TILE_SIZE;
+        int y3 = (yNext + height - 1) / TILE_SIZE;
         
         int x4 = (xNext + width - 1) / TILE_SIZE;
         int y4 = (yNext + height - 1) / TILE_SIZE;
