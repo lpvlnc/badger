@@ -139,26 +139,34 @@ public class Player extends Entity {
         
         if(up) {
             this.direction = Direction.UP;
-            isMoving = true;
-            y -= speed;
+            if(World.isFree(this.getX(), this.getY() + speed)) {
+                isMoving = true;
+                y -= speed;
+            }
         }
         
         if(down) {
             this.direction = Direction.DOWN;
-            isMoving = true;
-            y += speed;
+            if(World.isFree(this.getX(), this.getY() - speed)){
+                isMoving = true;
+                y += speed;
+            }
         }
         
         if(left) {
             this.direction = Direction.LEFT;
-            isMoving = true;
-            x -= speed;
+            if(World.isFree(this.getX() - speed, this.getY())) {
+                isMoving = true;
+                x -= speed;
+            }
         }
         
         if(right) {
             this.direction = Direction.RIGHT;
-            isMoving = true;
-            x += speed;
+            if(World.isFree(this.getX() + speed, this.getY())) {
+                isMoving = true;
+                x += speed;
+            }
         }
     }
     
