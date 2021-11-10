@@ -28,6 +28,7 @@ public class Chocolate extends Entity {
             if(Game.player.chocolate < 5) {
                 Game.player.chocolate++;
                 Game.player.energy = 100;
+                Game.player.energyFrames = 0;
                 Entity.addParticle(this);
                 Game.entities.remove(this);
             }

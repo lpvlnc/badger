@@ -16,7 +16,7 @@ import world.World;
  *
  * @author Leonardo
  */
-public class PlayerWeakParticle extends Entity {
+public class PoisonedParticle extends Entity {
     
     public BufferedImage[] playerWeakParticle;
     public int index = 0;
@@ -24,7 +24,7 @@ public class PlayerWeakParticle extends Entity {
     public int maxFrames = 10;
     public int frames = 0;
     
-    public PlayerWeakParticle(double x, double y, int width, int height, BufferedImage sprite) {
+    public PoisonedParticle(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         playerWeakParticle = new BufferedImage[5];
         for (int i = 0; i < 5; i ++) {
@@ -46,18 +46,16 @@ public class PlayerWeakParticle extends Entity {
     
     @Override
     public void render(Graphics g) {
-        if(Game.player.weak) {
-            if(Game.player.direction == Direction.RIGHT)
-                g.drawImage(playerWeakParticle[index], Game.player.getX() + 8 - Camera.x, Game.player.getY() - Camera.y, null);
-        
-            if(Game.player.direction == Direction.LEFT)
-                g.drawImage(playerWeakParticle[index], Game.player.getX() - 7 - Camera.x, Game.player.getY() - Camera.y, null);
+        if(Game.player.direction == Direction.RIGHT)
+            g.drawImage(playerWeakParticle[index], Game.player.getX() + 8 - Camera.x, Game.player.getY() - Camera.y, null);
 
-            if(Game.player.direction == Direction.DOWN)
-                g.drawImage(playerWeakParticle[index], Game.player.getX() - Camera.x, Game.player.getY() + 7 - Camera.y, null);
+        if(Game.player.direction == Direction.LEFT)
+            g.drawImage(playerWeakParticle[index], Game.player.getX() - 7 - Camera.x, Game.player.getY() - Camera.y, null);
 
-            if(Game.player.direction == Direction.UP)
-                g.drawImage(playerWeakParticle[index], Game.player.getX() - Camera.x, Game.player.getY() - 10 - Camera.y, null);
-        }
+        if(Game.player.direction == Direction.DOWN)
+            g.drawImage(playerWeakParticle[index], Game.player.getX() - Camera.x, Game.player.getY() + 7 - Camera.y, null);
+
+        if(Game.player.direction == Direction.UP)
+            g.drawImage(playerWeakParticle[index], Game.player.getX() - Camera.x, Game.player.getY() - 10 - Camera.y, null);
     }
 }

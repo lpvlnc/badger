@@ -24,6 +24,8 @@ public class Steroid extends Entity{
     public void update() {
         if (isColliding(this, Game.player)) {
             Game.player.steroid = true;
+            Game.player.energy = Game.player.maxEnergy;
+            Game.player.energyFrames = 0;
             Entity.addParticle(this);
             Game.entities.remove(this);
         }

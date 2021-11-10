@@ -5,7 +5,7 @@
  */
 package entity;
 
-import entity.Particle.PlayerWeakParticle;
+import entity.Particle.PoisonedParticle;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
@@ -61,7 +61,11 @@ public class Player extends Entity {
     public int chocolate = 0;
     public int parchment = 0;
     public boolean isRunning = false;
-    public int energy = 100;
+    public int maxEnergy = 100;
+    public int energy = maxEnergy;
+    
+    public int energyFrames = 0;
+    public int energyMaxFrames = 240;
     
     // on steroid attributes
     public boolean steroid = false;
@@ -73,7 +77,7 @@ public class Player extends Entity {
     public int runningFrames = 0;
     
     // weak attributes
-    public PlayerWeakParticle steroidParticle;
+    public PoisonedParticle poisonedParticle;
     public boolean weak = false;
     public int weakSpeed = 1;
     public int weakMaxTime = steroidMaxTime;
@@ -127,7 +131,7 @@ public class Player extends Entity {
             playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 224, World.TILE_SIZE, World.TILE_SIZE);
         }
         
-        steroidParticle = null;
+        poisonedParticle = null;
     }
     
     public void movement() {
@@ -177,6 +181,17 @@ public class Player extends Entity {
     
     @Override
     public void update(){
+        
+        if(energy < maxEnergy && !isRunning && !weak && !steroid)
+        {
+            energyFrames++;
+            if(energyFrames == energyMaxFrames)
+            {
+                energy+=10;
+                energyFrames = 0;
+            }
+        }
+        
         if(score > highScore){
             highScore = score;
         }
@@ -203,8 +218,10 @@ public class Player extends Entity {
     
     public void weak() {
         
-        if(steroidParticle == null)
-            steroidParticle = new PlayerWeakParticle(this.getX(), this.getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+        if(poisonedParticle == null) {
+            poisonedParticle = new PoisonedParticle(this.getX(), this.getY(), World.TILE_SIZE, World.TILE_SIZE, null);
+            Game.entities.add(poisonedParticle);
+        }
         
         maxFrames = weakMaxFrames;
         if(maxFramesChanged == false) {
@@ -216,6 +233,7 @@ public class Player extends Entity {
         speed = weakSpeed;
         weakTime++;
         if(weakTime == weakMaxTime) {
+            Game.entities.remove(poisonedParticle);
             weak = false;
             weakTime = 0;
             speed = defaultSpeed;
@@ -224,7 +242,7 @@ public class Player extends Entity {
         }
     }
     
-    public void running (){
+    public void running(){
         if(!steroid){
             runningFrames++;
             if(runningFrames == runningMaxFrames) {
@@ -236,7 +254,6 @@ public class Player extends Entity {
                     maxFramesChanged = false;
                     return;
                 }
-                System.out.println(energy);
             }
         }
             
@@ -249,7 +266,6 @@ public class Player extends Entity {
     }
     
     public void steroid() {
-        energy = 100;
         isRunning = true;
         running();
         canBeDamaged = false;

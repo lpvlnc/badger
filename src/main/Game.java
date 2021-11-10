@@ -6,7 +6,7 @@
 package main;
 
 import entity.Entity;
-import entity.Particle.PlayerWeakParticle;
+import entity.Particle.PoisonedParticle;
 import entity.Player;
 import graphic.Spritesheet;
 import graphic.UI;
@@ -76,10 +76,7 @@ public class Game extends Canvas implements Runnable {
         entities = new ArrayList<>();
         
         //initialize entity
-        player = new Player(0, 0, 16, 16, null);
-        entities.add(player);
         
-        entities.add(new PlayerWeakParticle( 20, 20, World.TILE_SIZE, World.TILE_SIZE, null));
         
         world = new World("/map/level1.png");
         stream = ClassLoader.getSystemClassLoader().getResourceAsStream("font/prstart.ttf");
@@ -131,6 +128,8 @@ public class Game extends Canvas implements Runnable {
         for(int i = 0; i < entities.size(); i++){
             Entity e = entities.get(i);
             e.render(g);
+            if(showHitBox)
+                e.showHitBox(g);
         }
         
         //ui.render(g);

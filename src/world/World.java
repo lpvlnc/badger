@@ -8,6 +8,7 @@ package world;
 import entity.Chocolate;
 import entity.Life;
 import entity.Parchment;
+import entity.Player;
 import entity.Steroid;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -59,7 +60,10 @@ public class World {
                     case 0xFFFFFFFF:
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_WALL);
                         break;
-                    case 0xFF4CFF00: // player
+                    case 0xFF00ff00: // player
+                        
+                        Game.player = new Player(0, 0, 16, 16, null);
+                        Game.entities.add(Game.player);
                         Game.player.setX(xx * TILE_SIZE);
                         Game.player.setY(yy * TILE_SIZE);
                         break;
