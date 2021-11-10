@@ -58,7 +58,7 @@ public class Game extends Canvas implements Runnable {
     public static InputStream stream;
     
     // Entities
-    public static Player player;
+    public static Player player = null;
     
     // Lists
     public static ArrayList<Entity> entities;

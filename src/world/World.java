@@ -6,6 +6,7 @@
 package world;
 
 import entity.Chocolate;
+import entity.Entity;
 import entity.Life;
 import entity.Parchment;
 import entity.Player;
@@ -54,18 +55,19 @@ public class World {
                 tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_FLOOR);
 
                 switch(pixelAtual){
+                    case 0xFF00ff00: // player
+                        if(Game.player == null){
+                            Game.player = new Player(0, 0, 16, 16, null);
+                            Game.entities.add(Game.player);
+                            Game.player.setX(xx * TILE_SIZE);
+                            Game.player.setY(yy * TILE_SIZE);
+                        }
+                        break;
                     case 0xFF000000: // chão
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_FLOOR);
                         break;
                     case 0xFFFFFFFF:
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.TILE_WALL);
-                        break;
-                    case 0xFF00ff00: // player
-                        
-                        Game.player = new Player(0, 0, 16, 16, null);
-                        Game.entities.add(Game.player);
-                        Game.player.setX(xx * TILE_SIZE);
-                        Game.player.setY(yy * TILE_SIZE);
                         break;
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
