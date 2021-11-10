@@ -87,6 +87,7 @@ public class Player extends Entity {
         super(x, y, width, height, sprite);
         setDepth(0);
         initSprites();
+        this.setMask(5, 0, 22, 32);
     }
     
     private void initSprites() {
@@ -185,43 +186,6 @@ public class Player extends Entity {
     public void updateCamera(){
         Camera.x = Camera.clamp(getX() - Game.WIDTH/ 2, 0, World.mapWidth * World.TILE_SIZE - Game.WIDTH);
         Camera.y = Camera.clamp(getY() - Game.HEIGHT/ 2, 0, World.mapHeight * World.TILE_SIZE - Game.HEIGHT);
-    }
-    
-    @Override
-    public void update(){
-        
-        if(energy < maxEnergy && !isRunning && !weak && !steroid)
-        {
-            energyFrames++;
-            if(energyFrames == energyMaxFrames)
-            {
-                energy+=10;
-                energyFrames = 0;
-            }
-        }
-        
-        if(score > highScore){
-            highScore = score;
-        }
-        if(isRunning && !weak && energy > 0)
-            running();
-        else {
-            speed = defaultSpeed;
-        }
-        
-        if(steroid) {
-            steroid();
-        }else {
-            damage();
-        }
-        
-        if(weak) {
-            weak();
-        }
-        
-        movement();
-        animation();
-        updateCamera();
     }
     
     public void weak() {
@@ -342,6 +306,43 @@ public class Player extends Entity {
             g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
         else
             g.drawImage(playerRight[0], getX() - Camera.x, getY() - Camera.y, null);
+    }
+    
+    @Override
+    public void update(){
+        
+        if(energy < maxEnergy && !isRunning && !weak && !steroid)
+        {
+            energyFrames++;
+            if(energyFrames == energyMaxFrames)
+            {
+                energy+=10;
+                energyFrames = 0;
+            }
+        }
+        
+        if(score > highScore){
+            highScore = score;
+        }
+        if(isRunning && !weak && energy > 0)
+            running();
+        else {
+            speed = defaultSpeed;
+        }
+        
+        if(steroid) {
+            steroid();
+        }else {
+            damage();
+        }
+        
+        if(weak) {
+            weak();
+        }
+        
+        movement();
+        animation();
+        updateCamera();
     }
     
     @Override

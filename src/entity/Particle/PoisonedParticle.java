@@ -26,6 +26,7 @@ public class PoisonedParticle extends Entity {
     
     public PoisonedParticle(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
+        this.hasCollision = false;
         playerWeakParticle = new BufferedImage[5];
         for (int i = 0; i < 5; i ++) {
             playerWeakParticle[i] = Game.spritesheet.getSprite(480, 0 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);

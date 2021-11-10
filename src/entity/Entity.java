@@ -6,6 +6,7 @@
 package entity;
 
 import entity.Particle.Particle;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -29,6 +30,7 @@ public class Entity {
     protected int wMask;
     protected int hMask;
     BufferedImage sprite;
+    protected boolean hasCollision = true;
     public enum Direction { 
         UP, LEFT, DOWN, RIGHT 
     }
@@ -64,7 +66,10 @@ public class Entity {
     }
     
     public void showHitBox(Graphics g){
-        g.fillRect(this.getX() - Camera.x, this.getY() - Camera.y, this.getWidth(), this.getHeight());
+        if(hasCollision) {
+            g.setColor(new Color(100, 255, 100, 200));
+            g.fillRect(this.getX() + this.xMask - Camera.x, this.getY() + this.yMask - Camera.y, this.wMask, this.hMask);
+        }
     }
     
     public static boolean isColliding(Entity e1, Entity e2){
