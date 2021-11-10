@@ -27,12 +27,14 @@ public class Particle extends Entity {
     public Particle(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         this.setDepth(-1);
+        this.hasCollision = false;
         sparkle = new BufferedImage[7];
         for(int i = 0; i < 7; i++) {
             sparkle[i] = Game.spritesheet.getSprite(608, 128 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
     }
     
+    @Override
     public void update() {
         frames++;
         if(frames == maxFrames){
@@ -44,6 +46,7 @@ public class Particle extends Entity {
         }
     }
     
+    @Override
     public void render(Graphics g) {
         g.drawImage(sparkle[index], this.getX() - Camera.x,  this.getY() - Camera.y, null);
     }
