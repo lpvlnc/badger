@@ -38,6 +38,8 @@ public class UI {
     public static BufferedImage chocolate;
     public static BufferedImage energyBack;
     public static BufferedImage energy;
+    public static BufferedImage steroid;
+    public static BufferedImage parchment;
     public static boolean updateFps;
     public static int frames = 0;
     
@@ -75,6 +77,9 @@ public class UI {
         
         energyBack = Game.spritesheet.getSprite(416, 32, World.TILE_SIZE, World.TILE_SIZE);
         energy = Game.spritesheet.getSprite(416, 0, World.TILE_SIZE, World.TILE_SIZE);
+        
+        steroid = Game.spritesheet.getSprite(512, 0, World.TILE_SIZE, World.TILE_SIZE);
+        parchment = Game.spritesheet.getSprite(544, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
     
     public void render(Graphics graphics){
@@ -83,13 +88,27 @@ public class UI {
         renderLife();
         renderEnergy();
         renderChocolate();
+        renderSteroid();
+        renderParchment();
         showFPS();
     }
     
     public void showFPS(){
         if(Game.showFps) {
-            drawText("FPS:" + frames, 854, 20);
+            drawText("FPS:" + frames, 854, 606);
         }
+    }
+    
+    public void renderParchment() {
+        g.drawImage(parchment, 80, -18, 24, 24, null);
+        String zero = Game.player.parchmentCounter < 10 ? "0" : "";
+        drawText("x" + zero + Game.player.parchmentCounter, 902, 20);
+    }
+    
+    public void renderSteroid() {
+        g.drawImage(steroid, 337, -24, null);
+        String zero = Game.player.steroidCounter < 10 ? "0" : "";
+        drawText("x" + zero + Game.player.steroidCounter, 801, 20);
     }
     
     public void renderChocolate() {
@@ -98,14 +117,14 @@ public class UI {
             g.drawImage(chocolateBack, 154 + (i * 30), -24, null);
         }
         
-        for(int i = 0; i < Game.player.chocolate; i++) {
-            g.drawImage(chocolate, 154, -24, null);
+        for(int i = 0; i < Game.player.chocolateCounter; i++) {
+            g.drawImage(chocolate, 154 + (i * 30), -24, null);
         }
     }
     
     public void renderEnergy() {
         drawText("ENERGY:", 221, 20);
-        if (Game.player.steroid){
+        if (Game.player.onSteroid){
             for(int i = 0; i < 5; i++) {
                 g.drawImage(energyBack, 101 + (i * 17), -24, null);
             }
@@ -132,7 +151,7 @@ public class UI {
     
     public void renderLife() {
         drawText("LIFE:", 4, 20);
-        if(Game.player.steroid) {
+        if(Game.player.onSteroid) {
             for(int i = 0; i < 5; i++){
                 g.drawImage(heartBack, 79 +  (i * 24), -15, null);
             }
@@ -196,6 +215,7 @@ public class UI {
             g2.setColor(originalColor);
             g2.setStroke(originalStroke);
             g2.setRenderingHints(originalHints);
+            g = (Graphics)g2;
         }
     }
 }
