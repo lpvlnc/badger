@@ -29,7 +29,7 @@ public class Tile {
     public static BufferedImage FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
     
     // WALL
-    public static BufferedImage WALL_TOP = Game.spritesheet.getSprite(160, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_TOP = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_TOP_LEFT_CORNER = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL = Game.spritesheet.getSprite(96, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_TOP_RIGHT_CORNER = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);

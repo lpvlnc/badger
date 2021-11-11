@@ -5,7 +5,6 @@
  */
 package entity;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
 import world.World;
@@ -25,7 +24,7 @@ public class Parchment extends Entity {
     {
         if(isColliding(this, Game.player))
         {
-            Game.player.parchment++;
+            Game.player.parchmentCounter++;
             Entity.addParticle(this);
             Game.entities.remove(this);
         }
