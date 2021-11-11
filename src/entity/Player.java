@@ -58,17 +58,18 @@ public class Player extends Entity {
     public boolean dead = false;
     public int score = 0;
     public int highScore = 0;
-    public int chocolate = 0;
-    public int parchment = 0;
+    public int chocolateCounter = 0;
     public boolean isRunning = false;
     public int maxEnergy = 100;
     public int energy = maxEnergy;
+    public int parchmentCounter = 0;
     
     public int energyFrames = 0;
     public int energyMaxFrames = 240;
     
     // on steroid attributes
-    public boolean steroid = false;
+    public int steroidCounter = 0;
+    public boolean onSteroid = false;
     public int steroidMaxTime = 400;
     public int steroidTime = 0;
     
@@ -218,8 +219,15 @@ public class Player extends Entity {
         }
     }
     
+    public void useSteroid(){
+        if(steroidCounter > 0 && !onSteroid && !weak){
+            steroidCounter--;
+            onSteroid = true;
+        }
+    }
+    
     public void running(){
-        if(!steroid){
+        if(!onSteroid){
             runningFrames++;
             if(runningFrames == runningMaxFrames) {
                 runningFrames = 0;
@@ -247,7 +255,7 @@ public class Player extends Entity {
         canBeDamaged = false;
         steroidTime++;
         if(steroidTime == steroidMaxTime) {
-            steroid = false;
+            onSteroid = false;
             steroidTime = 0;
             speed = defaultSpeed;
             weak = true;
@@ -315,7 +323,7 @@ public class Player extends Entity {
     @Override
     public void update(){
         
-        if(energy < maxEnergy && !isRunning && !weak && !steroid)
+        if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
         {
             energyFrames++;
             if(energyFrames == energyMaxFrames)
@@ -335,7 +343,7 @@ public class Player extends Entity {
             maxFrames = defaultMaxFrames;
         }
         
-        if(steroid) {
+        if(onSteroid) {
             steroid();
         }else {
             damage();
