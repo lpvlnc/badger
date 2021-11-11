@@ -42,7 +42,8 @@ public class KeyHandler implements KeyListener {
         }
         
         if(e.getKeyCode() == KeyEvent.VK_SHIFT){
-            player.isRunning = true;
+            if(player.energy > 0)
+                player.isRunning = true;
         }
         
         if(e.getKeyCode() == KeyEvent.VK_ENTER){

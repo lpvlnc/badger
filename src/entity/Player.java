@@ -219,6 +219,10 @@ public class Player extends Entity {
     }
     
     public void running(){
+        if (energy <= 0) {
+            isRunning = false;
+            return;
+        }
         if(!steroid){
             runningFrames++;
             if(runningFrames == runningMaxFrames) {
