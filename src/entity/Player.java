@@ -137,6 +137,18 @@ public class Player extends Entity {
     }
     
     public void movement() {
+        if(getX() <= 0)
+            setX(0);
+        
+        if(getX() >= World.mapWidth * World.TILE_SIZE - World.TILE_SIZE - 2)
+            setX(World.mapWidth * World.TILE_SIZE - World.TILE_SIZE - 2);
+        
+        if(getY() <= 0)
+            setY(0);
+        
+        if(getY() + World.TILE_SIZE > World.mapHeight * World.TILE_SIZE - 12 )
+            setY(World.mapHeight * World.TILE_SIZE - World.TILE_SIZE - 12);
+        
         isMoving = false;
         
         if(up) {

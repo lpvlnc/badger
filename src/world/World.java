@@ -36,6 +36,21 @@ public class World {
     public static int night = 1;
     public static int shift = day;
     
+    public BufferedImage selectWallTile(Tile[] tiles, int x, int y){
+        BufferedImage tile = Tile.WALL;
+        try {
+            if (tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP)
+                tile = Tile.WALL;
+            if (tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL) {
+                tile = Tile.WALL_BOTTOM_CENTER;
+            }
+        } catch (Exception e){
+            return tile;
+        }
+        
+        return tile;
+    }
+    
     public World(String path) throws IOException {
 
         // ALGORITMO DE RENDERIZACAO DE MAPA A PARTIR DE UMA IMAGEM BIT MAP //
@@ -69,8 +84,11 @@ public class World {
                     case 0xFF000000: // floor
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
+                    case 0xFF7e7e7e: // WALL top
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP);
+                    break;
                     case 0xFFFFFFFF: // wall
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL);
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTile(tiles, xx, yy));
                         break;
                     case 0xFFe6e6e6: // WALL bottom left corner
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_LEFT_CORNER);
@@ -87,9 +105,7 @@ public class World {
                     case 0xFF9b9b9b: // WALL top right corner
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP_RIGHT_CORNER);
                         break;
-                    case 0xFF7e7e7e: // WALL top
-                    tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP);
-                    break;
+                    
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
@@ -133,6 +149,7 @@ public class World {
     }
     
     public static boolean isFreeDynamic(int xNext, int yNext, int width, int height){
+
         int x1 = xNext / TILE_SIZE;
         int y1 = yNext / TILE_SIZE;
         
@@ -144,13 +161,17 @@ public class World {
         
         int x4 = (xNext + width - 1) /  TILE_SIZE;
         int y4 = (yNext + height - 1) / TILE_SIZE;
-        
-        return !(
-                (tiles[x1 + (y1 * World.mapWidth)] instanceof TileWall) ||
-                (tiles[x2 + (y2 * World.mapWidth)] instanceof TileWall) ||
-                (tiles[x3 + (y3 * World.mapWidth)] instanceof TileWall) ||
-                (tiles[x4 + (y4 * World.mapWidth)] instanceof TileWall)
-                );
+
+        try {
+            return !(
+                    (tiles[x1 + (y1 * World.mapWidth)] instanceof TileWall) ||
+                    (tiles[x2 + (y2 * World.mapWidth)] instanceof TileWall) ||
+                    (tiles[x3 + (y3 * World.mapWidth)] instanceof TileWall) ||
+                    (tiles[x4 + (y4 * World.mapWidth)] instanceof TileWall)
+                    );
+         } catch (Exception e) {
+             return true;
+         }
     }
     
     public void render(Graphics g){

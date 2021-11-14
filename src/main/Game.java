@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.imageio.ImageIO;
 import world.World;
 
 /**
@@ -132,7 +133,6 @@ public class Game extends Canvas implements Runnable {
                 e.showHitBox(g);
         }
         
-        //ui.render(g);
         /* Game render end */
         g.dispose();
         g = bs.getDrawGraphics();
