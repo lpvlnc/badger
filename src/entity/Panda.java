@@ -14,17 +14,12 @@ public class Panda extends Entity{
     
     @Override
     public void update() {
-        if (isColliding(this, Game.player)) {
-
-        }
-    }
-    
-    
-    
-        public void render(Graphics g){
         
     }
-
+    
+    public void render(Graphics g){
+        
+    }
 }    
     
     
