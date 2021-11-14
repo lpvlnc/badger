@@ -36,13 +36,16 @@ public class World {
     public static int night = 1;
     public static int shift = day;
     
+    
     public BufferedImage selectWallTile(Tile[] tiles, int x, int y){
         BufferedImage tile = Tile.WALL;
         try {
-            if (tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP)
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP)
                 tile = Tile.WALL;
-            if (tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL) {
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL) {
                 tile = Tile.WALL_BOTTOM_CENTER;
+                if(tiles[(x - 1) + (y  * mapWidth)] instanceof TileFloor)
+                    tile = Tile.WALL_BOTTOM_LEFT_CORNER;
             }
         } catch (Exception e){
             return tile;
@@ -100,10 +103,10 @@ public class World {
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_RIGHT_CORNER);
                         break;
                     case 0xFFafafaf: // WALL top left corner
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP_LEFT_CORNER);
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_LEFT);
                         break;
                     case 0xFF9b9b9b: // WALL top right corner
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP_RIGHT_CORNER);
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_RIGHT);
                         break;
                     
                     case 0xFFff0000: // life

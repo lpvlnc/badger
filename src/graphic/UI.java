@@ -90,6 +90,7 @@ public class UI {
         renderChocolate();
         renderSteroid();
         renderParchment();
+        renderScore();
         showFPS();
     }
     
@@ -99,16 +100,25 @@ public class UI {
         }
     }
     
+    public void renderScore() {
+        String score = String.valueOf(Game.player.score);
+        while(score.length() < 6) {
+            score = "0" + score;
+        }
+            
+        drawText("SCORE:" + score, 756, 20);
+    }
+    
     public void renderParchment() {
-        g.drawImage(parchment, 80, -18, 24, 24, null);
+        g.drawImage(parchment, 56, -21, 24, 24, null);
         String zero = Game.player.parchmentCounter < 10 ? "0" : "";
-        drawText("x" + zero + Game.player.parchmentCounter, 902, 20);
+        drawText("x" + zero + Game.player.parchmentCounter, 103, 604);
     }
     
     public void renderSteroid() {
-        g.drawImage(steroid, 337, -24, null);
+        g.drawImage(steroid, -437, 558, null);
         String zero = Game.player.steroidCounter < 10 ? "0" : "";
-        drawText("x" + zero + Game.player.steroidCounter, 801, 20);
+        drawText("x" + zero + Game.player.steroidCounter, 26, 604);
     }
     
     public void renderChocolate() {

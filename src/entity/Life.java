@@ -5,6 +5,7 @@
  */
 package entity;
 
+import entity.Entity;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;

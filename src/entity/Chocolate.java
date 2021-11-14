@@ -14,7 +14,7 @@ import world.World;
  * @author Leonardo
  */
 public class Chocolate extends Entity {
-    
+    public int chocolateScore = 250;
     public Chocolate(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         this.sprite = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
@@ -27,6 +27,7 @@ public class Chocolate extends Entity {
         {
             if(Game.player.chocolateCounter < 5) {
                 Game.player.chocolateCounter++;
+                Game.player.score += chocolateScore;
                 Game.player.energy = 100;
                 Game.player.energyFrames = 0;
                 Entity.addParticle(this);

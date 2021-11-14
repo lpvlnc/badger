@@ -5,7 +5,7 @@
  */
 package entity;
 
-import entity.Particle.Particle;
+import entity.particle.Particle;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;

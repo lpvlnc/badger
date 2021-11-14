@@ -5,7 +5,7 @@
  */
 package entity;
 
-import entity.Particle.PoisonedParticle;
+import entity.particle.PoisonedParticle;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
@@ -338,7 +338,6 @@ public class Player extends Entity {
     
     @Override
     public void update(){
-        
         if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
         {
             energyFrames++;

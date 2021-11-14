@@ -6,7 +6,7 @@
 package main;
 
 import entity.Entity;
-import entity.Particle.PoisonedParticle;
+import entity.particle.PoisonedParticle;
 import entity.Player;
 import graphic.Spritesheet;
 import graphic.UI;

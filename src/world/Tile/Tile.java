@@ -30,9 +30,9 @@ public class Tile {
     
     // WALL
     public static BufferedImage WALL_TOP = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_TOP_LEFT_CORNER = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_LEFT = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL = Game.spritesheet.getSprite(96, 576, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_TOP_RIGHT_CORNER = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_RIGHT = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_BOTTOM_LEFT_CORNER = Game.spritesheet.getSprite(64, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
