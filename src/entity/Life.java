@@ -30,6 +30,7 @@ public class Life extends Entity {
         life = new BufferedImage[4];
         for(int i = 0; i < 4; i++){
             life[i] = Game.spritesheet.getSprite(448, 0 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+            setMask(10, 11, 11, 10);
         }
     }
     
