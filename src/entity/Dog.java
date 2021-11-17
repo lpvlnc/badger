@@ -5,20 +5,25 @@
  */
 
 package entity;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 /**
  *
  * @author thaia
  */
-public class dog extends Entity {
+public class Dog extends Entity {
 
-public BufferedImage dog;
+    public BufferedImage dog;
 
-public void update() {
-    
-}
+    public Dog(double x, double y, int width, int height, BufferedImage sprite) {
+        super(x, y, width, height, sprite);
+    }
 
-public void render (Graphics g) {
-    
-}
+    public void update() {
+
+    }
+
+    public void render (Graphics g) {
+
+    }
 }
