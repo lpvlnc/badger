@@ -25,12 +25,12 @@ public class Panda extends Entity{
         super(x, y, width, height, sprite);
         pandaLeft = new BufferedImage[3];
         for(int i = 0; i < 3; i++) {
-            pandaLeft[i] = Game.spritesheet.getSprite(96 + (i * World.TILE_SIZE), 256, 32, 32);
+            pandaLeft[i] = Game.spritesheet.getSprite(96 + (i * World.TILE_SIZE), 288, 32, 32);
         }
         
         pandaRight = new BufferedImage[3];
         for(int i = 0; i < 3; i++) {
-            pandaRight[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 256, 32, 32);
+            pandaRight[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 288, 32, 32);
         }
         
         if(getY() <= 64)
