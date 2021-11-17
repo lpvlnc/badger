@@ -167,7 +167,7 @@ public class Player extends Entity {
                 isMoving = true;
                 y += speed;
             }
-        }
+        } 
         
         if(left) {
             this.direction = Direction.LEFT;
@@ -178,6 +178,7 @@ public class Player extends Entity {
             }
         }
         
+        
         if(right) {
             this.direction = Direction.RIGHT;
             setMask(8, 6, 24, 17);
@@ -186,7 +187,26 @@ public class Player extends Entity {
                 x += speed;
             }
         }
-    }
+        
+        if(right&left) {
+            this.direction = Direction.RIGHT;
+            setMask(8, 6, 24, 17);
+            if(World.isFreeDynamic(getX() + xMask + speed, getY() + yMask, wMask, hMask)) {
+                isMoving = true;
+                x += speed;
+            }
+        }
+    
+        if(down&up){
+            this.direction = Direction.DOWN;
+            setMask(10, 1, 14, 29);
+            if(World.isFreeDynamic(getX() + xMask, getY() + yMask + speed, wMask, hMask)){
+                isMoving = true;
+                y += speed;
+            }
+        }
+    }    
+    
     
     public void animation()
     {

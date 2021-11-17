@@ -18,6 +18,7 @@ public class Chocolate extends Entity {
     public Chocolate(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         this.sprite = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
+        setMask(3, 3, 26, 26);
     }
     
     @Override
