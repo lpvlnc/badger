@@ -12,19 +12,13 @@ import java.awt.image.BufferedImage;
  */
 public class dog extends Entity {
 
-public BufferedImage dog();
-    }
+public BufferedImage dog;
 
-
-
-public void update(){
+public void update() {
+    
 }
 
-
-
-public void render (Graphics g){
+public void render (Graphics g) {
+    
 }
-
-
-
 }
