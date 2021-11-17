@@ -11,6 +11,7 @@ import world.Tile.TileWall;
 import entity.Chocolate;
 import entity.Entity;
 import entity.Life;
+import entity.Panda;
 import entity.Parchment;
 import entity.Player;
 import entity.Steroid;
@@ -108,7 +109,6 @@ public class World {
                     case 0xFF9b9b9b: // WALL top right corner
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_RIGHT);
                         break;
-                    
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
@@ -120,6 +120,9 @@ public class World {
                         break;
                     case 0xFF7507e2:
                         Game.entities.add(new Steroid(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
+                    case 0xFF6e956f:
+                        Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
                     default: // floor
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);

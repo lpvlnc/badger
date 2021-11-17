@@ -44,7 +44,6 @@ public class KeyHandler implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_SHIFT){
             if(player.energy > 0 && player.isMoving){
                 player.isRunning = true;
-            
             }
         }
         

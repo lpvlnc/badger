@@ -241,6 +241,7 @@ public class Player extends Entity {
     public void running(){
         if (energy <= 0) {
             isRunning = false;
+            frames = 0;
             return;
         }
         if(!onSteroid){
