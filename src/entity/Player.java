@@ -342,8 +342,9 @@ public class Player extends Entity {
     
     @Override
     public void update(){
-        System.out.println("frames: "+ frames);
-        System.out.println("max frames: "+ maxFrames);
+        
+        if(isRunning && frames > 3)
+            System.out.println("frames: "+ frames);
         if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
         {
             energyFrames++;
