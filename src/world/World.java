@@ -9,6 +9,7 @@ import world.Tile.Tile;
 import world.Tile.TileFloor;
 import world.Tile.TileWall;
 import entity.Chocolate;
+import entity.Dog;
 import entity.Entity;
 import entity.Life;
 import entity.Panda;
@@ -123,6 +124,9 @@ public class World {
                         break;
                     case 0xFF6e956f:
                         Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
+                    case 0xFFb09898:
+                        Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
                     default: // floor
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);

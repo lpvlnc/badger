@@ -261,7 +261,6 @@ public class Player extends Entity {
 
     public void startRunning(){
         isRunning = true;
-        frames = 0;
         maxFrames = steroidMaxFrames;
         speed = runningSpeed;
     }
@@ -304,7 +303,7 @@ public class Player extends Entity {
         
         if(life <= 0){
             life = 0;
-           Game.gameOver = true;
+            Game.gameOver = true;
         }
     }
     

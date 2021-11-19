@@ -84,9 +84,5 @@ public class KeyHandler implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_SHIFT){
             player.stopRunning();
         }
-        
-        if(e.getKeyCode() == KeyEvent.VK_CONTROL){
-            player.stopRunning();
-        }
     }
 }
