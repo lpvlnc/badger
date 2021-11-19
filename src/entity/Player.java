@@ -211,7 +211,7 @@ public class Player extends Entity {
     public void animation()
     {
         frames++;
-        if(frames == maxFrames){
+        if(frames >= maxFrames){
             frames = 0;
             index++;
             if(index == maxIndex){
@@ -254,50 +254,33 @@ public class Player extends Entity {
     public void useSteroid(){
         if(steroidCounter > 0 && !onSteroid && !weak){
             steroidCounter--;
+            startRunning();
             onSteroid = true;
         }
     }
-    
-    public void running(){
-        if (energy <= 0) {
-            isRunning = false;
-            frames = 0;
-            return;
-        }
-        if(!onSteroid){
-            runningFrames++;
-            if(runningFrames == runningMaxFrames) {
-                runningFrames = 0;
-                energy-=10;
-                if(energy <= 0) {
-                    isRunning = false;
-                    maxFrames = defaultMaxFrames;
-                    maxFramesChanged = false;
-                    return;
-                }
-            }
-        }
-            
+
+    public void startRunning(){
+        isRunning = true;
+        frames = 0;
         maxFrames = steroidMaxFrames;
-        if(maxFramesChanged == false) {
-            frames = 0;
-            maxFramesChanged = true;
-        }
         speed = runningSpeed;
     }
     
+    public void stopRunning(){
+        isRunning = false;
+        frames = 0;
+        maxFrames = defaultMaxFrames;
+        speed = defaultSpeed;
+    }
+    
     public void steroid() {
-        isRunning = true;
-        running();
         canBeDamaged = false;
         steroidTime++;
         if(steroidTime == steroidMaxTime) {
             onSteroid = false;
             steroidTime = 0;
-            speed = defaultSpeed;
+            stopRunning();
             weak = true;
-            isRunning = false;
-            maxFramesChanged = false;
         }
     }
     
@@ -359,6 +342,8 @@ public class Player extends Entity {
     
     @Override
     public void update(){
+        System.out.println("frames: "+ frames);
+        System.out.println("max frames: "+ maxFrames);
         if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
         {
             energyFrames++;
@@ -372,11 +357,22 @@ public class Player extends Entity {
         if(score > highScore){
             highScore = score;
         }
-        if(isRunning && !weak && energy > 0)
-            running();
-        else {
-            speed = defaultSpeed;
-            maxFrames = defaultMaxFrames;
+        
+        if(isRunning && !weak && energy > 0) {
+            if(!onSteroid){
+                if(energy <= 0) {
+                    stopRunning();
+                    return;
+                }
+                runningFrames++;
+                if(runningFrames == runningMaxFrames) {
+                    runningFrames = 0;
+                    //energy-=10;
+                    if(energy <= 0) {
+                        stopRunning();
+                    }
+                }
+            }
         }
         
         if(onSteroid) {

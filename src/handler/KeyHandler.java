@@ -43,7 +43,7 @@ public class KeyHandler implements KeyListener {
         
         if(e.getKeyCode() == KeyEvent.VK_SHIFT){
             if(player.energy > 0 && player.isMoving){
-                player.isRunning = true;
+                player.startRunning();
             }
         }
         
@@ -57,6 +57,10 @@ public class KeyHandler implements KeyListener {
         
         if(e.getKeyCode() == KeyEvent.VK_F)
             showFps = !showFps;
+        
+        if(e.getKeyCode() == KeyEvent.VK_CONTROL){
+            player.useSteroid();
+        }
     }
 
     @Override
@@ -78,11 +82,7 @@ public class KeyHandler implements KeyListener {
         }
         
         if(e.getKeyCode() == KeyEvent.VK_SHIFT){
-            player.isRunning = false;
-        }
-        
-        if(e.getKeyCode() == KeyEvent.VK_CONTROL){
-            player.useSteroid();
+            player.stopRunning();
         }
     }
 }
