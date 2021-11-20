@@ -6,13 +6,10 @@
 package entity;
 
 import astar.AStar;
-import astar.Node;
 import astar.Vector2i;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 import main.Game;
 import world.Camera;
 import world.World;
@@ -31,31 +28,28 @@ public class Salesman extends Entity {
     public boolean down;
     public boolean left;
     public boolean right;
-    public double speed;
 
     public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
-        speed = ThreadLocalRandom.current().nextDouble(0.5, 2);
-        System.out.println(speed);
         salesMan = Game.spritesheet.getSprite(0, 352, World.TILE_SIZE, World.TILE_SIZE);
         salesManUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManUp[0] = Game.spritesheet.getSprite(32, 352 + (i * 32), World.TILE_SIZE, World.TILE_SIZE);
+           salesManUp[0] = Game.spritesheet.getSprite(32, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
         
         salesManLeft = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManLeft[0] = Game.spritesheet.getSprite(96, 352 + (i * 32), World.TILE_SIZE, World.TILE_SIZE);
+           salesManLeft[0] = Game.spritesheet.getSprite(96, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
         
         salesManDown = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManDown[0] = Game.spritesheet.getSprite(0, 352 + (i * 32), World.TILE_SIZE, World.TILE_SIZE);
+           salesManDown[0] = Game.spritesheet.getSprite(0, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
         
         salesManRight = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManRight[0] = Game.spritesheet.getSprite(64, 352 + (i * 32), World.TILE_SIZE, World.TILE_SIZE);
+           salesManRight[0] = Game.spritesheet.getSprite(64, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
     }
      
