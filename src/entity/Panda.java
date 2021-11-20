@@ -14,7 +14,6 @@ public class Panda extends Entity{
     
     public boolean up;
     public boolean right;
-    public int speed = 1;
     public int frames = 0;
     public int maxFrames = 15;
     public int index = 0;

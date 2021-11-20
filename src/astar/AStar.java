@@ -42,8 +42,8 @@ public class AStar {
     
     public static List<Node> findPath(World world, Vector2i start, Vector2i end){
         lastTime = System.currentTimeMillis();
-        List<Node> openList = new ArrayList<Node>();
-        List<Node> closedList = new ArrayList<Node>();
+        List<Node> openList = new ArrayList<>();
+        List<Node> closedList = new ArrayList<>();
         
         Node current = new Node(start, null, 0, getDistance(start, end));
         
@@ -54,7 +54,7 @@ public class AStar {
             if(current.tile.equals(end)){
                 //chegamos no ponto final
                 //basta retornar o valor
-                List<Node> path = new ArrayList<Node>();
+                List<Node> path = new ArrayList<>();
                 while(current.parent != null){
                     path.add(current);
                     current = current.parent;

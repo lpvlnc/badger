@@ -18,7 +18,6 @@ import world.World;
 public class Dog extends Entity {
 
     public BufferedImage dog;
-    public int speed = 1;
     public boolean up;
 
     public Dog(double x, double y, int width, int height, BufferedImage sprite) {

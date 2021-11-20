@@ -43,6 +43,8 @@ public class Entity {
     public int depth;
     protected List<Node> path;
     
+    public int speed = 1;
+    
     public Entity(double x, double y, int width, int height, BufferedImage sprite){
         this.x = x;
         this.y = y;
@@ -112,21 +114,21 @@ public class Entity {
                 if(x < target.x * World.TILE_SIZE){
                     isMoving = true;
                     direction = Direction.RIGHT;
-                    x++;
+                    x+=speed;
                 } else if(x > target.x * World.TILE_SIZE){
                     isMoving = true;
                     direction = Direction.LEFT;
-                    x--;
+                    x-=speed;
                 }
                 
                 if(y < target.y * World.TILE_SIZE){
                     isMoving = true;
                     direction = Direction.DOWN;
-                    y++;
+                    y+=speed;
                 }else if (y > target.y * World.TILE_SIZE){
                     isMoving = true;
                     direction = Direction.UP;
-                    y--;
+                    y-=speed;
                 }
                 
                 if(x == target.x * World.TILE_SIZE && y == target.y * World.TILE_SIZE){

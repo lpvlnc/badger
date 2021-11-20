@@ -11,6 +11,8 @@ import astar.Vector2i;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import main.Game;
 import world.Camera;
 import world.World;
@@ -29,10 +31,12 @@ public class Salesman extends Entity {
     public boolean down;
     public boolean left;
     public boolean right;
-    public boolean isMoving = false;
+    public double speed;
 
     public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
+        speed = ThreadLocalRandom.current().nextDouble(0.5, 2);
+        System.out.println(speed);
         salesMan = Game.spritesheet.getSprite(0, 352, World.TILE_SIZE, World.TILE_SIZE);
         salesManUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
@@ -54,47 +58,19 @@ public class Salesman extends Entity {
            salesManRight[0] = Game.spritesheet.getSprite(64, 352 + (i * 32), World.TILE_SIZE, World.TILE_SIZE);
         }
     }
-    
-     public void followPlayerPath(List<Node> path){
-        if(path != null){
-            if(path.size() > 0){
-                Vector2i target = path.get(path.size() - 1).tile;
-                if(x < target.x * World.TILE_SIZE){
-                    isMoving = true;
-                    direction = Direction.RIGHT;
-                    x++;
-                } else if(x > target.x * World.TILE_SIZE){
-                    isMoving = true;
-                    direction = Direction.LEFT;
-                    x--;
-                }
-                
-                if(y < target.y * World.TILE_SIZE){
-                    isMoving = true;
-                    direction = Direction.DOWN;
-                    y++;
-                }else if (y > target.y * World.TILE_SIZE){
-                    isMoving = true;
-                    direction = Direction.UP;
-                    y--;
-                }
-                
-                if(x == target.x * World.TILE_SIZE && y == target.y * World.TILE_SIZE){
-                    path.remove(path.size() - 1);
-                }
-            }
-        }
-    }
      
+    @Override
     public void update() {
-        if(path == null || path.size() == 0){
-            Vector2i start = new Vector2i((int)getX() / World.TILE_SIZE, (int)getY() / World.TILE_SIZE);
-            Vector2i end = new Vector2i((int)Game.player.getX() / World.TILE_SIZE, (int)Game.player.getY() / World.TILE_SIZE);
+        if(path == null || path.isEmpty()){
+            Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
+            Vector2i end = new Vector2i(Game.player.getX() / World.TILE_SIZE, Game.player.getY() / World.TILE_SIZE);
             path = AStar.findPath(Game.world, start, end);
         }
-        followPath(path);
+        if(new Random().nextInt(100) < 98)
+            followPath(path);
     }
     
+    @Override
     public void render(Graphics g) {
         g.drawImage(salesMan, getX() - Camera.x, getY() - Camera.y, null);
     }

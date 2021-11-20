@@ -53,7 +53,6 @@ public class Player extends Entity {
     public int life = maxLife;
     public int defaultSpeed = 2;
     public int runningSpeed = 4;
-    public int speed = defaultSpeed;
     public boolean dead = false;
     public int score = 0;
     public int highScore = 0;
@@ -88,6 +87,7 @@ public class Player extends Entity {
         setDepth(0);
         setMask(8, 6, 24, 17);
         initSprites();
+        speed = defaultSpeed;
     }
     
     private void initSprites() {
