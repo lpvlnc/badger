@@ -183,7 +183,7 @@ public class UI {
             for(int i = 0; i < 5; i++){
                 g.drawImage(heartBack, 79 +  (i * 24), -15, null);
             }
-            for(int i = 0; i <= Game.player.life; i++){
+            for(int i = 0; i < Game.player.life; i++){
                 g.drawImage(heart, 79 + (i * 24), -15, null);
             }
         }

@@ -43,10 +43,11 @@ public class Player extends Entity {
     
     
     // damage animation logic
-    public boolean damaged = true;
+    public boolean damaged = false;
     public boolean canBeDamaged = true;
     public int damagedFrames = 0;
     public int maxDamagedFrames = 60;
+    public int damageReceived = 0;
 
     // general attributes
     public int maxLife = 2;
@@ -121,15 +122,15 @@ public class Player extends Entity {
         }
         
         for (int i = 0; i < 6; i++) {
-            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 160, World.TILE_SIZE, World.TILE_SIZE);
+            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 162, World.TILE_SIZE, World.TILE_SIZE);
         }
         
         for (int i = 0; i < 4; i++){
-            playerDownDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 192, World.TILE_SIZE, World.TILE_SIZE);
+            playerDownDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 194, World.TILE_SIZE, World.TILE_SIZE);
         }
         
         for(int i = 0; i < 6; i++){
-            playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 224, World.TILE_SIZE, World.TILE_SIZE);
+            playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 226, World.TILE_SIZE, World.TILE_SIZE);
         }
         
         poisonedParticle = null;
@@ -282,15 +283,12 @@ public class Player extends Entity {
         }
     }
     
+    public void takeDamage(int damage){
+        life -= damage;
+        canBeDamaged = false;
+    }
+    
     public void damage() {
-        
-        if(canBeDamaged){
-            if(damaged){
-                canBeDamaged = false;
-                life-=1;
-            }
-        }
-        
         if(!canBeDamaged){
             damaged = false;
             damagedFrames++;
@@ -307,40 +305,72 @@ public class Player extends Entity {
     }
     
     public void renderPlayerUp(Graphics g) {
-        if(isMoving) {
-            if (index > 3)
-                index = 0;
-            g.drawImage(playerUp[index], getX() - Camera.x, getY() - Camera.y, null);
-        } else
-            g.drawImage(playerUp[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(canBeDamaged) {
+            if(isMoving) {
+                if (index > 3)
+                    index = 0;
+                g.drawImage(playerUp[index], getX() - Camera.x, getY() - Camera.y, null);
+            } else
+                g.drawImage(playerUp[0], getX() - Camera.x, getY() - Camera.y, null);
+        } else {
+            if(isMoving) {
+                if (index > 3)
+                    index = 0;
+                g.drawImage(playerUpDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+            } else
+                g.drawImage(playerUpDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+        }
     }
     
     public void renderPlayerLeft(Graphics g) {
-        if(isMoving)
-            g.drawImage(playerLeft[index], getX() - Camera.x, getY() - Camera.y, null);
-        else
-            g.drawImage(playerLeft[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(canBeDamaged){
+            if(isMoving)
+                g.drawImage(playerLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+            else
+                g.drawImage(playerLeft[0], getX() - Camera.x, getY() - Camera.y, null);
+        } else {
+            if(isMoving)
+                g.drawImage(playerLeftDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+            else
+                g.drawImage(playerLeftDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+        }
     }
     
     public void renderPlayerDown(Graphics g) {
-        if(isMoving) {
-            if (index > 3)
-                index = 0;
-            g.drawImage(playerDown[index], getX() - Camera.x, getY() - Camera.y, null);
-        } else
-            g.drawImage(playerDown[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(canBeDamaged){
+            if(isMoving) {
+                if (index > 3)
+                    index = 0;
+                g.drawImage(playerDown[index], getX() - Camera.x, getY() - Camera.y, null);
+            } else
+                g.drawImage(playerDown[0], getX() - Camera.x, getY() - Camera.y, null);
+        } else {
+            if(isMoving) {
+                if (index > 3)
+                    index = 0;
+                g.drawImage(playerDownDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+            } else
+                g.drawImage(playerDownDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+        }
     }
     
     public void renderPlayerRight(Graphics g) {
-        if(isMoving)
-            g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
-        else
-            g.drawImage(playerRight[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(canBeDamaged){
+            if(isMoving)
+                g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
+            else
+                g.drawImage(playerRight[0], getX() - Camera.x, getY() - Camera.y, null);
+        } else {
+            if(isMoving)
+                g.drawImage(playerRightDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+            else
+                g.drawImage(playerRightDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+        }
     }
     
     @Override
     public void update(){
-        
+        System.out.println(life);
         if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
         {
             energyFrames++;

@@ -9,10 +9,8 @@ import astar.AStar;
 import astar.Vector2i;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-import javafx.scene.shape.Circle;
 import main.Game;
 import world.Camera;
 import world.World;
@@ -34,14 +32,14 @@ public class Salesman extends Entity {
     
     public int visionCenterX;
     public int visionCenterY;
-    public int visionRadius = 200;
+    public int visionRadius = 300;
 
     public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setMask(8, 3, 16, 29);
         visionCenterX = xMask + (wMask / 2);
         visionCenterY = yMask + (hMask / 2);
-        speed = 2;
+        speed = 1;
         salesMan = Game.spritesheet.getSprite(0, 352, World.TILE_SIZE, World.TILE_SIZE);
         salesManUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
@@ -89,11 +87,12 @@ public class Salesman extends Entity {
             
             if(new Random().nextInt(100) < 98)
                 followPath(path);
-            else
-                path = null;
         } else {
-            if (path != null)
-                path = null;
+            path = null;
+        }
+        
+        if(isColliding(this, Game.player) && Game.player.canBeDamaged) {
+            Game.player.takeDamage(1);
         }
     }
     
