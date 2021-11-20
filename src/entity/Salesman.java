@@ -40,25 +40,25 @@ public class Salesman extends Entity {
         visionCenterX = xMask + (wMask / 2);
         visionCenterY = yMask + (hMask / 2);
         speed = 1;
-        salesMan = Game.spritesheet.getSprite(0, 352, World.TILE_SIZE, World.TILE_SIZE);
+        salesMan = Game.spritesheet.getSprite(0, 384, World.TILE_SIZE, World.TILE_SIZE);
         salesManUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManUp[0] = Game.spritesheet.getSprite(32, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManUp[0] = Game.spritesheet.getSprite(32, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
         
         salesManLeft = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManLeft[0] = Game.spritesheet.getSprite(96, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManLeft[0] = Game.spritesheet.getSprite(96, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
         
         salesManDown = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManDown[0] = Game.spritesheet.getSprite(0, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManDown[0] = Game.spritesheet.getSprite(0, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
         
         salesManRight = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManRight[0] = Game.spritesheet.getSprite(64, 352 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManRight[0] = Game.spritesheet.getSprite(64, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
         }
     }
     
