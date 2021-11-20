@@ -44,6 +44,10 @@ public class Dog extends Entity {
         
         if(getY() + World.TILE_SIZE > World.mapHeight * World.TILE_SIZE - hMask)
             up = true;
+        
+        if(isColliding(this, Game.player)) {
+            Game.player.takeDamage(2);
+        }
     }
 
     public void render (Graphics g) {

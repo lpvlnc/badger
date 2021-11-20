@@ -91,7 +91,7 @@ public class Salesman extends Entity {
             path = null;
         }
         
-        if(isColliding(this, Game.player) && Game.player.canBeDamaged) {
+        if(isColliding(this, Game.player)) {
             Game.player.takeDamage(1);
         }
     }

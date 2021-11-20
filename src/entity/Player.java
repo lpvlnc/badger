@@ -50,7 +50,7 @@ public class Player extends Entity {
     public int damageReceived = 0;
 
     // general attributes
-    public int maxLife = 2;
+    public int maxLife = 5;
     public int life = maxLife;
     public int defaultSpeed = 2;
     public int runningSpeed = 4;
@@ -67,7 +67,7 @@ public class Player extends Entity {
     public int energyMaxFrames = 240;
     
     // on steroid attributes
-    public int steroidCounter = 0;
+    public int steroidCounter = 1;
     public boolean onSteroid = false;
     public int steroidMaxTime = 400;
     public int steroidTime = 0;
@@ -284,8 +284,15 @@ public class Player extends Entity {
     }
     
     public void takeDamage(int damage){
-        life -= damage;
-        canBeDamaged = false;
+        if(canBeDamaged){
+            if(weak) {
+                life = 0;
+                Game.gameOver = true;
+            } else {
+                life -= damage;
+                canBeDamaged = false;
+            }
+        }
     }
     
     public void damage() {
@@ -305,7 +312,7 @@ public class Player extends Entity {
     }
     
     public void renderPlayerUp(Graphics g) {
-        if(canBeDamaged) {
+        if(canBeDamaged || onSteroid) {
             if(isMoving) {
                 if (index > 3)
                     index = 0;
@@ -323,7 +330,7 @@ public class Player extends Entity {
     }
     
     public void renderPlayerLeft(Graphics g) {
-        if(canBeDamaged){
+        if(canBeDamaged || onSteroid){
             if(isMoving)
                 g.drawImage(playerLeft[index], getX() - Camera.x, getY() - Camera.y, null);
             else
@@ -337,7 +344,7 @@ public class Player extends Entity {
     }
     
     public void renderPlayerDown(Graphics g) {
-        if(canBeDamaged){
+        if(canBeDamaged  || onSteroid){
             if(isMoving) {
                 if (index > 3)
                     index = 0;
@@ -355,7 +362,7 @@ public class Player extends Entity {
     }
     
     public void renderPlayerRight(Graphics g) {
-        if(canBeDamaged){
+        if(canBeDamaged || onSteroid){
             if(isMoving)
                 g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
             else

@@ -71,7 +71,6 @@ public class Panda extends Entity{
             else
                 up = true;
         }
-        
                 
         frames++;
         if(frames >= maxFrames){
@@ -81,6 +80,10 @@ public class Panda extends Entity{
             {
                 index = 0;
             }
+        }
+        
+        if(isColliding(this, Game.player)) {
+            Game.player.takeDamage(Game.player.life);
         }
     }
     
