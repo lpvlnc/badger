@@ -5,12 +5,15 @@
  */
 package entity;
 
+import astar.Node;
+import astar.Vector2i;
 import entity.particle.Particle;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
+import java.util.List;
 import main.Game;
 import world.Camera;
 import world.World;
@@ -35,8 +38,10 @@ public class Entity {
         UP, LEFT, DOWN, RIGHT 
     }
     public Direction direction = Direction.RIGHT;
+    public boolean isMoving = false;
     
     public int depth;
+    protected List<Node> path;
     
     public Entity(double x, double y, int width, int height, BufferedImage sprite){
         this.x = x;
@@ -98,6 +103,37 @@ public class Entity {
     
     public static void addParticle(Entity e){
         Game.entities.add(new Particle(e.getX(), e.getY(), World.TILE_SIZE, World.TILE_SIZE, null));
+    }
+    
+    public void followPath(List<Node> path) {
+        if(path != null){
+            if(path.size() > 0){
+                Vector2i target = path.get(path.size() - 1).tile;
+                if(x < target.x * World.TILE_SIZE){
+                    isMoving = true;
+                    direction = Direction.RIGHT;
+                    x++;
+                } else if(x > target.x * World.TILE_SIZE){
+                    isMoving = true;
+                    direction = Direction.LEFT;
+                    x--;
+                }
+                
+                if(y < target.y * World.TILE_SIZE){
+                    isMoving = true;
+                    direction = Direction.DOWN;
+                    y++;
+                }else if (y > target.y * World.TILE_SIZE){
+                    isMoving = true;
+                    direction = Direction.UP;
+                    y--;
+                }
+                
+                if(x == target.x * World.TILE_SIZE && y == target.y * World.TILE_SIZE){
+                    path.remove(path.size() - 1);
+                }
+            }
+        }
     }
     
     public int getDepth() {

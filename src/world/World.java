@@ -15,6 +15,7 @@ import entity.Life;
 import entity.Panda;
 import entity.Parchment;
 import entity.Player;
+import entity.Salesman;
 import entity.Steroid;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -127,6 +128,9 @@ public class World {
                         break;
                     case 0xFFb09898:
                         Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
+                    case 0xFFffa579:
+                        Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
                     default: // floor
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);

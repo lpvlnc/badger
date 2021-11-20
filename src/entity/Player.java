@@ -32,7 +32,6 @@ public class Player extends Entity {
     public boolean down;
     public boolean left;
     public boolean right;
-    public boolean isMoving = false;
     public int index = 0;
     public int maxIndex = 6;
     public int frames = 0;
