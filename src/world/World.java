@@ -159,7 +159,7 @@ public class World {
     }
     
     public static boolean isFreeDynamic(int xNext, int yNext, int width, int height){
-
+        
         int x1 = xNext / TILE_SIZE;
         int y1 = yNext / TILE_SIZE;
         

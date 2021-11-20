@@ -18,7 +18,7 @@ public class Steroid extends Entity{
     public Steroid(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         this.sprite = Game.spritesheet.getSprite(512, 0, World.TILE_SIZE, World.TILE_SIZE);
-        setMask(4, 4, 23, 24);
+        setMask(5, 5, 22, 23);
     }
     
     @Override
