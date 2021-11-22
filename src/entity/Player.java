@@ -62,7 +62,8 @@ public class Player extends Entity {
     public int maxEnergy = 100;
     public int energy = maxEnergy;
     public int parchmentCounter = 0;
-    public boolean xRay = true;
+    public boolean hasCrown = true;
+    public boolean xRay;
     
     public int energyFrames = 0;
     public int energyMaxFrames = 240;
