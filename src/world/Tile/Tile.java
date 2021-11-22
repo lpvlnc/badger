@@ -5,7 +5,10 @@
  */
 package world.Tile;
 
+import java.awt.AlphaComposite;
+import java.awt.Composite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import main.Game;
 import world.Camera;
@@ -20,8 +23,8 @@ import static world.World.tiles;
 public class Tile {
     
     BufferedImage sprite;
-    private int x;
-    private int y;
+    int x;
+    int y;
     private int width;
     private int height;
     
@@ -57,11 +60,8 @@ public class Tile {
     }
     
     public void render(Graphics g){
-        if(show){
+        if(show)
             g.drawImage(sprite, (int)x - Camera.x, (int)y - Camera.y, null);
-        } else {
-            g.drawImage(sprite, (int)x - Camera.x, (int)y - Camera.y, null); //pra aplicar o fog of war é só remover esse else
-        }
     }
      
      public BufferedImage getSprite() {
