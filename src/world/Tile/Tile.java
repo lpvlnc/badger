@@ -17,14 +17,14 @@ import world.World;
  */
 public class Tile {
     
-    private BufferedImage sprite;
+    BufferedImage sprite;
     private int x;
     private int y;
     private int width;
     private int height;
     
-    public boolean show = false;
-    public boolean solid = false;
+    public boolean show = true;
+    public boolean solid = true;
     
     public static BufferedImage FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
     
@@ -44,6 +44,10 @@ public class Tile {
         this.width = width;
         this.height = height;
         this.sprite = sprite;
+    }
+    
+    public void update(){
+        solid = sprite == Tile.WALL_BOTTOM_LEFT_CORNER || sprite == Tile.WALL_BOTTOM_CENTER || sprite == Tile.WALL_BOTTOM_RIGHT_CORNER;
     }
     
      public void render(Graphics g){

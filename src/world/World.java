@@ -39,23 +39,6 @@ public class World {
     public static int night = 1;
     public static int shift = day;
     
-    
-    public BufferedImage selectWallTile(Tile[] tiles, int x, int y){
-        BufferedImage tile = Tile.WALL;
-        try {
-            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP)
-                tile = Tile.WALL;
-            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL) {
-                tile = Tile.WALL_BOTTOM_CENTER;
-                if(tiles[(x - 1) + (y  * mapWidth)] instanceof TileFloor)
-                    tile = Tile.WALL_BOTTOM_LEFT_CORNER;
-            }
-        } catch (Exception e){
-            return tile;
-        }
-        return tile;
-    }
-    
     public World(String path) throws IOException {
 
         // ALGORITMO DE RENDERIZACAO DE MAPA A PARTIR DE UMA IMAGEM BIT MAP //
@@ -90,7 +73,7 @@ public class World {
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
                     case 0xFF7e7e7e: // WALL top
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_TOP);
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(tiles, xx, yy));
                     break;
                     case 0xFFFFFFFF: // wall
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTile(tiles, xx, yy));
@@ -140,6 +123,57 @@ public class World {
         }
     }
     
+    public static BufferedImage selectWallTopTile(Tile[] tiles, int x, int y){
+        BufferedImage tile = Tile.WALL_TOP;
+        try {
+            // if the tile above is any kind of bottom wall it will be replaced by a regular wall tile (can't have any bottom kind tile above a regular wall tile)
+            if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
+                tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL);
+            if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_RIGHT_CORNER)
+                tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL_BOTTOM_CENTER);
+            
+        } catch (Exception e){
+            return tile;
+        }
+        return tile;
+    }
+    
+    public static BufferedImage selectWallTile(Tile[] tiles, int x, int y){
+        BufferedImage tile = Tile.WALL;
+        try {
+            // if the tile above is any kind of bottom wall it will be replaced by a regular wall tile (can't have any bottom kind tile above a regular wall tile)
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_CENTER)
+                tiles[x + ((y - 1)  * mapWidth)].setSprite(Tile.WALL);
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_LEFT_CORNER)
+                tiles[x + ((y - 1)  * mapWidth)].setSprite(Tile.WALL_LEFT);
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_RIGHT_CORNER)
+                tiles[x + ((y - 1)  * mapWidth)].setSprite(Tile.WALL_RIGHT);
+            
+            // if the tile at left is any kind of right tile/right corner tile it will be replaced by a regular wall tile/wall bottom tile (can't have any right/bottom right kind tile followed by another of its kind)
+            if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
+                tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL);
+            if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_RIGHT_CORNER)
+                tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL_BOTTOM_CENTER);
+            
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP)
+                tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
+            
+            if (tile == Tile.WALL_RIGHT && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
+                tile = Tile.WALL_LEFT;
+            if (tile == Tile.WALL_BOTTOM_RIGHT_CORNER && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
+                tile = Tile.WALL_BOTTOM_LEFT_CORNER;
+            
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
+                tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_LEFT)
+                tile = Tile.WALL_BOTTOM_LEFT_CORNER;
+            
+        } catch (Exception e){
+            return tile;
+        }
+        return tile;
+    }
+    
     public static boolean isFree(int xNext, int yNext){
         int x1 = xNext / TILE_SIZE;
         int y1 = yNext / TILE_SIZE;
@@ -177,14 +211,20 @@ public class World {
 
         try {
             return !(
-                    (tiles[x1 + (y1 * World.mapWidth)] instanceof TileWall) ||
-                    (tiles[x2 + (y2 * World.mapWidth)] instanceof TileWall) ||
-                    (tiles[x3 + (y3 * World.mapWidth)] instanceof TileWall) ||
-                    (tiles[x4 + (y4 * World.mapWidth)] instanceof TileWall)
+                    (tiles[x1 + (y1 * World.mapWidth)] instanceof TileWall && tiles[x1 + (y1 * World.mapWidth)].solid) ||
+                    (tiles[x2 + (y2 * World.mapWidth)] instanceof TileWall && tiles[x2 + (y2 * World.mapWidth)].solid) ||
+                    (tiles[x3 + (y3 * World.mapWidth)] instanceof TileWall && tiles[x3 + (y3 * World.mapWidth)].solid) ||
+                    (tiles[x4 + (y4 * World.mapWidth)] instanceof TileWall && tiles[x4 + (y4 * World.mapWidth)].solid)
                     );
          } catch (Exception e) {
              return true;
          }
+    }
+    
+    public void update(){
+        for (Tile tile : tiles) {
+            tile.update();
+        }
     }
     
     public void render(Graphics g){
