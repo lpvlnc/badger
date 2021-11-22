@@ -71,9 +71,12 @@ public class World {
                     case 0xFF000000: // floor
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
+                    case 0xFF4e4e4e: // wall top solid
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(tiles, xx, yy, true));
+                        break;
                     case 0xFF7e7e7e: // wall top
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(tiles, xx, yy));
-                    break;
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(tiles, xx, yy, false));
+                        break;
                     case 0xFFFFFFFF: // wall
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTile(xx, yy));
                         break;
@@ -107,10 +110,10 @@ public class World {
         }
     }
     
-    public static BufferedImage selectWallTopTile(Tile[] tiles, int x, int y){
-        BufferedImage tile = Tile.WALL_TOP;
+    public static BufferedImage selectWallTopTile(Tile[] tiles, int x, int y, boolean solid){
+        BufferedImage tile = solid ? Tile.WALL_TOP_SOLID : Tile.WALL_TOP;
         try {
-            // if the tile above is any kind of bottom wall it will be replaced by a regular wall tile (can't have any bottom kind tile above a regular wall tile)
+            // if the tile at left is any kind of right tile/right corner tile it will be replaced by a regular wall tile/wall bottom tile (can't have any right/bottom right kind tile followed by another of its kind)
             if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
                 tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL);
             if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_RIGHT_CORNER)
@@ -125,6 +128,8 @@ public class World {
     public static BufferedImage selectWallTile(int x, int y){
         BufferedImage tile = Tile.WALL;
         try {
+            if(tiles[x + ((y - 1)  * mapWidth)].solid)
+                tiles[x + (y  * mapWidth)].solid = true;
             // if the tile above is any kind of bottom wall it will be replaced by a regular wall tile (can't have any bottom kind tile above a regular wall tile)
             if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_CENTER)
                 tiles[x + ((y - 1)  * mapWidth)].setSprite(Tile.WALL);
@@ -139,15 +144,14 @@ public class World {
             if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_RIGHT_CORNER)
                 tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL_BOTTOM_CENTER);
             
-            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP)
+            if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP || tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP_SOLID)
                 tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
             
             if (tile == Tile.WALL_RIGHT && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
                 tile = Tile.WALL_LEFT;
+            
             if (tile == Tile.WALL_BOTTOM_RIGHT_CORNER && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
-                tile = Tile.WALL_BOTTOM_LEFT_CORNER;
-            
-            
+                    tile = Tile.WALL_BOTTOM_LEFT_CORNER;
             
             if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
                 tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
@@ -208,8 +212,8 @@ public class World {
     }
     
     public void update(){
-        for (Tile tile : tiles) {
-            tile.update();
+        for (Tile t : tiles) {
+            t.update();
         }
     }
     

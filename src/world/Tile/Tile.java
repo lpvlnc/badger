@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import main.Game;
 import world.Camera;
 import world.World;
+import static world.World.mapWidth;
+import static world.World.tiles;
 
 /**
  *
@@ -31,6 +33,7 @@ public class Tile {
     
     // WALL
     public static BufferedImage WALL_TOP = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static BufferedImage WALL_TOP_SOLID = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_LEFT = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL = Game.spritesheet.getSprite(96, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_RIGHT = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);
@@ -48,7 +51,9 @@ public class Tile {
     }
     
     public void update(){
-        solid = sprite == Tile.WALL_BOTTOM_LEFT_CORNER || sprite == Tile.WALL_BOTTOM_CENTER || sprite == Tile.WALL_BOTTOM_RIGHT_CORNER;
+        
+        solid = sprite == Tile.WALL_BOTTOM_LEFT_CORNER || sprite == Tile.WALL_BOTTOM_CENTER || sprite == Tile.WALL_BOTTOM_RIGHT_CORNER || sprite == Tile.WALL_TOP_SOLID || tiles[(x / World.TILE_SIZE) + (((y - 1) / World.TILE_SIZE) * mapWidth)].sprite == Tile.WALL_TOP_SOLID;
+
     }
     
     public void render(Graphics g){
