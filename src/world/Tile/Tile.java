@@ -25,6 +25,7 @@ public class Tile {
     
     public boolean show = true;
     public boolean solid = true;
+    public int depth = 0;
     
     public static BufferedImage FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
     
@@ -50,7 +51,7 @@ public class Tile {
         solid = sprite == Tile.WALL_BOTTOM_LEFT_CORNER || sprite == Tile.WALL_BOTTOM_CENTER || sprite == Tile.WALL_BOTTOM_RIGHT_CORNER;
     }
     
-     public void render(Graphics g){
+    public void render(Graphics g){
         if(show){
             g.drawImage(sprite, (int)x - Camera.x, (int)y - Camera.y, null);
         } else {

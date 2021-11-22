@@ -125,15 +125,15 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
         
         /* Game render start */
+        world.renderFloor(g);
         Collections.sort(entities, Entity.nodeSorter);
-        world.render(g);
         for(int i = 0; i < entities.size(); i++){
             Entity e = entities.get(i);
             e.render(g);
             if(showHitBox)
                 e.showHitBox(g);
         }
-        
+        world.renderWall(g);
         /* Game render end */
         g.dispose();
         g = bs.getDrawGraphics();

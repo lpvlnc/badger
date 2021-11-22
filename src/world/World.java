@@ -10,7 +10,6 @@ import world.Tile.TileFloor;
 import world.Tile.TileWall;
 import entity.Chocolate;
 import entity.Dog;
-import entity.Entity;
 import entity.Life;
 import entity.Panda;
 import entity.Parchment;
@@ -72,26 +71,11 @@ public class World {
                     case 0xFF000000: // floor
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
-                    case 0xFF7e7e7e: // WALL top
+                    case 0xFF7e7e7e: // wall top
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(tiles, xx, yy));
                     break;
                     case 0xFFFFFFFF: // wall
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTile(tiles, xx, yy));
-                        break;
-                    case 0xFFe6e6e6: // WALL bottom left corner
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_LEFT_CORNER);
-                        break;
-                    case 0xFFd2d2d2: // WALL bottom center wall
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_CENTER);
-                        break;
-                    case 0xFFbebebe: // WALL bottom right corner
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_BOTTOM_RIGHT_CORNER);
-                        break;
-                    case 0xFFafafaf: // WALL top left corner
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_LEFT);
-                        break;
-                    case 0xFF9b9b9b: // WALL top right corner
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.WALL_RIGHT);
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTile(xx, yy));
                         break;
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
@@ -138,7 +122,7 @@ public class World {
         return tile;
     }
     
-    public static BufferedImage selectWallTile(Tile[] tiles, int x, int y){
+    public static BufferedImage selectWallTile(int x, int y){
         BufferedImage tile = Tile.WALL;
         try {
             // if the tile above is any kind of bottom wall it will be replaced by a regular wall tile (can't have any bottom kind tile above a regular wall tile)
@@ -162,6 +146,8 @@ public class World {
                 tile = Tile.WALL_LEFT;
             if (tile == Tile.WALL_BOTTOM_RIGHT_CORNER && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
                 tile = Tile.WALL_BOTTOM_LEFT_CORNER;
+            
+            
             
             if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
                 tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
@@ -227,8 +213,7 @@ public class World {
         }
     }
     
-    public void render(Graphics g){
-    
+    public void renderFloor(Graphics g){
         int xStart = Camera.x / TILE_SIZE;
         int yStart = Camera.y / TILE_SIZE;
         
@@ -243,7 +228,29 @@ public class World {
                 }
                 
                 Tile tile = tiles[xx + (yy * mapWidth)];
-                tile.render(g);
+                if(tile instanceof TileFloor)
+                    tile.render(g);
+            }
+        }
+    }
+    
+    public void renderWall(Graphics g){
+        int xStart = Camera.x / TILE_SIZE;
+        int yStart = Camera.y / TILE_SIZE;
+        
+        int xFinal = xStart + (Game.WIDTH / TILE_SIZE);
+        int yFinal = yStart + (Game.HEIGHT / TILE_SIZE);
+        
+        for(int xx = xStart ; xx <= xFinal; xx++){
+            for(int yy = yStart; yy <= yFinal; yy++){
+                
+                if(xx < 0 || yy < 0 || xx >= mapWidth || yy >= mapHeight){
+                    continue;
+                }
+                
+                Tile tile = tiles[xx + (yy * mapWidth)];
+                if(tile instanceof TileWall)
+                    tile.render(g);
             }
         }
     }
