@@ -122,7 +122,7 @@ public class Player extends Entity {
         }
         
         for (int i = 0; i < 6; i++) {
-            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 160, World.TILE_SIZE, World.TILE_SIZE);
+            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 162, World.TILE_SIZE, World.TILE_SIZE -2);
         }
         
         for (int i = 0; i < 4; i++){

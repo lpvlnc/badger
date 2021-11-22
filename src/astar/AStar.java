@@ -79,7 +79,7 @@ public class AStar {
                 Tile tile;
                 try {
                     tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
-                } catch (Exception e){
+                } catch (Exception e) {
                     continue;
                 }
 

@@ -53,7 +53,6 @@ public class World {
         } catch (Exception e){
             return tile;
         }
-        
         return tile;
     }
     
