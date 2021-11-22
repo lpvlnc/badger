@@ -6,7 +6,6 @@
 package main;
 
 import entity.Entity;
-import entity.particle.PoisonedParticle;
 import entity.Player;
 import graphic.Spritesheet;
 import graphic.UI;
@@ -20,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.imageio.ImageIO;
 import world.World;
 
 /**

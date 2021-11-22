@@ -80,8 +80,6 @@ public class Salesman extends Entity {
         
         if(isSeeingPlayer()){
             if(path == null || path.isEmpty()){
-                System.out.println(getX() / World.TILE_SIZE);
-                System.out.println(getY() / World.TILE_SIZE);
                 Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
                 Vector2i end = new Vector2i(Game.player.getX() / World.TILE_SIZE, Game.player.getY() / World.TILE_SIZE);
                 path = AStar.findPath(Game.world, start, end);

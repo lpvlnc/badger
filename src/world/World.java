@@ -74,13 +74,16 @@ public class World {
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
                     case 0xFF4e4e4e: // wall top solid
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(tiles, xx, yy, true));
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(xx, yy, true));
                         break;
                     case 0xFF7e7e7e: // wall top
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(tiles, xx, yy, false));
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(xx, yy, false));
                         break;
                     case 0xFFFFFFFF: // wall
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTile(xx, yy));
+                        break;
+                    case 0xFFa2a2a2:
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallDoorTop(xx, yy));
                         break;
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
@@ -112,7 +115,18 @@ public class World {
         }
     }
     
-    public static BufferedImage selectWallTopTile(Tile[] tiles, int x, int y, boolean solid){
+    public static BufferedImage selectWallDoorTop(int x, int y){
+        BufferedImage tile = Tile.WALL_TOP_DOOR;
+        try {
+            if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
+                tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL);
+        }catch (Exception e){
+            return tile;
+        }
+        return tile;
+    }
+    
+    public static BufferedImage selectWallTopTile(int x, int y, boolean solid){
         BufferedImage tile = solid ? Tile.WALL_TOP_SOLID : Tile.WALL_TOP;
         try {
             // if the tile at left is any kind of right tile/right corner tile it will be replaced by a regular wall tile/wall bottom tile (can't have any right/bottom right kind tile followed by another of its kind)
@@ -159,7 +173,6 @@ public class World {
                 tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
             if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_LEFT)
                 tile = Tile.WALL_BOTTOM_LEFT_CORNER;
-            
         } catch (Exception e){
             return tile;
         }
