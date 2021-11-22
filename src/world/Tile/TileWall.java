@@ -27,10 +27,8 @@ public class TileWall extends Tile {
     public void render(Graphics g){
         
         if(Game.player.xRay) {
-            g.drawImage(Tile.FLOOR, (int)x - Camera.x, (int)y - Camera.y, null);
             Graphics2D g2 = (Graphics2D)g;
-            Composite comp;
-            comp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+            Composite comp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
             g2.setComposite(comp);
             g2.drawImage(sprite, (int)x - Camera.x, (int)y - Camera.y, null);
         } else {

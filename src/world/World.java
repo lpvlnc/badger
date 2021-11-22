@@ -30,6 +30,7 @@ import main.Game;
  */
 public class World {
     public static Tile[] tiles;
+     public static Tile[] tilesFloor;
     public static int mapWidth;
     public static int mapHeight;
     public static int TILE_SIZE = 32;
@@ -49,6 +50,7 @@ public class World {
         mapHeight = map.getHeight();
         int[] pixels = new int[mapWidth * mapHeight];
         tiles = new Tile[mapWidth * mapHeight];
+        tilesFloor = new Tile[mapWidth * mapHeight];
 
         map.getRGB(0, 0, mapWidth, mapHeight, pixels, 0, mapWidth);
 
@@ -60,7 +62,8 @@ public class World {
                 int pos = xx + (yy * mapWidth);
 
                 tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
-
+                tilesFloor[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
+                
                 switch(pixelAtual){
                     case 0xFF00ff00: // player
                         if(Game.player == null){
@@ -233,6 +236,7 @@ public class World {
     }
     
     public void renderFloor(Graphics g){
+        
         int xStart = Camera.x / TILE_SIZE;
         int yStart = Camera.y / TILE_SIZE;
         
@@ -245,10 +249,8 @@ public class World {
                 if(xx < 0 || yy < 0 || xx >= mapWidth || yy >= mapHeight){
                     continue;
                 }
-                
-                Tile tile = tiles[xx + (yy * mapWidth)];
-                if(tile instanceof TileFloor)
-                    tile.render(g);
+                Tile tile = tilesFloor[xx + (yy * mapWidth)];
+                tile.render(g);
             }
         }
     }
