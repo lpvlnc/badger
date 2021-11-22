@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import main.Game;
 import world.Tile.Tile;
 import world.Tile.TileWall;
 import world.World;
@@ -68,84 +69,84 @@ public class AStar {
             closedList.add(current);
             
             for(int i = 0; i < 9; i++){
-                try {
-                    if(i == 4){
-                        continue;
-                    }
-                    int x = current.tile.x;
-                    int y = current.tile.y;
-                    int xi = (i%3) - 1;
-                    int yi = (i/3) - 1;
-                    
-                    Tile tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
-
-                    if(tile == null){
-                        continue;
-                    }
-
-                    if(tile instanceof TileWall){
-                        continue;
-                    }
-
-                    switch (i) {
-                        case 0:
-                            {
-                                Tile test = World.tiles[x+xi+1+((y+yi) * World.mapWidth)];
-                                Tile test2 = World.tiles[x+xi+((y+yi+1) * World.mapWidth)];
-                                if(test instanceof TileWall || test2 instanceof TileWall){
-                                    continue;
-                                }       
-                                break;
-                            }
-                        case 2:
-                            {
-                                Tile test = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
-                                Tile test2 = World.tiles[x+xi+((y+yi+1) * World.mapWidth)];
-                                if(test instanceof TileWall || test2 instanceof TileWall){
-                                    continue;
-                                }       
-                                break;
-                            }
-                        case 6:
-                            {
-                                Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
-                                Tile test2 = World.tiles[x+xi+1+((y+yi) * World.mapWidth)];
-                                if(test instanceof TileWall || test2 instanceof TileWall){
-                                    continue;
-                                }       
-                                break;
-                            }
-                        case 8:
-                            {
-                                Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
-                                Tile test2 = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
-                                if(test instanceof TileWall || test2 instanceof TileWall){
-                                    continue;
-                                }       
-                                break;
-                            }
-                        default:
-                            break;
-                    }
-
-                    Vector2i a = new Vector2i(x+xi, y+yi);
-                    double gCost = current.gCost + getDistance(current.tile, a);
-                    double hCost = getDistance(a, end);
-
-                    Node node = new Node(a, current, gCost, hCost);
-
-                    if(vecInList(closedList, a) && gCost >= current.gCost){
-                        continue;
-                    }
-
-                    if(!vecInList(openList, a)){
-                        openList.add(node);
-                    } else if(gCost < current.gCost){
-                        openList.remove(current);
-                        openList.add(node);
-                    }
-                }catch(Exception e){
+                if(i == 4){
                     continue;
+                }
+                int x = current.tile.x;
+                int y = current.tile.y;
+                int xi = (i%3) - 1;
+                int yi = (i/3) - 1;
+                Tile tile;
+                try {
+                    tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
+                } catch (Exception e){
+                    continue;
+                }
+
+                if(tile == null){
+                    continue;
+                }
+
+                if(tile instanceof TileWall){
+                    continue;
+                }
+
+                switch (i) {
+                    case 0:
+                        {
+                            Tile test = World.tiles[x+xi+1+((y+yi) * World.mapWidth)];
+                            Tile test2 = World.tiles[x+xi+((y+yi+1) * World.mapWidth)];
+                            if(test instanceof TileWall || test2 instanceof TileWall){
+                                continue;
+                            }       
+                            break;
+                        }
+                    case 2:
+                        {
+                            Tile test = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
+                            Tile test2 = World.tiles[x+xi+((y+yi+1) * World.mapWidth)];
+                            if(test instanceof TileWall || test2 instanceof TileWall){
+                                continue;
+                            }       
+                            break;
+                        }
+                    case 6:
+                        {
+                            Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
+                            Tile test2 = World.tiles[x+xi+1+((y+yi) * World.mapWidth)];
+                            if(test instanceof TileWall || test2 instanceof TileWall){
+                                continue;
+                            }       
+                            break;
+                        }
+                    case 8:
+                        {
+                            Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
+                            Tile test2 = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
+                            if(test instanceof TileWall || test2 instanceof TileWall){
+                                continue;
+                            }       
+                            break;
+                        }
+                    default:
+                        break;
+                }
+
+                Vector2i a = new Vector2i(x+xi, y+yi);
+                double gCost = current.gCost + getDistance(current.tile, a);
+                double hCost = getDistance(a, end);
+
+                Node node = new Node(a, current, gCost, hCost);
+
+                if(vecInList(closedList, a) && gCost >= current.gCost){
+                    continue;
+                }
+
+                if(!vecInList(openList, a)){
+                    openList.add(node);
+                } else if(gCost < current.gCost){
+                    openList.remove(current);
+                    openList.add(node);
                 }
             }
         }

@@ -122,7 +122,7 @@ public class Player extends Entity {
         }
         
         for (int i = 0; i < 6; i++) {
-            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 162, World.TILE_SIZE, World.TILE_SIZE);
+            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 160, World.TILE_SIZE, World.TILE_SIZE);
         }
         
         for (int i = 0; i < 4; i++){
@@ -377,7 +377,6 @@ public class Player extends Entity {
     
     @Override
     public void update(){
-        System.out.println(life);
         if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
         {
             energyFrames++;

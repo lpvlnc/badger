@@ -87,8 +87,6 @@ public class Salesman extends Entity {
             
             if(new Random().nextInt(100) < 98)
                 followPath(path);
-        } else {
-            path = null;
         }
         
         if(isColliding(this, Game.player)) {
