@@ -29,7 +29,7 @@ import main.Game;
  */
 public class World {
     public static Tile[] tiles;
-     public static Tile[] tilesFloor;
+    public static Tile[] tilesFloor;
     public static int mapWidth;
     public static int mapHeight;
     public static int TILE_SIZE = 32;

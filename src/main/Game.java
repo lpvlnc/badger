@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import menu.MenuGameOver;
+import world.Tile.Tile;
 import world.World;
 
 /**

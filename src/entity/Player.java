@@ -109,7 +109,7 @@ public class Player extends Entity {
         }
         
         for (int i = 0; i < 6; i++) {
-            playerLeft[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 34, World.TILE_SIZE, World.TILE_SIZE -2);
+            playerLeft[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 34, World.TILE_SIZE, World.TILE_SIZE - 2);
         }
         
         for (int i = 0; i < 4; i++){
@@ -117,7 +117,7 @@ public class Player extends Entity {
         }
         
         for(int i = 0; i < 6; i++){
-            playerRight[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 98, World.TILE_SIZE, World.TILE_SIZE -2);
+            playerRight[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 98, World.TILE_SIZE, World.TILE_SIZE - 2);
         }
         
         for (int i = 0; i < 4; i++) {
@@ -125,7 +125,7 @@ public class Player extends Entity {
         }
         
         for (int i = 0; i < 6; i++) {
-            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 162, World.TILE_SIZE, World.TILE_SIZE -2);
+            playerLeftDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 162, World.TILE_SIZE, World.TILE_SIZE - 2);
         }
         
         for (int i = 0; i < 4; i++){
@@ -133,7 +133,7 @@ public class Player extends Entity {
         }
         
         for(int i = 0; i < 6; i++){
-            playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 226, World.TILE_SIZE, World.TILE_SIZE);
+            playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 226, World.TILE_SIZE, World.TILE_SIZE - 2);
         }
         
         poisonedParticle = null;
