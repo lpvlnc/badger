@@ -29,9 +29,10 @@ public class Tile {
     public boolean solid = true;
     public int depth = 0;
     
+    // Floor
     public static BufferedImage FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
-    
-    // WALL
+
+    // Wall
     public static BufferedImage WALL_TOP = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_TOP_SOLID = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_TOP_DOOR = Game.spritesheet.getSprite(96, 544, World.TILE_SIZE, World.TILE_SIZE);
@@ -42,13 +43,13 @@ public class Tile {
     public static BufferedImage WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static BufferedImage WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
     
-    
     public Tile(int x, int y, int width, int height, BufferedImage sprite){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.sprite = sprite;
+        
     }
     
     public void update(){
