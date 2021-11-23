@@ -75,7 +75,7 @@ public class Tile {
         
     }
     
-    public void changeTilesToOutside(){
+    public static void changeTilesToOutside(){
         WALL_TOP = OUTSIDE_WALL_TOP;
         WALL_TOP_SOLID = OUTSIDE_WALL_TOP_SOLID;
         WALL_TOP_DOOR = OUTSIDE_WALL_TOP_DOOR;
@@ -87,7 +87,7 @@ public class Tile {
         WALL_BOTTOM_RIGHT_CORNER = OUTSIDE_WALL_BOTTOM_RIGHT_CORNER;
     }
     
-    public void changeTilesToPyramid(){
+    public static void changeTilesToPyramid(){
         WALL_TOP = PYRAMID_WALL_TOP;
         WALL_TOP_SOLID = PYRAMID_WALL_TOP_SOLID;
         WALL_TOP_DOOR = PYRAMID_WALL_TOP_DOOR;

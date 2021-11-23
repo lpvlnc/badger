@@ -89,8 +89,18 @@ public class Game extends Canvas implements Runnable {
         
         //initialize entity
         
+        switch(level){
+            case 1:
+                Tile.changeTilesToOutside();
+                break;
+            case 2:
+                Tile.changeTilesToPyramid();
+                break;
+            default:
+                Tile.changeTilesToOutside();
+        }
         
-        world = new World("/map/level1.png");
+        world = new World("/map/level" + level + ".png");
         stream = ClassLoader.getSystemClassLoader().getResourceAsStream("font/prstart.ttf");
         ui = new UI();
         menuGameOver = new MenuGameOver();
