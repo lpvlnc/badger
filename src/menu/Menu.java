@@ -21,9 +21,9 @@ public class Menu {
     public boolean select = false;
     public int widthPos = ((Game.WIDTH * Game.SCALE) / 2) - 80;
     public int heightPos = ((Game.HEIGHT * Game.SCALE) / 2);
-    public int heightOffSet = 100;
-    public int arrowPos = ((Game.HEIGHT * Game.SCALE) / 2);
-    public int arrowOffSet = 100;
+    public int heightOffSet = 60;
+    public int arrowPos = ((Game.HEIGHT * Game.SCALE) / 2) + 30;
+    public int arrowOffSet = 60;
     
     public void update() {
         

@@ -68,6 +68,7 @@ public class MenuGameOver extends Menu {
                 System.exit(0);
             }
         }
+        arrowPos = ((Game.HEIGHT * Game.SCALE) / 2) + 40;
     }
     
     @Override
@@ -75,9 +76,13 @@ public class MenuGameOver extends Menu {
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(new Color(0, 0, 0, 150));
         g2.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
+        g2.setColor(new Color(250, 0, 250));
         for(int i = 0; i < options.size(); i++) {
-            Game.ui.drawText(options.get(i), widthPos + 45, heightPos - heightOffSet + (i * 30));
+            if(i == currentOption)
+                Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), null);
+            else
+                Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
         }
-        Game.ui.drawText(">", ((Game.WIDTH * Game.SCALE) / 2) - 55, arrowPos - arrowOffSet);
+        //Game.ui.drawText(">", ((Game.WIDTH * Game.SCALE) / 2) - 65, arrowPos - arrowOffSet, null);
     }
 }

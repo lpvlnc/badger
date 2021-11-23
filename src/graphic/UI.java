@@ -97,7 +97,7 @@ public class UI {
     
     public void showFPS(){
         if(Game.showFps) {
-            drawText("FPS:" + frames, 854, 606);
+            drawText("FPS:" + frames, 854, 606, null);
         }
     }
     
@@ -107,23 +107,23 @@ public class UI {
             score = "0" + score;
         }
             
-        drawText("SCORE:" + score, 756, 20);
+        drawText("SCORE:" + score, 756, 20, null);
     }
     
     public void renderParchment() {
         g.drawImage(parchment, 56, -21, 24, 24, null);
         String zero = Game.player.parchmentCounter < 10 ? "0" : "";
-        drawText("x" + zero + Game.player.parchmentCounter, 103, 604);
+        drawText("x" + zero + Game.player.parchmentCounter, 103, 604, null);
     }
     
     public void renderSteroid() {
         g.drawImage(steroid, -437, 558, null);
         String zero = Game.player.steroidCounter < 10 ? "0" : "";
-        drawText("x" + zero + Game.player.steroidCounter, 26, 604);
+        drawText("x" + zero + Game.player.steroidCounter, 26, 604, null);
     }
     
     public void renderChocolate() {
-        drawText("CHOCOLATE:", 437, 20);
+        drawText("CHOCOLATE:", 437, 20, null);
         for(int i = 0; i < 5; i++) {
             g.drawImage(chocolateBack, 154 + (i * 30), -24, null);
         }
@@ -134,7 +134,7 @@ public class UI {
     }
     
     public void renderEnergy() {
-        drawText("ENERGY:", 221, 20);
+        drawText("ENERGY:", 221, 20, null);
         if (Game.player.onSteroid){
             for(int i = 0; i < 5; i++) {
                 g.drawImage(energyBack, 101 + (i * 17), -24, null);
@@ -161,7 +161,7 @@ public class UI {
     }
     
     public void renderLife() {
-        drawText("LIFE:", 4, 20);
+        drawText("LIFE:", 4, 20, null);
         if(Game.player.onSteroid) {
             for(int i = 0; i < 5; i++){
                 g.drawImage(heartBack, 79 +  (i * 24), -15, null);
@@ -179,7 +179,8 @@ public class UI {
             for(int i = 0; i < 5; i++){
                 g.drawImage(weakHeartBack, 79 +  (i * 24), -15, null);
             }
-            g.drawImage(weakHeart, 79, -15, null);
+            if(Game.player.life >= 1)
+                g.drawImage(weakHeart, 79, -15, null);
         } else {
             for(int i = 0; i < 5; i++){
                 g.drawImage(heartBack, 79 +  (i * 24), -15, null);
@@ -190,7 +191,7 @@ public class UI {
         }
     }
     
-    public void drawText(String text, int x, int y) {
+    public void drawText(String text, int x, int y, Color color) {
 
         BasicStroke outlineStroke = new BasicStroke(2.0f);
 
@@ -218,8 +219,11 @@ public class UI {
             g2.setColor(this.fontOutlineColor);
             g2.setStroke(outlineStroke);
             g2.draw(textShape); // draw outline
-
-            g2.setColor(this.fontFillColor);
+            
+            if(color == null)
+                g2.setColor(this.fontFillColor);
+            else
+                g2.setColor(color);
             g2.fill(textShape); // fill the shape
 
             // reset to original settings after painting
@@ -227,45 +231,6 @@ public class UI {
             g2.setStroke(originalStroke);
             g2.setRenderingHints(originalHints);
             g = (Graphics)g2;
-        }
-    }
-    
-    public void drawText(String text, int x, int y, Graphics2D g) {
-
-        BasicStroke outlineStroke = new BasicStroke(2.0f);
-
-        if (g instanceof Graphics2D) {
-            Graphics2D g2 = (Graphics2D) g;
-            
-            AffineTransform tform = AffineTransform.getTranslateInstance(x, y);
-            tform.scale(1, 1);
-            g2.setTransform(tform);
-            
-            // remember original settings
-            Color originalColor = g2.getColor();
-            Stroke originalStroke = g2.getStroke();
-            RenderingHints originalHints = g2.getRenderingHints();
-            
-            // create a glyph vector from your text
-            GlyphVector glyphVector = g2.getFont().createGlyphVector(g2.getFontRenderContext(), text);
-            
-            // get the shape object
-            Shape textShape = glyphVector.getOutline();
-            
-            // activate anti aliasing for text rendering (if you want it to look nice)
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            g2.setColor(this.fontOutlineColor);
-            g2.setStroke(outlineStroke);
-            g2.draw(textShape); // draw outline
-
-            g2.setColor(this.fontFillColor);
-            g2.fill(textShape); // fill the shape
-
-            // reset to original settings after painting
-            g2.setColor(originalColor);
-            g2.setStroke(originalStroke);
-            g2.setRenderingHints(originalHints);
         }
     }
 }

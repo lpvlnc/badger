@@ -64,8 +64,15 @@ public class Game extends Canvas implements Runnable {
     public enum State { 
         MENU, PAUSE, NORMAL, GAMEOVER
     }
+    public static State state = State.GAMEOVER;
+    
+    // Level
+    public static int level = 1;
+    public int maxLevel = 2;
+    
+    // Menu
     public static MenuGameOver menuGameOver;
-    public static State state = State.NORMAL;
+    
     
     // Constructor
     public Game() throws IOException{
@@ -106,7 +113,11 @@ public class Game extends Canvas implements Runnable {
     }
     
     public static void restart() throws IOException{
-        new Game();
+        state = State.NORMAL;
+        entities.clear();
+        player = null;
+        world = new World("/map/level"+level+".png");
+        
     }
     
     public void update(){
@@ -124,6 +135,12 @@ public class Game extends Canvas implements Runnable {
         for(int i = 0; i < entities.size(); i++){
             Entity e = entities.get(i);
             e.update();
+        }
+        
+        if(player.chocolateCounter == 100){
+            level++;
+            if(level > maxLevel)
+                level = 1;
         }
     }
     

@@ -139,6 +139,11 @@ public class Player extends Entity {
         poisonedParticle = null;
     }
     
+    public void addPlayer(){
+        Game.player = new Player(0, 0, 16, 16, null);
+        Game.entities.add(Game.player);
+    }
+    
     public void movement() {
         if(getX() <= 0)
             setX(0);
