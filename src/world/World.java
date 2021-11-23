@@ -169,8 +169,12 @@ public class World {
             // if the tile at left is any kind of right tile/right corner tile it will be replaced by a regular wall tile/wall bottom tile (can't have any right/bottom right kind tile followed by another of its kind)
             if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
                 tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL);
-            if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_RIGHT_CORNER)
-                tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL_BOTTOM_CENTER);
+            if(tiles[x - 1 + (y  * mapWidth)].getSprite() == Tile.WALL_BOTTOM_RIGHT_CORNER) {
+                if (tiles[x - 2 + (y  * mapWidth)] instanceof TileFloor)
+                    tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL_BOTTOM_LEFT_CORNER);
+                else
+                    tiles[x - 1 + (y  * mapWidth)].setSprite(Tile.WALL_BOTTOM_CENTER);
+            }
             
             if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP || tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_TOP_SOLID)
                 tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
@@ -178,8 +182,11 @@ public class World {
             if (tile == Tile.WALL_RIGHT && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
                 tile = Tile.WALL_LEFT;
             
+            if(tile == Tile.WALL && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
+                tile = Tile.WALL_LEFT;
+            
             if (tile == Tile.WALL_BOTTOM_RIGHT_CORNER && tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
-                    tile = Tile.WALL_BOTTOM_LEFT_CORNER;
+                tile = Tile.WALL_BOTTOM_LEFT_CORNER;
             
             if(tiles[x + ((y - 1)  * mapWidth)].getSprite() == Tile.WALL_RIGHT)
                 tile = Tile.WALL_BOTTOM_RIGHT_CORNER;
