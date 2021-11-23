@@ -22,6 +22,7 @@ public class Panda extends Entity{
     
     public Panda(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
+        setDepth(-1);
         pandaLeft = new BufferedImage[3];
         for(int i = 0; i < 3; i++) {
             pandaLeft[i] = Game.spritesheet.getSprite(96 + (i * World.TILE_SIZE), 288, 32, 32);

@@ -36,6 +36,7 @@ public class Salesman extends Entity {
 
     public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
+        setDepth(-1);
         setMask(8, 3, 16, 29);
         visionCenterX = xMask + (wMask / 2);
         visionCenterY = yMask + (hMask / 2);

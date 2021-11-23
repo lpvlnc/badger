@@ -64,7 +64,7 @@ public class Game extends Canvas implements Runnable {
     public enum State { 
         MENU, PAUSE, NORMAL, GAMEOVER
     }
-    public static State state = State.GAMEOVER;
+    public static State state = State.NORMAL;
     
     // Level
     public static int level = 1;

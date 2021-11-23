@@ -22,6 +22,7 @@ public class Dog extends Entity {
 
     public Dog(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
+        setDepth(-1);
         dog = Game.spritesheet.getSprite(0, 320, World.TILE_SIZE, World.TILE_SIZE);
         setMask(9, 10, 13, 20);
         up = ThreadLocalRandom.current().nextInt(0, 2) != 0;
