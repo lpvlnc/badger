@@ -5,21 +5,17 @@
  */
 package menu;
 
-import graphic.UI;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import main.Game;
 
 /**
  *
  * @author Leonardo
  */
-public class MainMenu extends Menu {
-    public MainMenu() {
+public class MenuMain extends Menu {
+    public MenuMain() {
         options = new ArrayList<>();
     	options.add("New game");
     	options.add("Load game");
@@ -70,11 +66,7 @@ public class MainMenu extends Menu {
     }
     
     public void render(Graphics g) {
-        try {
-            new UI().drawText("Novo jogo", 100, 100);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //drawText("Novo jogo", 100, 100);
         g.drawString("Game Name", ((Game.WIDTH * Game.SCALE) / 2) - 100, ((Game.HEIGHT * Game.SCALE) / 2) - 200);
         
         for(int i = 0; i < options.size(); i++) {

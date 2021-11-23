@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import menu.MenuGameOver;
 import world.World;
 
 /**
@@ -61,10 +62,9 @@ public class Game extends Canvas implements Runnable {
     
     // Game state
     public enum State { 
-        MENU, NORMAL, GAMEOVER
+        MENU, PAUSE, NORMAL, GAMEOVER
     }
-    
-    //public State state = State.MENU;
+    public static MenuGameOver menuGameOver;
     public static State state = State.NORMAL;
     
     // Constructor
@@ -85,6 +85,7 @@ public class Game extends Canvas implements Runnable {
         world = new World("/map/level1.png");
         stream = ClassLoader.getSystemClassLoader().getResourceAsStream("font/prstart.ttf");
         ui = new UI();
+        menuGameOver = new MenuGameOver();
         // initializing objects end //
     }
     
@@ -113,6 +114,8 @@ public class Game extends Canvas implements Runnable {
             case NORMAL:
                 updateGame();
             break;
+            case GAMEOVER:
+                menuGameOver.update();
         }
     }
     
@@ -150,6 +153,11 @@ public class Game extends Canvas implements Runnable {
         g = bs.getDrawGraphics();
         g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
         ui.render(g);
+        switch(state){
+            case GAMEOVER:
+                menuGameOver.render(g);
+            break;
+        }
         bs.show();
     }
     
