@@ -20,6 +20,7 @@ import entity.Steroid;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import main.Game;
 
@@ -84,7 +85,7 @@ public class World {
                         Game.player.setY(yy * TILE_SIZE);
                         break;
                     case 0xFF000000: // floor
-                        /*
+                        
                         int random = new Random().nextInt(100);
                         
                         if(random <= 96) {
@@ -97,7 +98,7 @@ public class World {
                         } else {
                             if(new Random().nextInt(2) == 1)
                                 Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                        }*/
+                        }
                         break;
                     case 0xFF4e4e4e: // wall top solid
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(xx, yy, true));

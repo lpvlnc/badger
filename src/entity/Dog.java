@@ -26,12 +26,12 @@ public class Dog extends Entity{
         
         dogUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-            dogUp[i] = Game.spritesheet.getSprite(1 + (i * World.TILE_SIZE), 350, 32, 32);
+            dogUp[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 350, 32, 32);
         }
         
         dogDown = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-            dogDown[i] = Game.spritesheet.getSprite(0+ (i * World.TILE_SIZE), 319, 32, 32);
+            dogDown[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 319, 32, 32);
     
         }
             
