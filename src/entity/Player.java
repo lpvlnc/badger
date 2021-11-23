@@ -69,13 +69,13 @@ public class Player extends Entity {
     public int energyMaxFrames = 240;
     
     // on steroid attributes
-    public int steroidCounter = 1;
+    public int steroidCounter = 0;
     public boolean onSteroid = false;
     public int steroidMaxTime = 400;
     public int steroidTime = 0;
     
     // running attributes
-    public int runningMaxFrames = 10;
+    public int runningMaxFrames = 20;
     public int runningFrames = 0;
     
     // weak attributes
@@ -402,7 +402,7 @@ public class Player extends Entity {
                 runningFrames++;
                 if(runningFrames == runningMaxFrames) {
                     runningFrames = 0;
-                    //energy-=10;
+                    energy-=10;
                     if(energy <= 0) {
                         stopRunning();
                     }
