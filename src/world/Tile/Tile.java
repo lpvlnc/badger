@@ -29,8 +29,8 @@ public class Tile {
     public boolean solid = true;
     public int depth = 0;
     
-    // Floor
-    public static BufferedImage FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
+    // Outside Floor
+    public static final BufferedImage OUTSIDE_FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
 
    
     // Outside Wall
@@ -44,6 +44,8 @@ public class Tile {
     public static final BufferedImage OUTSIDE_WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage OUTSIDE_WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
     
+    // Pyramid Floor
+    public static final BufferedImage PYRAMID_FLOOR = Game.spritesheet.getSprite(0, 576, World.TILE_SIZE, World.TILE_SIZE);
     // Pyramid wall
     public static final BufferedImage PYRAMID_WALL_TOP = Game.spritesheet.getSprite(416, 544, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_TOP_SOLID = Game.spritesheet.getSprite(416, 544, World.TILE_SIZE, World.TILE_SIZE);
@@ -55,6 +57,8 @@ public class Tile {
     public static final BufferedImage PYRAMID_WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(384, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(416, 608, World.TILE_SIZE, World.TILE_SIZE);
     
+    // Floor
+    public static BufferedImage FLOOR = OUTSIDE_FLOOR;
     // wall
     public static BufferedImage WALL_TOP = OUTSIDE_WALL_TOP;
     public static BufferedImage WALL_TOP_SOLID = OUTSIDE_WALL_TOP_SOLID;
@@ -76,6 +80,7 @@ public class Tile {
     }
     
     public static void changeTilesToOutside(){
+        FLOOR = OUTSIDE_FLOOR;
         WALL_TOP = OUTSIDE_WALL_TOP;
         WALL_TOP_SOLID = OUTSIDE_WALL_TOP_SOLID;
         WALL_TOP_DOOR = OUTSIDE_WALL_TOP_DOOR;
@@ -88,6 +93,7 @@ public class Tile {
     }
     
     public static void changeTilesToPyramid(){
+        FLOOR = PYRAMID_FLOOR;
         WALL_TOP = PYRAMID_WALL_TOP;
         WALL_TOP_SOLID = PYRAMID_WALL_TOP_SOLID;
         WALL_TOP_DOOR = PYRAMID_WALL_TOP_DOOR;

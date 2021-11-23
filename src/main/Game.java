@@ -176,6 +176,10 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         g = bs.getDrawGraphics();
         g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+        if(level == 2) {
+            g.setColor(new Color(0, 0, 0, 50));
+            g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
+        }
         ui.render(g);
         switch(state){
             case GAMEOVER:

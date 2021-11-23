@@ -69,7 +69,7 @@ public class Player extends Entity {
     public boolean action = false;
     
     public int energyFrames = 0;
-    public int energyMaxFrames = 240;
+    public int energyMaxFrames = 60;
     
     // on steroid attributes
     public int steroidCounter = 0;
@@ -269,12 +269,14 @@ public class Player extends Entity {
     }
 
     public void startRunning(){
+        energyFrames = 0;
         isRunning = true;
         maxFrames = steroidMaxFrames;
         speed = runningSpeed;
     }
     
     public void stopRunning(){
+        energyFrames = 0;
         isRunning = false;
         frames = 0;
         maxFrames = defaultMaxFrames;

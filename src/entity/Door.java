@@ -55,10 +55,16 @@ public class Door extends Entity {
         canEnter = isColliding(this, Game.player);
     }
     
+    public void doorState(){
+        if(Game.player.chocolateCounter >= 3)
+            closed = false;
+    }
+    
+    @Override
     public void update(){
         isCollidingWithPlayer();
         playerIsOnEntrance();
-        closed = Game.player.chocolateCounter <= 0;
+        doorState();
         if(!closed && canEnter && Game.player.action) {
             try {
                 Game.nextLevel();
@@ -68,6 +74,7 @@ public class Door extends Entity {
         }
     }
     
+    @Override
     public void render(Graphics g){
         if(closed)
             g.drawImage(doorClosed, getX() - Camera.x, getY() - Camera.y, null);
