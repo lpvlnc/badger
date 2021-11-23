@@ -20,7 +20,6 @@ import entity.Steroid;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Random;
 import javax.imageio.ImageIO;
 import main.Game;
 
@@ -43,6 +42,17 @@ public class World {
     
     public World(String path) throws IOException {
 
+        switch(Game.level){
+            case 1:
+                Tile.changeTilesToOutside();
+                break;
+            case 2:
+                Tile.changeTilesToPyramid();
+                break;
+            default:
+                Tile.changeTilesToOutside();
+        }
+        
         // ALGORITMO DE RENDERIZACAO DE MAPA A PARTIR DE UMA IMAGEM BIT MAP //
         BufferedImage map = ImageIO.read(getClass().getResource(path));
 
@@ -68,10 +78,10 @@ public class World {
                     case 0xFF00ff00: // player
                         if(Game.player == null){
                             Game.player = new Player(0, 0, 16, 16, null);
-                            Game.entities.add(Game.player);
-                            Game.player.setX(xx * TILE_SIZE);
-                            Game.player.setY(yy * TILE_SIZE);
                         }
+                        Game.entities.add(Game.player);
+                        Game.player.setX(xx * TILE_SIZE);
+                        Game.player.setY(yy * TILE_SIZE);
                         break;
                     case 0xFF000000: // floor
                         /*
