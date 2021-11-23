@@ -87,7 +87,6 @@ public class World {
                             if(new Random().nextInt(2) == 1)
                                 Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         }*/
-                        
                         break;
                     case 0xFF4e4e4e: // wall top solid
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(xx, yy, true));
@@ -126,7 +125,6 @@ public class World {
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
                 }
-
             }
         }
     }
