@@ -91,10 +91,10 @@ public class Panda extends Entity{
     @Override
     public void render(Graphics g){
         if(right) {
-            setMask(7, 2, 20, 30);
+            setMask(4, 2, 21, 30);
             g.drawImage(pandaRight[index], getX() - Camera.x, getY() - Camera.y, null);
         } else {
-            setMask(6, 2, 20, 30);
+            setMask(4, 2, 21, 30);
             g.drawImage(pandaLeft[index], getX() - Camera.x, getY() - Camera.y, null);
         }
     }
