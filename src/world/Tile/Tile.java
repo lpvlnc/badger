@@ -32,16 +32,39 @@ public class Tile {
     // Floor
     public static BufferedImage FLOOR = Game.spritesheet.getSprite(0, 608, World.TILE_SIZE, World.TILE_SIZE);
 
-    // Wall
-    public static BufferedImage WALL_TOP = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_TOP_SOLID = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_TOP_DOOR = Game.spritesheet.getSprite(96, 544, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_LEFT = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL = Game.spritesheet.getSprite(96, 576, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_RIGHT = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_BOTTOM_LEFT_CORNER = Game.spritesheet.getSprite(64, 608, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
-    public static BufferedImage WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
+   
+    // Outside Wall
+    public static final BufferedImage OUTSIDE_WALL_TOP = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL_TOP_SOLID = Game.spritesheet.getSprite(128, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL_TOP_DOOR = Game.spritesheet.getSprite(96, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL_LEFT = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL = Game.spritesheet.getSprite(96, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL_RIGHT = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL_BOTTOM_LEFT_CORNER = Game.spritesheet.getSprite(64, 608, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
+    
+    // Pyramid wall
+    public static final BufferedImage PYRAMID_WALL_TOP = Game.spritesheet.getSprite(416, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_TOP_SOLID = Game.spritesheet.getSprite(416, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_TOP_DOOR = Game.spritesheet.getSprite(96, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_LEFT = Game.spritesheet.getSprite(64, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL = Game.spritesheet.getSprite(96, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_RIGHT = Game.spritesheet.getSprite(128, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_BOTTOM_LEFT_CORNER = Game.spritesheet.getSprite(64, 608, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
+    
+    // wall
+    public static BufferedImage WALL_TOP = OUTSIDE_WALL_TOP;
+    public static BufferedImage WALL_TOP_SOLID = OUTSIDE_WALL_TOP_SOLID;
+    public static BufferedImage WALL_TOP_DOOR = OUTSIDE_WALL_TOP_DOOR;
+    public static BufferedImage WALL_LEFT = OUTSIDE_WALL_LEFT;
+    public static BufferedImage WALL = OUTSIDE_WALL;
+    public static BufferedImage WALL_RIGHT = OUTSIDE_WALL_RIGHT;
+    public static BufferedImage WALL_BOTTOM_LEFT_CORNER = OUTSIDE_WALL_BOTTOM_LEFT_CORNER;
+    public static BufferedImage WALL_BOTTOM_CENTER = OUTSIDE_WALL_BOTTOM_CENTER;
+    public static BufferedImage WALL_BOTTOM_RIGHT_CORNER = OUTSIDE_WALL_BOTTOM_RIGHT_CORNER;
     
     public Tile(int x, int y, int width, int height, BufferedImage sprite){
         this.x = x;
