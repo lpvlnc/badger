@@ -1,33 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package entity;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 import main.Game;
 import world.Camera;
 import world.World;
-/**
- *
- * @author thaia
- */
-public class Dog extends Entity {
 
-    public BufferedImage dog;
+public class Dog extends Entity{ 
+
+    public BufferedImage[] dogUp;
+    public BufferedImage[] dogDown;
+    
     public boolean up;
-
+    public boolean down;
+    public int frames = 0;
+    public int maxFrames = 15;
+    public int index = 0;
+    public int maxIndex = 4;
+    private int initialY;
+    
     public Dog(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-1);
-        dog = Game.spritesheet.getSprite(0, 320, World.TILE_SIZE, World.TILE_SIZE);
-        setMask(9, 10, 13, 20);
-        up = ThreadLocalRandom.current().nextInt(0, 2) != 0;
+        
+        dogUp = new BufferedImage[4];
+        for(int i = 0; i < 4; i++) {
+            dogUp[i] = Game.spritesheet.getSprite(1 + (i * World.TILE_SIZE), 350, 32, 32);
+        }
+        
+        dogDown = new BufferedImage[4];
+        for(int i = 0; i < 4; i++) {
+            dogDown[i] = Game.spritesheet.getSprite(0+ (i * World.TILE_SIZE), 319, 32, 32);
+    
+        }
+            
+        if(getY() <= 64)
+            setY(65);
+        
+        initialY = getY();
+        down = ThreadLocalRandom.current().nextInt(0, 2) != 0;
+   
     }
-
+    
+    @Override
     public void update() {
         if(getY() <= 0 || !World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask))
             up = false;
@@ -45,13 +61,34 @@ public class Dog extends Entity {
         
         if(getY() + World.TILE_SIZE > World.mapHeight * World.TILE_SIZE - hMask)
             up = true;
+                
+        frames++;
+        if(frames >= maxFrames){
+            frames = 0;
+            index++;
+            if(index == maxIndex)
+            {
+                index = 0;
+            }
+        }
         
-        if(isColliding(this, Game.player)) {
+      if(isColliding(this, Game.player)) {
             Game.player.takeDamage(2);
         }
     }
-
-    public void render (Graphics g) {
-        g.drawImage(dog, getX() - Camera.x, getY() - Camera.y, null);
+    
+    @Override
+    public void render(Graphics g){
+        if(up) {
+            setMask(9, 9, 13, 22);
+            g.drawImage(dogUp[index], getX() - Camera.x, getY() - Camera.y, null);
+        } else {
+            setMask(10, 9, 12, 19);
+            g.drawImage(dogDown[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
     }
-}
+}    
+    
+    
+    
+
