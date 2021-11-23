@@ -228,4 +228,43 @@ public class UI {
             g = (Graphics)g2;
         }
     }
+    
+    public void drawText(String text, int x, int y, Graphics2D g) {
+
+        BasicStroke outlineStroke = new BasicStroke(2.0f);
+
+        if (g instanceof Graphics2D) {
+            Graphics2D g2 = (Graphics2D) g;
+            
+            AffineTransform tform = AffineTransform.getTranslateInstance(x, y);
+            tform.scale(1, 1);
+            g2.setTransform(tform);
+            
+            // remember original settings
+            Color originalColor = g2.getColor();
+            Stroke originalStroke = g2.getStroke();
+            RenderingHints originalHints = g2.getRenderingHints();
+            
+            // create a glyph vector from your text
+            GlyphVector glyphVector = g2.getFont().createGlyphVector(g2.getFontRenderContext(), text);
+            
+            // get the shape object
+            Shape textShape = glyphVector.getOutline();
+            
+            // activate anti aliasing for text rendering (if you want it to look nice)
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setColor(this.fontOutlineColor);
+            g2.setStroke(outlineStroke);
+            g2.draw(textShape); // draw outline
+
+            g2.setColor(this.fontFillColor);
+            g2.fill(textShape); // fill the shape
+
+            // reset to original settings after painting
+            g2.setColor(originalColor);
+            g2.setStroke(originalStroke);
+            g2.setRenderingHints(originalHints);
+        }
+    }
 }

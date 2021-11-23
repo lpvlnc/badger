@@ -99,8 +99,8 @@ public class Game extends Canvas implements Runnable {
         thread.join();
     }
     
-    public void restart(){
-        
+    public static void restart() throws IOException{
+        new Game();
     }
     
     public void update(){
