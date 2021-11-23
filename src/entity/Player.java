@@ -9,6 +9,7 @@ import entity.particle.PoisonedParticle;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
+import main.Game.State;
 import world.Camera;
 import world.World;
 
@@ -289,7 +290,7 @@ public class Player extends Entity {
         if(canBeDamaged){
             if(weak) {
                 life = 0;
-                Game.gameOver = true;
+                Game.state = State.GAMEOVER;
             } else {
                 life -= damage;
                 canBeDamaged = false;
@@ -309,7 +310,7 @@ public class Player extends Entity {
         
         if(life <= 0){
             life = 0;
-            Game.gameOver = true;
+            Game.state = State.GAMEOVER;
         }
     }
     

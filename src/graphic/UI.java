@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Game;
+import main.Game.State;
 import world.World;
 
 /**

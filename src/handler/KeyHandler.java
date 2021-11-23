@@ -7,7 +7,11 @@ package handler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.Game;
+import main.Game.State;
 import static main.Game.player;
 import static main.Game.showFps;
 import static main.Game.showHitBox;
@@ -46,10 +50,6 @@ public class KeyHandler implements KeyListener {
                 player.startRunning();
             }
         }
-        
-        if(e.getKeyCode() == KeyEvent.VK_ENTER){
-            Game.restart = true;
-        }
        
         if(e.getKeyCode() == KeyEvent.VK_H){
             showHitBox = !showHitBox;
@@ -64,6 +64,15 @@ public class KeyHandler implements KeyListener {
         
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
             player.xRay = !player.xRay;
+        }
+        
+        if(Game.state == State.GAMEOVER){
+            if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                try {
+                    Game.restart();
+            } catch (IOException ex) {
+                Logger.getLogger(KeyHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

@@ -42,9 +42,6 @@ public class Game extends Canvas implements Runnable {
     public static Spritesheet spritesheet;
     public static World world;
     
-    public static boolean gameOver = false;
-    public static boolean restart = false;
-    
     //Config
     public static boolean showFps = false;
     public static boolean showHitBox = false;
@@ -61,6 +58,14 @@ public class Game extends Canvas implements Runnable {
     
     // Lists
     public static ArrayList<Entity> entities;
+    
+    // Game state
+    public enum State { 
+        MENU, NORMAL, GAMEOVER
+    }
+    
+    //public State state = State.MENU;
+    public static State state = State.NORMAL;
     
     // Constructor
     public Game() throws IOException{
@@ -99,11 +104,19 @@ public class Game extends Canvas implements Runnable {
         thread.join();
     }
     
-    public void restart(){
-        
+    public static void restart() throws IOException{
+        new Game();
     }
     
     public void update(){
+        switch(state){
+            case NORMAL:
+                updateGame();
+            break;
+        }
+    }
+    
+    public void updateGame(){
         world.update();
         for(int i = 0; i < entities.size(); i++){
             Entity e = entities.get(i);
