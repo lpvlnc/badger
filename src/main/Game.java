@@ -68,7 +68,7 @@ public class Game extends Canvas implements Runnable {
     public static State state = State.NORMAL;
     
     // Level
-    public static int level = 2;
+    public static int level = 1;
     public int maxLevel = 2;
     
     // Menu

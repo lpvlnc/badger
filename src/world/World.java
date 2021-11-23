@@ -10,6 +10,7 @@ import world.Tile.TileFloor;
 import world.Tile.TileWall;
 import entity.Chocolate;
 import entity.Dog;
+import entity.Door;
 import entity.Life;
 import entity.Panda;
 import entity.Parchment;
@@ -73,7 +74,9 @@ public class World {
                         }
                         break;
                     case 0xFF000000: // floor
+                        /*
                         int random = new Random().nextInt(100);
+                        
                         if(random <= 96) {
                             tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                             break;
@@ -81,7 +84,7 @@ public class World {
                             Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         } else if (random == 98) {
                             Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                        }/* else {
+                        } else {
                             if(new Random().nextInt(2) == 1)
                                 Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         }*/
@@ -98,11 +101,17 @@ public class World {
                     case 0xFFa2a2a2:
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallDoorTop(xx, yy));
                         break;
+                    case 0xFFd3d300:
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.PYRAMID_WALL);
+                        break;
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
                     case 0xFF72413b: // chocolate
                         Game.entities.add(new Chocolate(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
+                    case 0xFFffff00:
+                        Game.entities.add(new Door(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
                     case 0xFFffd26d:
                         Game.entities.add(new Parchment(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
