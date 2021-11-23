@@ -104,7 +104,7 @@ public class Tile {
                 sprite == Tile.WALL_BOTTOM_CENTER || 
                 sprite == Tile.WALL_BOTTOM_RIGHT_CORNER || 
                 sprite == Tile.WALL_TOP_SOLID || 
-                sprite == Tile.PYRAMID_WALL ||
+                sprite == Tile.PYRAMID_WALL_BOTTOM_CENTER ||
                 tiles[(x / World.TILE_SIZE) + (((y - 1) / World.TILE_SIZE) * mapWidth)].sprite == Tile.WALL_TOP_SOLID;
     }
     
