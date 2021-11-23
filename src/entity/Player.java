@@ -66,6 +66,7 @@ public class Player extends Entity {
     public int parchmentCounter = 0;
     public boolean hasCrown = true;
     public boolean xRay;
+    public boolean action = false;
     
     public int energyFrames = 0;
     public int energyMaxFrames = 240;
@@ -163,7 +164,7 @@ public class Player extends Entity {
         if(up) {
             this.direction = Direction.UP;
             setMask(9, 0, 13, 28);
-            if(World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask) && !collidingWithDoor()) {
+            if(World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask)) {
                 isMoving = true;
                 y -= speed;
             }
@@ -172,7 +173,7 @@ public class Player extends Entity {
         if(down) {
             this.direction = Direction.DOWN;
             setMask(10, 1, 14, 29);
-            if(World.isFreeDynamic(getX() + xMask, getY() + yMask + speed, wMask, hMask) && !collidingWithDoor()){
+            if(World.isFreeDynamic(getX() + xMask, getY() + yMask + speed, wMask, hMask)){
                 isMoving = true;
                 y += speed;
             }
@@ -181,7 +182,7 @@ public class Player extends Entity {
         if(left) {
             this.direction = Direction.LEFT;
             setMask(0, 6, 24, 17);
-            if(World.isFreeDynamic(getX() + xMask - speed, getY() + yMask, wMask, hMask) && !collidingWithDoor()) {
+            if(World.isFreeDynamic(getX() + xMask - speed, getY() + yMask, wMask, hMask)) {
                 isMoving = true;
                 x -= speed;
             }
@@ -191,7 +192,7 @@ public class Player extends Entity {
         if(right) {
             this.direction = Direction.RIGHT;
             setMask(8, 6, 24, 17);
-            if(World.isFreeDynamic(getX() + xMask + speed, getY() + yMask, wMask, hMask) && !collidingWithDoor()) {
+            if(World.isFreeDynamic(getX() + xMask + speed, getY() + yMask, wMask, hMask)) {
                 isMoving = true;
                 x += speed;
             }
@@ -200,7 +201,7 @@ public class Player extends Entity {
         if(right&left) {
             this.direction = Direction.RIGHT;
             setMask(8, 6, 24, 17);
-            if(World.isFreeDynamic(getX() + xMask + speed, getY() + yMask, wMask, hMask) && !collidingWithDoor()) {
+            if(World.isFreeDynamic(getX() + xMask + speed, getY() + yMask, wMask, hMask)) {
                 isMoving = true;
                 x += speed;
             }
@@ -214,34 +215,6 @@ public class Player extends Entity {
                 y += speed;
             }
         }
-    }    
-    
-    public boolean collidingWithDoor(){
-        for(int i = 0; i < Game.entities.size(); i++){
-            Entity e = Game.entities.get(i);
-            if(e instanceof Door){
-                Rectangle playerRect = new Rectangle(getX() + xMask, getY() + yMask, wMask, hMask);
-                e.setMask(0, 0, 32, 128);
-                Rectangle doorRect = new Rectangle(e.getX() + e.xMask, e.getY() + e.yMask, e.wMask, e.hMask);
-                if(playerRect.intersects(doorRect)) {
-                    x+=0.02f;
-                    return true;
-                }
-                e.setMask(64, 0, 32, 128);
-                doorRect = new Rectangle(e.getX() + e.xMask, e.getY() + e.yMask, e.wMask, e.hMask);
-                if(playerRect.intersects(doorRect)) {
-                    x-=0.02f;
-                    return true;
-                }
-                e.setMask(32, 0, 32, 96);
-                doorRect = new Rectangle(e.getX() + e.xMask, e.getY() + e.yMask, e.wMask, e.hMask);
-                if(playerRect.intersects(doorRect)) {
-                    y+=0.02f;
-                    return true;
-                }
-            }
-        }
-        return false;
     }
     
     public void animation()

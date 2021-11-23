@@ -58,6 +58,10 @@ public class KeyHandler implements KeyListener {
 
                 if(e.getKeyCode() == KeyEvent.VK_SPACE)
                     player.xRay = !player.xRay;
+                
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                    player.action = true;
+                
                 break;
             case GAMEOVER:
                 if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)
@@ -75,24 +79,30 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP){
-            player.up = false;
-        }
-        
-        if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT){
-            player.left = false;
-        }
-        
-        if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN){
-            player.down = false;
-        }
-        
-        if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT){
-            player.right = false;
-        }
-        
-        if(e.getKeyCode() == KeyEvent.VK_SHIFT){
-            player.stopRunning();
+         switch(Game.state) {
+            case NORMAL:
+                if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP){
+                    player.up = false;
+                }
+
+                if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT){
+                    player.left = false;
+                }
+
+                if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN){
+                    player.down = false;
+                }
+
+                if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT){
+                    player.right = false;
+                }
+
+                if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+                    player.stopRunning();
+                }
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                    player.action = false;
+            break;
         }
     }
 }
