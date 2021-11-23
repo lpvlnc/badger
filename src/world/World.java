@@ -83,10 +83,10 @@ public class World {
                             Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         } else if (random == 98) {
                             Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                        } else {
+                        }/* else {
                             if(new Random().nextInt(2) == 1)
                                 Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                        }
+                        }*/
                         
                         break;
                     case 0xFF4e4e4e: // wall top solid
@@ -158,7 +158,7 @@ public class World {
     }
     
     public static BufferedImage selectWallTile(int x, int y){
-        BufferedImage tile = Tile.WALL;
+        BufferedImage tile = Tile.WALL_BOTTOM_LEFT_CORNER;
         try {
             if(tiles[x + ((y - 1)  * mapWidth)].solid)
                 tiles[x + (y  * mapWidth)].solid = true;
