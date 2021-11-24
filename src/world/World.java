@@ -9,6 +9,7 @@ import world.Tile.Tile;
 import world.Tile.TileFloor;
 import world.Tile.TileWall;
 import entity.Chocolate;
+import entity.Crown;
 import entity.Dog;
 import entity.Door;
 import entity.Life;
@@ -148,6 +149,9 @@ public class World {
                         break;
                     case 0xFF7507e2:
                         Game.entities.add(new Steroid(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                        break;
+                    case 0xFF825353:
+                        Game.entities.add(new Crown(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         break;
                     case 0xFF6e956f:
                         Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));

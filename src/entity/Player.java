@@ -5,6 +5,7 @@
  */
 package entity;
 
+import entity.particle.Particle;
 import entity.particle.PoisonedParticle;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -28,6 +29,14 @@ public class Player extends Entity {
     public BufferedImage[] playerLeftDamaged;
     public BufferedImage[] playerDownDamaged;
     public BufferedImage[] playerRightDamaged;
+    public BufferedImage[] playerCrownUp;
+    public BufferedImage[] playerCrownLeft;
+    public BufferedImage[] playerCrownDown;
+    public BufferedImage[] playerCrownRight;
+    public BufferedImage[] playerCrownUpDamaged;
+    public BufferedImage[] playerCrownLeftDamaged;
+    public BufferedImage[] playerCrownDownDamaged;
+    public BufferedImage[] playerCrownRightDamaged;
 
     // movement animation logic
     public boolean up;
@@ -64,7 +73,7 @@ public class Player extends Entity {
     public int maxEnergy = 100;
     public int energy = maxEnergy;
     public int parchmentCounter = 0;
-    public boolean hasCrown = true;
+    public boolean hasCrown = false;
     public boolean xRay;
     public boolean action = false;
     
@@ -80,6 +89,7 @@ public class Player extends Entity {
     // running attributes
     public int runningMaxFrames = 20;
     public int runningFrames = 0;
+    public Particle runningParticle;
     
     // weak attributes
     public PoisonedParticle poisonedParticle;
@@ -105,6 +115,15 @@ public class Player extends Entity {
         playerLeftDamaged = new BufferedImage[6];
         playerDownDamaged = new BufferedImage[4];
         playerRightDamaged = new BufferedImage[6];
+        
+        playerCrownUp = new BufferedImage[4];
+        playerCrownLeft = new BufferedImage[6];
+        playerCrownDown = new BufferedImage[4];
+        playerCrownRight = new BufferedImage[6];
+        playerCrownUpDamaged = new BufferedImage[4];
+        playerCrownLeftDamaged = new BufferedImage[6];
+        playerCrownDownDamaged = new BufferedImage[4];
+        playerCrownRightDamaged = new BufferedImage[6];
         
         for (int i = 0; i < 4; i++) {
             playerUp[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 0, World.TILE_SIZE, World.TILE_SIZE);
@@ -138,7 +157,40 @@ public class Player extends Entity {
             playerRightDamaged[i] = Game.spritesheet.getSprite(i * World.TILE_SIZE, 226, World.TILE_SIZE, World.TILE_SIZE - 2);
         }
         
+        for (int i = 0; i < 4; i++) {
+            playerCrownUp[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 0, World.TILE_SIZE, World.TILE_SIZE);
+        }
+        
+        for (int i = 0; i < 6; i++) {
+            playerCrownLeft[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 34, World.TILE_SIZE, World.TILE_SIZE - 2);
+        }
+        
+        for (int i = 0; i < 4; i++){
+            playerCrownDown[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 66, World.TILE_SIZE, World.TILE_SIZE);
+        }
+        
+        for(int i = 0; i < 6; i++){
+            playerCrownRight[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 98, World.TILE_SIZE, World.TILE_SIZE - 2);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            playerCrownUpDamaged[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 128, World.TILE_SIZE, World.TILE_SIZE);
+        }
+        
+        for (int i = 0; i < 6; i++) {
+            playerCrownLeftDamaged[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 162, World.TILE_SIZE, World.TILE_SIZE - 2);
+        }
+        
+        for (int i = 0; i < 4; i++){
+            playerCrownDownDamaged[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 194, World.TILE_SIZE, World.TILE_SIZE);
+        }
+        
+        for(int i = 0; i < 6; i++){
+            playerCrownRightDamaged[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 226, World.TILE_SIZE, World.TILE_SIZE - 2);
+        }
+        
         poisonedParticle = null;
+        runningParticle = null;
     }
     
     public void addPlayer(){
@@ -323,66 +375,131 @@ public class Player extends Entity {
     }
     
     public void renderPlayerUp(Graphics g) {
-        if(canBeDamaged || onSteroid) {
-            if(isMoving) {
-                if (index > 3)
-                    index = 0;
-                g.drawImage(playerUp[index], getX() - Camera.x, getY() - Camera.y, null);
-            } else
-                g.drawImage(playerUp[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(hasCrown){
+            if(canBeDamaged || onSteroid) {
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerCrownUp[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerCrownUp[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerCrownUpDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerCrownUpDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         } else {
-            if(isMoving) {
-                if (index > 3)
-                    index = 0;
-                g.drawImage(playerUpDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
-            } else
-                g.drawImage(playerUpDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            if(canBeDamaged || onSteroid) {
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerUp[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerUp[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerUpDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerUpDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         }
+        
     }
     
     public void renderPlayerLeft(Graphics g) {
-        if(canBeDamaged || onSteroid){
-            if(isMoving)
-                g.drawImage(playerLeft[index], getX() - Camera.x, getY() - Camera.y, null);
-            else
-                g.drawImage(playerLeft[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(hasCrown) {
+            if(canBeDamaged || onSteroid){
+                if(isMoving)
+                    g.drawImage(playerCrownLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerCrownLeft[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving)
+                    g.drawImage(playerCrownLeftDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerCrownLeftDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         } else {
-            if(isMoving)
-                g.drawImage(playerLeftDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
-            else
-                g.drawImage(playerLeftDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            if(canBeDamaged || onSteroid){
+                if(isMoving)
+                    g.drawImage(playerLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerLeft[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving)
+                    g.drawImage(playerLeftDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerLeftDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         }
     }
     
     public void renderPlayerDown(Graphics g) {
-        if(canBeDamaged  || onSteroid){
-            if(isMoving) {
-                if (index > 3)
-                    index = 0;
-                g.drawImage(playerDown[index], getX() - Camera.x, getY() - Camera.y, null);
-            } else
-                g.drawImage(playerDown[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(hasCrown){
+            if(canBeDamaged  || onSteroid){
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerCrownDown[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerCrownDown[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerCrownDownDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerCrownDownDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         } else {
-            if(isMoving) {
-                if (index > 3)
-                    index = 0;
-                g.drawImage(playerDownDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
-            } else
-                g.drawImage(playerDownDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            if(canBeDamaged  || onSteroid){
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerDown[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerDown[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving) {
+                    if (index > 3)
+                        index = 0;
+                    g.drawImage(playerDownDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                } else
+                    g.drawImage(playerDownDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         }
     }
     
     public void renderPlayerRight(Graphics g) {
-        if(canBeDamaged || onSteroid){
-            if(isMoving)
-                g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
-            else
-                g.drawImage(playerRight[0], getX() - Camera.x, getY() - Camera.y, null);
+        if(hasCrown){
+            if(canBeDamaged || onSteroid){
+                if(isMoving)
+                    g.drawImage(playerCrownRight[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerCrownRight[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving)
+                    g.drawImage(playerCrownRightDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerCrownRightDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         } else {
-            if(isMoving)
-                g.drawImage(playerRightDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
-            else
-                g.drawImage(playerRightDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            if(canBeDamaged || onSteroid){
+                if(isMoving)
+                    g.drawImage(playerRight[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerRight[0], getX() - Camera.x, getY() - Camera.y, null);
+            } else {
+                if(isMoving)
+                    g.drawImage(playerRightDamaged[index], getX() - Camera.x, getY() - Camera.y, null);
+                else
+                    g.drawImage(playerRightDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
+            }
         }
     }
     
