@@ -123,14 +123,13 @@ public class World {
                     case 0xFFe4e400:
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.PYRAMID_WALL_BOTTOM_CENTER);
                         break;
-                    case 0xFFccffcc:
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
-                        break;
                     case 0xFF424242:
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObeliskBg());
+                        tiles[xx + ((yy - 2) * mapWidth)] = new TileWall(xx * TILE_SIZE, (yy - 2) * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObeliskBg());
+                        tiles[xx + (yy * mapWidth)] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
                         break;
                     case 0xFF2d2d2d:
-                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObelisk());
+                        tiles[xx + ((yy - 2) * mapWidth)] = new TileWall(xx * TILE_SIZE, (yy - 2) * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObelisk());
+                        tiles[xx + (yy * mapWidth)] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
                         break;
                     case 0xFFd68e8e:
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObstacle());
