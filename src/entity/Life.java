@@ -27,6 +27,7 @@ public class Life extends Entity {
     
     public Life(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
+        setDepth(-2);
         life = new BufferedImage[4];
         for(int i = 0; i < 4; i++){
             life[i] = Game.spritesheet.getSprite(448, 0 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
