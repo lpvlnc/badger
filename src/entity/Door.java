@@ -56,7 +56,7 @@ public class Door extends Entity {
     }
     
     public void doorState(){
-        if(Game.player.chocolateCounter >= 3)
+        if(Game.player.chocolateCounter >= 3 && Game.player.hasCrown && Game.player.score >= 1000)
             closed = false;
     }
     

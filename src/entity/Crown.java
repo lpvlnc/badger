@@ -25,6 +25,7 @@ public class Crown extends Entity {
     public void update() {
         if (isColliding(this, Game.player)) {
             Game.player.hasCrown = true;
+            Game.player.score+=250;
             Entity.addParticle(this);
             Game.entities.remove(this);
         }
