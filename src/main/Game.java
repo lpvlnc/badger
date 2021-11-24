@@ -124,6 +124,7 @@ public class Game extends Canvas implements Runnable {
         state = State.NORMAL;
         entities.clear();
         level++;
+        player.direction = Entity.Direction.UP;
         world = new World("/map/level"+level+".png");
     }
     

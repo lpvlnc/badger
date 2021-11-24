@@ -86,19 +86,21 @@ public class World {
                         break;
                     case 0xFF000000: // floor
                         
-                        int random = new Random().nextInt(100);
-                        
-                        if(random <= 96) {
-                            tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
-                            break;
-                        } else if (random == 97) {
-                            Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                        } else if (random == 98) {
-                            Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                        }/* else {
-                            if(new Random().nextInt(2) == 1)
-                                Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                        }*/
+                        int enemy = generateEnemy();
+                        switch(enemy){
+                            case 0:
+                                tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
+                                break;
+                            case 1:
+                                Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                                break;
+                            case 2:
+                                Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                                break;
+                            case 3:
+                                //Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                                break;
+                        }
                         break;
                     case 0xFF4e4e4e: // wall top solid
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(xx, yy, true));
@@ -117,6 +119,15 @@ public class World {
                         break;
                     case 0xFFe4e400:
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.PYRAMID_WALL_BOTTOM_CENTER);
+                        break;
+                    case 0xFFccffcc:
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
+                        break;
+                    case 0xFF424242:
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObeliskBg());
+                        break;
+                    case 0xFF2d2d2d:
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObelisk());
                         break;
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
@@ -147,6 +158,65 @@ public class World {
                         break;
                 }
             }
+        }
+    }
+    
+    public int generateEnemy(){
+        int random = new Random().nextInt(100);
+        if(Game.level == 1){
+            if(random <= 96){
+                return 0;
+            } else if (random == 97){
+                return 1;
+            } else if (random == 98){
+                return 2;
+            } else {
+                return 0;//3;
+            }
+        } else {
+            if(random <= 90){
+                return 0;
+            } else if (random >= 91 && random < 98){
+                return 2;
+            } else {
+                return 0;//3;
+            }
+        }
+    }
+    
+    public static BufferedImage selectObelisk(){
+        int random = new Random().nextInt(5);
+        switch(random){
+            case 0:
+                return Tile.PYRAMID_OBELISK_1;
+            case 1:
+                return Tile.PYRAMID_OBELISK_2;
+            case 2:
+                return Tile.PYRAMID_OBELISK_3;
+            case 3:
+                return Tile.PYRAMID_OBELISK_4;
+            case 4:
+                return Tile.PYRAMID_OBELISK_5;
+            default:
+                return Tile.PYRAMID_OBELISK_1;
+        }
+    }
+    
+    public static BufferedImage selectObeliskBg(){
+        int random = new Random().nextInt(5);
+        switch(random){
+            case 0:
+                return Tile.PYRAMID_OBELISK_BG_1;
+            case 1:
+                return Tile.PYRAMID_OBELISK_BG_2;
+            case 2:
+                return Tile.PYRAMID_OBELISK_BG_3;
+            case 3:
+                return Tile.PYRAMID_OBELISK_BG_4;
+            case 4:
+                return Tile.PYRAMID_OBELISK_BG_5;
+            default:
+                return Tile.PYRAMID_OBELISK_BG_1;
         }
     }
     
@@ -277,7 +347,7 @@ public class World {
     public void renderFloor(Graphics g){
         
         int xStart = Camera.x / TILE_SIZE;
-        int yStart = Camera.y / TILE_SIZE;
+        int yStart = (Camera.y / TILE_SIZE);
         
         int xFinal = xStart + (Game.WIDTH / TILE_SIZE);
         int yFinal = yStart + (Game.HEIGHT / TILE_SIZE);
@@ -296,10 +366,10 @@ public class World {
     
     public void renderWall(Graphics g){
         int xStart = Camera.x / TILE_SIZE;
-        int yStart = Camera.y / TILE_SIZE;
+        int yStart = (Camera.y / TILE_SIZE) - 3;
         
         int xFinal = xStart + (Game.WIDTH / TILE_SIZE);
-        int yFinal = yStart + (Game.HEIGHT / TILE_SIZE);
+        int yFinal = yStart + (Game.HEIGHT / TILE_SIZE) + 3;
         
         for(int xx = xStart ; xx <= xFinal; xx++){
             for(int yy = yStart; yy <= yFinal; yy++){
