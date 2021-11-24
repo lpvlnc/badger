@@ -72,18 +72,20 @@ public class Tile {
     public static final BufferedImage PYRAMID_OBSTACLE_4 = Game.spritesheet.getSprite(480, 480, World.TILE_SIZE, World.TILE_SIZE);
     
     // Pyramid obelisk with background
-    public static final BufferedImage PYRAMID_OBELISK_BG_1 = Game.spritesheet.getSprite(480, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_BG_2 = Game.spritesheet.getSprite(512, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_BG_3 = Game.spritesheet.getSprite(544, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_BG_4 = Game.spritesheet.getSprite(576, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_BG_5 = Game.spritesheet.getSprite(608, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_BG_1 = Game.spritesheet.getSprite(448, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_BG_2 = Game.spritesheet.getSprite(480, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_BG_3 = Game.spritesheet.getSprite(512, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_BG_4 = Game.spritesheet.getSprite(544, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_BG_5 = Game.spritesheet.getSprite(576, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_BG_6 = Game.spritesheet.getSprite(608, 384, 32, 96);
     
     // pyramid obelisk without background
-    public static final BufferedImage PYRAMID_OBELISK_1 = Game.spritesheet.getSprite(320, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_2 = Game.spritesheet.getSprite(352, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_3 = Game.spritesheet.getSprite(384, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_4 = Game.spritesheet.getSprite(416, 384, 32, 96);
-    public static final BufferedImage PYRAMID_OBELISK_5 = Game.spritesheet.getSprite(448, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_1 = Game.spritesheet.getSprite(256, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_2 = Game.spritesheet.getSprite(288, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_3 = Game.spritesheet.getSprite(320, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_4 = Game.spritesheet.getSprite(352, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_5 = Game.spritesheet.getSprite(384, 384, 32, 96);
+    public static final BufferedImage PYRAMID_OBELISK_6 = Game.spritesheet.getSprite(416, 384, 32, 96);
     
     // Floor
     public static BufferedImage FLOOR = OUTSIDE_FLOOR;

@@ -218,7 +218,7 @@ public class World {
     }
     
     public static BufferedImage selectObelisk(){
-        int random = new Random().nextInt(5);
+        int random = new Random().nextInt(6);
         switch(random){
             case 0:
                 return Tile.PYRAMID_OBELISK_1;
@@ -230,13 +230,15 @@ public class World {
                 return Tile.PYRAMID_OBELISK_4;
             case 4:
                 return Tile.PYRAMID_OBELISK_5;
+            case 5:
+                return Tile.PYRAMID_OBELISK_6;
             default:
                 return Tile.PYRAMID_OBELISK_1;
         }
     }
     
     public static BufferedImage selectObeliskBg(){
-        int random = new Random().nextInt(5);
+        int random = new Random().nextInt(6);
         switch(random){
             case 0:
                 return Tile.PYRAMID_OBELISK_BG_1;
@@ -248,6 +250,8 @@ public class World {
                 return Tile.PYRAMID_OBELISK_BG_4;
             case 4:
                 return Tile.PYRAMID_OBELISK_BG_5;
+            case 5:
+                return Tile.PYRAMID_OBELISK_BG_6;
             default:
                 return Tile.PYRAMID_OBELISK_BG_1;
         }
