@@ -108,6 +108,9 @@ public class World {
                     case 0xFF7e7e7e: // wall top
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopTile(xx, yy, false));
                         break;
+                    case 0xFFc6c6c6:
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTopEdge(xx, yy));
+                        break;
                     case 0xFFFFFFFF: // wall
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectWallTile(xx, yy));
                         break;
@@ -128,6 +131,9 @@ public class World {
                         break;
                     case 0xFF2d2d2d:
                         tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObelisk());
+                        break;
+                    case 0xFFd68e8e:
+                        tiles[pos] = new TileWall(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, selectObstacle());
                         break;
                     case 0xFFff0000: // life
                         Game.entities.add(new Life(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
@@ -158,6 +164,33 @@ public class World {
                         break;
                 }
             }
+        }
+    }
+    
+    public BufferedImage selectWallTopEdge(int x, int y) {
+        BufferedImage tile = Tile.PYRAMID_WALL_TOP_RIGHT;
+        try {
+            if(tiles[x - 1 + (y  * mapWidth)] instanceof TileFloor)
+                tile = Tile.PYRAMID_WALL_TOP_LEFT;
+        }catch (Exception e){
+            return tile;
+        }
+        return tile;
+    }
+    
+    public BufferedImage selectObstacle(){
+        int random = new Random().nextInt(4);
+        switch(random){
+            case 0:
+                return Game.level == 1 ? Tile.OUTSIDE_OBSTACLE_1 : Tile.PYRAMID_OBSTACLE_1;
+            case 1:
+                return Game.level == 1 ? Tile.OUTSIDE_OBSTACLE_2 : Tile.PYRAMID_OBSTACLE_2;
+            case 2:
+                return Game.level == 1 ? Tile.OUTSIDE_OBSTACLE_3 : Tile.PYRAMID_OBSTACLE_3;
+            case 3:
+                return Game.level == 1 ? Tile.OUTSIDE_OBSTACLE_4 : Tile.PYRAMID_OBSTACLE_4;
+            default:
+                return Tile.OUTSIDE_OBSTACLE_1;
         }
     }
     

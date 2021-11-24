@@ -43,6 +43,12 @@ public class Tile {
     public static final BufferedImage OUTSIDE_WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(96, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage OUTSIDE_WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(128, 608, World.TILE_SIZE, World.TILE_SIZE);
     
+    // Outside obstacles
+    public static final BufferedImage OUTSIDE_OBSTACLE_1 = Game.spritesheet.getSprite(512, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_2 = Game.spritesheet.getSprite(544, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_3 = Game.spritesheet.getSprite(576, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_4 = Game.spritesheet.getSprite(608, 480, World.TILE_SIZE, World.TILE_SIZE);
+    
     // Pyramid Floor
     public static final BufferedImage PYRAMID_FLOOR = Game.spritesheet.getSprite(0, 576, World.TILE_SIZE, World.TILE_SIZE);
     
@@ -50,12 +56,20 @@ public class Tile {
     public static final BufferedImage PYRAMID_WALL_TOP = Game.spritesheet.getSprite(416, 544, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_TOP_SOLID = Game.spritesheet.getSprite(416, 544, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_TOP_DOOR = Game.spritesheet.getSprite(384, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_TOP_LEFT = Game.spritesheet.getSprite(384, 512, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_WALL_TOP_RIGHT = Game.spritesheet.getSprite(416, 512, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_LEFT = Game.spritesheet.getSprite(352, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL = Game.spritesheet.getSprite(384, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_RIGHT = Game.spritesheet.getSprite(416, 576, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_BOTTOM_LEFT_CORNER = Game.spritesheet.getSprite(352, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_BOTTOM_CENTER = Game.spritesheet.getSprite(384, 608, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage PYRAMID_WALL_BOTTOM_RIGHT_CORNER = Game.spritesheet.getSprite(416, 608, World.TILE_SIZE, World.TILE_SIZE);
+    
+    // Pyramid obstacles
+    public static final BufferedImage PYRAMID_OBSTACLE_1 = Game.spritesheet.getSprite(384, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_OBSTACLE_2 = Game.spritesheet.getSprite(416, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_OBSTACLE_3 = Game.spritesheet.getSprite(448, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_OBSTACLE_4 = Game.spritesheet.getSprite(480, 480, World.TILE_SIZE, World.TILE_SIZE);
     
     // Pyramid obelisk with background
     public static final BufferedImage PYRAMID_OBELISK_BG_1 = Game.spritesheet.getSprite(480, 384, 32, 96);
@@ -125,6 +139,14 @@ public class Tile {
                 sprite == Tile.WALL_BOTTOM_RIGHT_CORNER || 
                 sprite == Tile.WALL_TOP_SOLID || 
                 sprite == Tile.PYRAMID_WALL_BOTTOM_CENTER ||
+                sprite == Tile.OUTSIDE_OBSTACLE_1 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_2 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_3 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_4 ||
+                sprite == Tile.PYRAMID_OBSTACLE_1 ||
+                sprite == Tile.PYRAMID_OBSTACLE_2 ||
+                sprite == Tile.PYRAMID_OBSTACLE_3 ||
+                sprite == Tile.PYRAMID_OBSTACLE_4 ||
                 sprite == null ||
                 tiles[(x / World.TILE_SIZE) + (((y - 1) / World.TILE_SIZE) * mapWidth)].sprite == Tile.WALL_TOP_SOLID;
     }
