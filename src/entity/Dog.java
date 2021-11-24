@@ -15,10 +15,10 @@ public class Dog extends Entity{
     public boolean up;
     public boolean down;
     public int frames = 0;
-    public int maxFrames = 15;
+    public int maxFrames = 10;
     public int index = 0;
     public int maxIndex = 4;
-    private int initialY;
+    public int topOffSet = Game.level == 1 ? (World.TILE_SIZE * 4) : 0;
     
     public Dog(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
@@ -38,14 +38,12 @@ public class Dog extends Entity{
         if(getY() <= 64)
             setY(65);
         
-        initialY = getY();
         down = ThreadLocalRandom.current().nextInt(0, 2) != 0;
-   
     }
     
     @Override
     public void update() {
-        if(getY() <= (World.TILE_SIZE * 4) - yMask || !World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask))
+        if(getY() <= topOffSet - yMask || !World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask))
             up = false;
         
         if(getY() >= World.mapWidth * World.TILE_SIZE - World.TILE_SIZE || !World.isFreeDynamic(getX() + xMask, getY() + yMask + speed, wMask, hMask))

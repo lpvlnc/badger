@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import menu.MenuGameOver;
-import world.Tile.Tile;
 import world.World;
 
 /**
@@ -68,7 +67,7 @@ public class Game extends Canvas implements Runnable {
     public static State state = State.NORMAL;
     
     // Level
-    public static int level = 1;
+    public static int level = 2;
     public int maxLevel = 2;
     
     // Menu

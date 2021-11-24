@@ -18,11 +18,9 @@ import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Game;
-import main.Game.State;
 import world.World;
 
 /**
@@ -40,6 +38,7 @@ public class UI {
     public static BufferedImage energyBack;
     public static BufferedImage energy;
     public static BufferedImage steroid;
+    public static BufferedImage parchmentBack;
     public static BufferedImage parchment;
     public static boolean updateFps;
     public static int frames = 0;
@@ -80,6 +79,8 @@ public class UI {
         energy = Game.spritesheet.getSprite(416, 0, World.TILE_SIZE, World.TILE_SIZE);
         
         steroid = Game.spritesheet.getSprite(512, 0, World.TILE_SIZE, World.TILE_SIZE);
+        
+        parchmentBack = Game.spritesheet.getSprite(544, 32, World.TILE_SIZE, World.TILE_SIZE);
         parchment = Game.spritesheet.getSprite(544, 0, World.TILE_SIZE, World.TILE_SIZE);
     }
     
@@ -88,9 +89,11 @@ public class UI {
         g.setFont(pixelFont);
         renderLife();
         renderEnergy();
-        renderChocolate();
+        if(Game.level == 1)
+            renderChocolate();
+        else
+            renderParchment();
         renderSteroid();
-        renderParchment();
         renderScore();
         showFPS();
     }
@@ -110,12 +113,6 @@ public class UI {
         drawText("SCORE:" + score, 756, 20, null);
     }
     
-    public void renderParchment() {
-        g.drawImage(parchment, 56, -21, 24, 24, null);
-        String zero = Game.player.parchmentCounter < 10 ? "0" : "";
-        drawText("x" + zero + Game.player.parchmentCounter, 103, 604, null);
-    }
-    
     public void renderSteroid() {
         g.drawImage(steroid, -437, 558, null);
         String zero = Game.player.steroidCounter < 10 ? "0" : "";
@@ -130,6 +127,22 @@ public class UI {
         
         for(int i = 0; i < Game.player.chocolateCounter; i++) {
             g.drawImage(chocolate, 154 + (i * 30), -24, null);
+        }
+    }
+    
+    public void renderParchment() {
+        drawText("PARCHMENT:", 437, 20, null);
+        for(int i = 0; i < 10; i ++) {
+            if(i < 5)
+                g.drawImage(parchmentBack, 160 + (i * 30), -19, 24, 24, null);
+            else
+                g.drawImage(parchmentBack, 160 + ((i - 5) * 30), 7, 24, 24, null);
+        }
+        for(int i = 0; i < Game.player.parchmentCounter; i ++) {
+            if(i < 5)
+                g.drawImage(parchment, 160 + (i * 30), -19, 24, 24, null);
+            else
+                g.drawImage(parchment, 160 + ((i - 5) * 30), 7, 24, 24, null);
         }
     }
     

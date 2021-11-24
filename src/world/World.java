@@ -78,9 +78,8 @@ public class World {
                 
                 switch(pixelAtual){
                     case 0xFF00ff00: // player
-                        if(Game.player == null){
+                        if(Game.player == null)
                             Game.player = new Player(0, 0, 16, 16, null);
-                        }
                         Game.entities.add(Game.player);
                         Game.player.setX(xx * TILE_SIZE);
                         Game.player.setY(yy * TILE_SIZE);
@@ -168,6 +167,61 @@ public class World {
                     default: // floor
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         break;
+                }
+            }
+        }
+        if(Game.level == 1) {
+            spawnChocolate();
+            spawnCrown();
+        }
+        
+        if(Game.level == 2) {
+            spawnParchment();
+        }
+    }
+    
+    public void spawnParchment(){
+        int parchment = 0;
+        int maxParchment = 10;
+        Random rand = new Random();
+        while (parchment < maxParchment){
+            int x = rand.nextInt(mapWidth);
+            int y = rand.nextInt(mapHeight - 1);
+            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+                if(rand.nextInt(100) < 10) {
+                    Game.entities.add(new Parchment(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                    parchment++;
+                }
+            }
+        }
+    }
+    
+    public void spawnChocolate(){
+        int chocolate = 0;
+        int maxChocolate = 5;
+        Random rand = new Random();
+        while (chocolate < maxChocolate){
+            int x = rand.nextInt(mapWidth);
+            int y = rand.nextInt(mapHeight - 1);
+            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+                if(rand.nextInt(100) < 10) {
+                    Game.entities.add(new Chocolate(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                    chocolate++;
+                }
+            }
+        }
+    }
+    
+    public void spawnCrown(){
+        Random rand = new Random();
+        int crown = 0;
+        while (crown < 1){
+            int x = rand.nextInt((mapWidth));
+            int y = rand.nextInt((mapHeight));
+            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+                if(rand.nextInt(100) < 10) {
+                    Game.entities.add(new Crown(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                    crown++;
                 }
             }
         }
