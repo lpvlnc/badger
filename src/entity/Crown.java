@@ -18,6 +18,7 @@ public class Crown extends Entity {
     
     public Crown(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
+        setMask(3, 13, 26, 7);
         this.sprite = Game.spritesheet.getSprite(512, 32, World.TILE_SIZE, World.TILE_SIZE);
     }
     
