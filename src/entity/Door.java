@@ -52,7 +52,12 @@ public class Door extends Entity {
     
     public void playerIsOnEntrance(){
         setMask(33, 97, 30, 30);
-        canEnter = isColliding(this, Game.player);
+        if(closed){
+            if(isColliding(this, Game.player))
+                Game.player.y += Game.player.speed;
+        } else {
+            canEnter = isColliding(this, Game.player);
+        }
     }
     
     public void doorState(){

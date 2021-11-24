@@ -85,6 +85,9 @@ public class World {
                         Game.player.setX(xx * TILE_SIZE);
                         Game.player.setY(yy * TILE_SIZE);
                         break;
+                    case 0xFF9fff9f: // spawn area
+                        tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
+                        break;
                     case 0xFF000000: // floor
                         
                         int enemy = generateEnemy();

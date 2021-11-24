@@ -45,7 +45,7 @@ public class Dog extends Entity{
     
     @Override
     public void update() {
-        if(getY() <= 0 || !World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask))
+        if(getY() <= (World.TILE_SIZE * 4) - yMask || !World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask))
             up = false;
         
         if(getY() >= World.mapWidth * World.TILE_SIZE - World.TILE_SIZE || !World.isFreeDynamic(getX() + xMask, getY() + yMask + speed, wMask, hMask))

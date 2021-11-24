@@ -43,13 +43,13 @@ public class Panda extends Entity{
     
     @Override
     public void update() {
-        if(getX() <= 0 || !World.isFreeDynamic(getX() + xMask - speed, getY() + yMask, wMask, hMask))
+        if(getX() <= (World.TILE_SIZE * 4) - yMask || !World.isFreeDynamic(getX() + xMask - speed, getY() + yMask, wMask, hMask))
             right = true;
         
         if(getX() >= World.mapWidth * World.TILE_SIZE - World.TILE_SIZE - 2 || !World.isFreeDynamic(getX() + xMask + speed, getY() + yMask, wMask, hMask))
             right = false;
         
-        if(getY() <= 0 || !World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask)) {
+        if(getY() <= (World.TILE_SIZE * 4) - yMask || !World.isFreeDynamic(getX() + xMask, getY() + yMask - speed, wMask, hMask)) {
             up = false;
             initialY = getY() + (2*World.TILE_SIZE);
         }  
