@@ -19,11 +19,12 @@ import main.Game.State;
  *
  * @author Leonardo
  */
-public class MenuMain extends Menu {
+public class Menupause extends Menu {
     
-    public MenuMain(){
+    public Menupause(){
         options = new ArrayList<>();
-    	options.add("Start game");
+    	options.add("Pause");
+    	options.add("Main menu");
     	options.add("Exit");
     	maxOption = options.size() - 1;
     }
@@ -51,12 +52,16 @@ public class MenuMain extends Menu {
         
         if(select) {
             select = false;
-            if(options.get(currentOption).contentEquals("Start game")) {
+            if(options.get(currentOption).contentEquals("Pause")) {
                 try {
                     Game.restart();
                 } catch (IOException ex) {
                     Logger.getLogger(MenuGameOver.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+            
+            if(options.get(currentOption).contentEquals("Main menu")) {
+                Game.state = State.MENU;
             }
 
             if(options.get(currentOption).contentEquals("Exit")) {
