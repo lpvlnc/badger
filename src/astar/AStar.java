@@ -70,11 +70,11 @@ public class AStar {
                 int y = current.tile.y;
                 int xi = (i%3) - 1;
                 int yi = (i/3) - 1;
-                int pos = (x+xi + ((y+yi) * World.mapWidth));
-                if(!validPosition(pos))
-                    continue;
+                int pos = x+xi+ ( (y+yi) * World.mapWidth);
+                if(!validPosition(pos)) {
+                    return null;
+                }
                 Tile tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
-                
 
                 if(tile == null){
                     continue;
@@ -87,14 +87,7 @@ public class AStar {
                 switch (i) {
                     case 0:
                         {
-                            int testPos = x+xi+1+((y+yi) * World.mapWidth);
-                            if(!validPosition(testPos))
-                                continue;
                             Tile test = World.tiles[x+xi+1+((y+yi) * World.mapWidth)];
-                            
-                            int test2Pos = x+xi+((y+yi+1) * World.mapWidth);
-                            if(!validPosition(test2Pos))
-                                continue;
                             Tile test2 = World.tiles[x+xi+((y+yi+1) * World.mapWidth)];
                             if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
                                 continue;
@@ -106,11 +99,11 @@ public class AStar {
                             int testPos = x+xi-1+((y+yi) * World.mapWidth);
                             if(!validPosition(testPos))
                                 continue;
-                            Tile test = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
-                            
                             int test2Pos = x+xi+((y+yi+1) * World.mapWidth);
                             if(!validPosition(test2Pos))
                                 continue;
+                            
+                            Tile test = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
                             Tile test2 = World.tiles[x+xi+((y+yi+1) * World.mapWidth)];
                             if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
                                 continue;
@@ -122,11 +115,11 @@ public class AStar {
                             int testPos = x+xi+((y+yi-1) * World.mapWidth);
                             if(!validPosition(testPos))
                                 continue;
-                            Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
-                            
                             int test2Pos = x+xi+1+((y+yi) * World.mapWidth);
                             if(!validPosition(test2Pos))
                                 continue;
+                            
+                            Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
                             Tile test2 = World.tiles[x+xi+1+((y+yi) * World.mapWidth)];
                             if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
                                 continue;
@@ -138,11 +131,11 @@ public class AStar {
                             int testPos = x+xi+((y+yi-1) * World.mapWidth);
                             if(!validPosition(testPos))
                                 continue;
-                            Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
-                            
                             int test2Pos = x+xi-1+((y+yi) * World.mapWidth);
                             if(!validPosition(test2Pos))
                                 continue;
+                            
+                            Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
                             Tile test2 = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
                             if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
                                 continue;
@@ -192,6 +185,6 @@ public class AStar {
     }
     
     private static boolean validPosition(int pos){
-        return pos < World.mapWidth * World.mapHeight && pos > 0;
+        return pos < (World.mapWidth * World.mapHeight) && pos > 0;
     }
 }
