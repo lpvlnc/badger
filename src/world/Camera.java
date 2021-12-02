@@ -28,7 +28,7 @@ public class Camera {
     }
     
     public void updateCamera(Entity e) {
-    	Camera.x = Camera.clamp(e.getX() - (Game.WIDTH / 2), 0, (World.mapWidth * (World.TILE_SIZE - Game.WIDTH)) - 32);
+    	Camera.x = Camera.clamp(e.getX() - (Game.WIDTH / 2), 0, (World.mapWidth * (World.TILE_SIZE - Game.WIDTH)));
         Camera.y = Camera.clamp(e.getY() - (Game.HEIGHT / 2), 0, (World.mapHeight * (World.TILE_SIZE - Game.HEIGHT)));
     }
 }

@@ -33,6 +33,7 @@ public class Salesman extends Entity {
     public int visionCenterX;
     public int visionCenterY;
     public int visionRadius = 300;
+    Random random = new Random();
 
     public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
@@ -80,10 +81,21 @@ public class Salesman extends Entity {
     public void update() {
         
         if(isSeeingPlayer()){
-            Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
-            Vector2i end = new Vector2i(Game.player.getX() / World.TILE_SIZE, Game.player.getY() / World.TILE_SIZE);
-            path = AStar.findPath(Game.world, start, end);
-            followPath(path);
+            if(random.nextInt(100) < 75){
+                if(path == null || path.isEmpty()){
+                    Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
+                    Vector2i end = new Vector2i(Game.player.getX() / World.TILE_SIZE, Game.player.getY() / World.TILE_SIZE);
+                    path = AStar.findPath(Game.world, start, end);
+                }
+            }
+            else{
+                Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
+                Vector2i end = new Vector2i(Game.player.getX() / World.TILE_SIZE, Game.player.getY() / World.TILE_SIZE);
+                path = AStar.findPath(Game.world, start, end);
+            }
+            
+            if(random.nextInt(100) < 95)
+                followPath(path);
         }
         
         if(isColliding(this, Game.player)) {

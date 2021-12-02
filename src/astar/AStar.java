@@ -96,13 +96,6 @@ public class AStar {
                         }
                     case 2:
                         {
-                            int testPos = x+xi-1+((y+yi) * World.mapWidth);
-                            if(!validPosition(testPos))
-                                continue;
-                            int test2Pos = x+xi+((y+yi+1) * World.mapWidth);
-                            if(!validPosition(test2Pos))
-                                continue;
-                            
                             Tile test = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
                             Tile test2 = World.tiles[x+xi+((y+yi+1) * World.mapWidth)];
                             if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
@@ -112,13 +105,6 @@ public class AStar {
                         }
                     case 6:
                         {
-                            int testPos = x+xi+((y+yi-1) * World.mapWidth);
-                            if(!validPosition(testPos))
-                                continue;
-                            int test2Pos = x+xi+1+((y+yi) * World.mapWidth);
-                            if(!validPosition(test2Pos))
-                                continue;
-                            
                             Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
                             Tile test2 = World.tiles[x+xi+1+((y+yi) * World.mapWidth)];
                             if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
@@ -128,13 +114,6 @@ public class AStar {
                         }
                     case 8:
                         {
-                            int testPos = x+xi+((y+yi-1) * World.mapWidth);
-                            if(!validPosition(testPos))
-                                continue;
-                            int test2Pos = x+xi-1+((y+yi) * World.mapWidth);
-                            if(!validPosition(test2Pos))
-                                continue;
-                            
                             Tile test = World.tiles[x+xi+((y+yi-1) * World.mapWidth)];
                             Tile test2 = World.tiles[x+xi-1+((y+yi) * World.mapWidth)];
                             if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){

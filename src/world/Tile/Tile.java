@@ -25,7 +25,6 @@ public class Tile {
     private int width;
     private int height;
     
-    public boolean show = true;
     public boolean solid = true;
     public int depth = 0;
     
@@ -48,6 +47,14 @@ public class Tile {
     public static final BufferedImage OUTSIDE_OBSTACLE_2 = Game.spritesheet.getSprite(544, 480, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage OUTSIDE_OBSTACLE_3 = Game.spritesheet.getSprite(576, 480, World.TILE_SIZE, World.TILE_SIZE);
     public static final BufferedImage OUTSIDE_OBSTACLE_4 = Game.spritesheet.getSprite(608, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_5 = Game.spritesheet.getSprite(288, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_6 = Game.spritesheet.getSprite(320, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_7 = Game.spritesheet.getSprite(352, 480, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_8 = Game.spritesheet.getSprite(320, 512, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_9 = Game.spritesheet.getSprite(352, 512, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_10 = Game.spritesheet.getSprite(320, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_11 = Game.spritesheet.getSprite(352, 544, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage OUTSIDE_OBSTACLE_12 = Game.spritesheet.getSprite(320, 576, World.TILE_SIZE, World.TILE_SIZE);
     
     // Pyramid Floor
     public static final BufferedImage PYRAMID_FLOOR = Game.spritesheet.getSprite(0, 576, World.TILE_SIZE, World.TILE_SIZE);
@@ -145,6 +152,14 @@ public class Tile {
                 sprite == Tile.OUTSIDE_OBSTACLE_2 ||
                 sprite == Tile.OUTSIDE_OBSTACLE_3 ||
                 sprite == Tile.OUTSIDE_OBSTACLE_4 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_5 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_6 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_7 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_8 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_9 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_10 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_11 ||
+                sprite == Tile.OUTSIDE_OBSTACLE_12 ||
                 sprite == Tile.PYRAMID_OBSTACLE_1 ||
                 sprite == Tile.PYRAMID_OBSTACLE_2 ||
                 sprite == Tile.PYRAMID_OBSTACLE_3 ||
@@ -154,8 +169,7 @@ public class Tile {
     }
     
     public void render(Graphics g){
-        if(show)
-            g.drawImage(sprite, (int)x - Camera.x, (int)y - Camera.y, null);
+        g.drawImage(sprite, (int)x - Camera.x, (int)y - Camera.y, null);
     }
      
      public BufferedImage getSprite() {
