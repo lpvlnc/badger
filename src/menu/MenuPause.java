@@ -8,10 +8,7 @@ package menu;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import main.Game;
 import main.Game.State;
 
@@ -35,7 +32,6 @@ public class MenuPause extends Menu {
             currentOption--;
             if(currentOption < 0){
                 currentOption = maxOption;
-                arrowOffSet = 100 - (maxOption * 30);
             }
         }
         
@@ -44,11 +40,8 @@ public class MenuPause extends Menu {
             currentOption++;
             if(currentOption > maxOption){
                 currentOption = 0;
-                arrowOffSet = 100;
             }
         }
-        
-        arrowOffSet = 100 - (currentOption * 30);
         
         if(select) {
             select = false;
@@ -64,7 +57,6 @@ public class MenuPause extends Menu {
                 System.exit(0);
             }
         }
-        arrowPos = ((Game.HEIGHT * Game.SCALE) / 2) + 40;
     }
     
     @Override
@@ -75,10 +67,11 @@ public class MenuPause extends Menu {
         g2.setColor(new Color(250, 0, 250));
         for(int i = 0; i < options.size(); i++) {
             if(i == currentOption)
-                Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), null);
+                Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), null);
+                //Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), null);
             else
-                Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
+                Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
+                //Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
         }
-        //Game.ui.drawText(">", ((Game.WIDTH * Game.SCALE) / 2) - 65, arrowPos - arrowOffSet, null);
     }
 }

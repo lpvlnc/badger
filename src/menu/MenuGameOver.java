@@ -35,7 +35,6 @@ public class MenuGameOver extends Menu {
             currentOption--;
             if(currentOption < 0){
                 currentOption = maxOption;
-                arrowOffSet = 100 - (maxOption * 30);
             }
         }
         
@@ -44,11 +43,8 @@ public class MenuGameOver extends Menu {
             currentOption++;
             if(currentOption > maxOption){
                 currentOption = 0;
-                arrowOffSet = 100;
             }
         }
-        
-        arrowOffSet = 100 - (currentOption * 30);
         
         if(select) {
             select = false;
@@ -68,7 +64,6 @@ public class MenuGameOver extends Menu {
                 System.exit(0);
             }
         }
-        arrowPos = ((Game.HEIGHT * Game.SCALE) / 2) + 40;
     }
     
     @Override
@@ -77,12 +72,14 @@ public class MenuGameOver extends Menu {
         g2.setColor(new Color(0, 0, 0, 150));
         g2.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
         g2.setColor(new Color(250, 0, 250));
+        Game.ui.drawTextCenter("GAME OVER", heightPos - 90, new Color(250, 0, 0));
         for(int i = 0; i < options.size(); i++) {
             if(i == currentOption)
-                Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), null);
+                Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), null);
+                //Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), null);
             else
-                Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
+                Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
+                //Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
         }
-        //Game.ui.drawText(">", ((Game.WIDTH * Game.SCALE) / 2) - 65, arrowPos - arrowOffSet, null);
     }
 }

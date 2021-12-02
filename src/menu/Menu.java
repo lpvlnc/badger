@@ -19,11 +19,9 @@ public class Menu {
     public int maxOption;
     public boolean up, down;
     public boolean select = false;
-    public int widthPos = ((Game.WIDTH * Game.SCALE) / 2) - 80;
+    public int widthPos = ((Game.WIDTH * Game.SCALE) / 2) - 112;
     public int heightPos = ((Game.HEIGHT * Game.SCALE) / 2);
     public int heightOffSet = 60;
-    public int arrowPos = ((Game.HEIGHT * Game.SCALE) / 2) + 30;
-    public int arrowOffSet = 60;
     
     public void update() {
         
