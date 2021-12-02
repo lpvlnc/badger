@@ -115,7 +115,7 @@ public class Entity {
                     isMoving = true;
                     direction = Direction.RIGHT;
                     x+=speed;
-                } else if(x > target.x * World.TILE_SIZE){
+                } else if(x  > target.x * World.TILE_SIZE){
                     isMoving = true;
                     direction = Direction.LEFT;
                     x-=speed;

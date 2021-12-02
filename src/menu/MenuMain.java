@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Game;
-import main.Game.State;
 
 /**
  *
@@ -69,7 +68,7 @@ public class MenuMain extends Menu {
         g2.setColor(new Color(250, 0, 250));
         for(int i = 0; i < options.size(); i++) {
             if(i == currentOption)
-                Game.ui.drawTextCenter(options.get(i),heightPos - heightOffSet + (i * 30), Color.yellow);
+                Game.ui.drawTextCenter(options.get(i),heightPos - heightOffSet + (i * 30), null);
                 //Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), null);
             else
                 Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
