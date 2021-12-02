@@ -80,14 +80,10 @@ public class Salesman extends Entity {
     public void update() {
         
         if(isSeeingPlayer()){
-            if(path == null || path.isEmpty()){
-                Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
-                Vector2i end = new Vector2i(Game.player.getX() / World.TILE_SIZE, Game.player.getY() / World.TILE_SIZE);
-                path = AStar.findPath(Game.world, start, end);
-            }
-            
-            if(new Random().nextInt(100) < 98)
-                followPath(path);
+            Vector2i start = new Vector2i((getX() + (xMask / 2)) / World.TILE_SIZE, (getY() + (yMask / 2)) / World.TILE_SIZE);
+            Vector2i end = new Vector2i((Game.player.getX() + (Game.player.xMask / 2)) / World.TILE_SIZE, (Game.player.getY() + (Game.player.yMask / 2)) / World.TILE_SIZE);
+            path = AStar.findPath(Game.world, start, end);
+            followPath(path);
         }
         
         if(isColliding(this, Game.player)) {

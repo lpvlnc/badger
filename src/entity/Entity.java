@@ -41,7 +41,7 @@ public class Entity {
     public boolean isMoving = false;
     
     public int depth;
-    protected List<Node> path = null;
+    protected List<Node> path;
     
     public int speed = 1;
     

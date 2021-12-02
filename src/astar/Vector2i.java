@@ -17,12 +17,9 @@ public class Vector2i {
         this.y = y;
     }
     
+    @Override
     public boolean equals(Object object){
         Vector2i vec = (Vector2i) object;
-        if(vec.x == this.x && vec.y == this.y){
-            return true;
-        }
-        
-        return false;
+        return vec.x == this.x && vec.y == this.y;
     }
 }

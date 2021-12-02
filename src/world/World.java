@@ -79,7 +79,7 @@ public class World {
                 switch(pixelAtual){
                     case 0xFF00ff00: // player
                         if(Game.player == null)
-                            Game.player = new Player(0, 0, 16, 16, null);
+                            Game.player = new Player(0, 0, TILE_SIZE, TILE_SIZE, null);
                         Game.entities.add(Game.player);
                         Game.player.setX(xx * TILE_SIZE);
                         Game.player.setY(yy * TILE_SIZE);
@@ -101,7 +101,7 @@ public class World {
                                 Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                                 break;
                             case 3:
-                                //Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                                Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                                 break;
                         }
                         break;
@@ -264,7 +264,7 @@ public class World {
             } else if (random == 98){
                 return 2;
             } else {
-                return 0;//3;
+                return 3;
             }
         } else {
             if(random <= 90){
@@ -272,7 +272,7 @@ public class World {
             } else if (random >= 91 && random < 98){
                 return 2;
             } else {
-                return 0;//3;
+                return 3;
             }
         }
     }

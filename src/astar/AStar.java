@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import main.Game;
 import world.Tile.Tile;
 import world.Tile.TileWall;
 import world.World;
@@ -24,27 +23,22 @@ public class AStar {
     private static Comparator<Node> nodeSorter = new Comparator<Node>() {
         @Override
         public int compare(Node n0, Node n1) {
-            if(n1.fCost < n0.fCost){
+            if(n1.fCost < n0.fCost)
                 return +1;
-            }
-            if(n1.fCost > n0.fCost){
+            if(n1.fCost > n0.fCost)
                 return -1;
-            }
             return 0;
         }
     };
     
     public static boolean clear(){
-        if(System.currentTimeMillis() - lastTime >= 1000){
-            return true;
-        }
-        return false;
+        return System.currentTimeMillis() - lastTime >= 1000;
     }
     
     public static List<Node> findPath(World world, Vector2i start, Vector2i end){
         lastTime = System.currentTimeMillis();
-        List<Node> openList = new ArrayList<>();
-        List<Node> closedList = new ArrayList<>();
+        List<Node> openList = new ArrayList<Node>();
+        List<Node> closedList = new ArrayList<Node>();
         
         Node current = new Node(start, null, 0, getDistance(start, end));
         
@@ -76,21 +70,46 @@ public class AStar {
                 int y = current.tile.y;
                 int xi = (i%3) - 1;
                 int yi = (i/3) - 1;
-                Tile tile;
-                try {
-                    tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
-                } catch (Exception e) {
+                int pos = (x+xi + ((y+yi) * World.mapWidth));
+                if(pos >= World.mapWidth * World.mapHeight || pos < 0)
                     continue;
-                }
+                Tile tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
+                
 
                 if(tile == null){
                     continue;
                 }
 
-                if(tile instanceof TileWall){
+                if(tile instanceof TileWall && tile.solid){
                     continue;
                 }
                 
+                if(i == 0){
+                    Tile test = World.tiles[x+xi+1+((y+yi)* World.mapWidth)];
+                    Tile test2 = World.tiles[x+xi+1+((y+yi)* World.mapWidth)];
+                    if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
+                        continue;
+                    }   
+                } else if (i == 2){
+                    Tile test = World.tiles[x+xi+1+((y+yi)* World.mapWidth)];
+                    Tile test2 = World.tiles[x+xi+((y+yi)* World.mapWidth)];
+                    if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
+                        continue;
+                    }   
+                } else if (i == 6){
+                    Tile test = World.tiles[x+xi+((y+yi-1)* World.mapWidth)];
+                    Tile test2 = World.tiles[x+xi+1+((y+yi)* World.mapWidth)];
+                    if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
+                        continue;
+                    }   
+                } else if (i == 8){
+                    Tile test = World.tiles[x+xi+((y+yi-1)* World.mapWidth)];
+                    Tile test2 = World.tiles[x+xi-1+((y+yi)* World.mapWidth)];
+                    if(test instanceof TileWall && test.solid || test2 instanceof TileWall && test2.solid){
+                        continue;
+                    }   
+                }
+                /*
                 switch (i) {
                     case 0:
                         {
@@ -130,7 +149,7 @@ public class AStar {
                         }
                     default:
                         break;
-                }
+                }*/
 
                 Vector2i a = new Vector2i(x+xi, y+yi);
                 double gCost = current.gCost + getDistance(current.tile, a);

@@ -73,7 +73,7 @@ public class Game extends Canvas implements Runnable {
     // Menu
     public static MenuGameOver menuGameOver;
     
-    
+    boolean teste = true;
     // Constructor
     public Game() throws IOException{
         kh = new KeyHandler();
