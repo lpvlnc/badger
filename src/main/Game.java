@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import menu.MenuGameOver;
+import menu.MenuMain;
 import world.World;
 
 /**
@@ -64,16 +65,16 @@ public class Game extends Canvas implements Runnable {
     public enum State { 
         MENU, PAUSE, NORMAL, GAMEOVER
     }
-    public static State state = State.NORMAL;
+    public static State state = State.MENU;
     
     // Level
-    public static int level = 2;
+    public static int level = 1;
     public int maxLevel = 2;
     
     // Menu
     public static MenuGameOver menuGameOver;
+    public static MenuMain menuMain;
     
-    boolean teste = true;
     // Constructor
     public Game() throws IOException{
         kh = new KeyHandler();
@@ -92,6 +93,7 @@ public class Game extends Canvas implements Runnable {
         stream = ClassLoader.getSystemClassLoader().getResourceAsStream("font/prstart.ttf");
         ui = new UI();
         menuGameOver = new MenuGameOver();
+        menuMain = new MenuMain();
         // initializing objects end //
     }
     
@@ -134,6 +136,10 @@ public class Game extends Canvas implements Runnable {
             break;
             case GAMEOVER:
                 menuGameOver.update();
+            break;    
+            case MENU:
+                menuMain.update();
+            break;    
         }
     }
     
@@ -185,7 +191,11 @@ public class Game extends Canvas implements Runnable {
             case GAMEOVER:
                 menuGameOver.render(g);
             break;
+            case MENU:
+                menuMain.render(g);
+            break;    
         }
+        
         bs.show();
     }
     
