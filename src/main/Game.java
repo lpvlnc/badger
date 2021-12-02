@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import menu.MenuGameOver;
 import menu.MenuMain;
+import menu.MenuPause;
 import world.World;
 
 /**
@@ -72,8 +73,10 @@ public class Game extends Canvas implements Runnable {
     public int maxLevel = 2;
     
     // Menu
-    public static MenuGameOver menuGameOver;
     public static MenuMain menuMain;
+    public static MenuPause menuPause;
+    public static MenuGameOver menuGameOver;
+    
     
     // Constructor
     public Game() throws IOException{
@@ -92,8 +95,11 @@ public class Game extends Canvas implements Runnable {
         world = new World("/map/level" + level + ".png");
         stream = ClassLoader.getSystemClassLoader().getResourceAsStream("font/prstart.ttf");
         ui = new UI();
-        menuGameOver = new MenuGameOver();
+        
         menuMain = new MenuMain();
+        menuPause = new MenuPause();
+        menuGameOver = new MenuGameOver();
+        
         // initializing objects end //
     }
     
@@ -131,15 +137,18 @@ public class Game extends Canvas implements Runnable {
     
     public void update(){
         switch(state){
-            case NORMAL:
-                updateGame();
-            break;
-            case GAMEOVER:
-                menuGameOver.update();
-            break;    
             case MENU:
                 menuMain.update();
-            break;    
+                break; 
+            case PAUSE:
+                menuPause.update();
+                break; 
+            case NORMAL:
+                updateGame();
+                break;
+            case GAMEOVER:
+                menuGameOver.update();
+                break;
         }
     }
     
@@ -188,12 +197,15 @@ public class Game extends Canvas implements Runnable {
         }
         ui.render(g);
         switch(state){
+            case MENU:
+                menuMain.render(g);
+            break; 
+            case PAUSE:
+                menuPause.render(g);
+            break; 
             case GAMEOVER:
                 menuGameOver.render(g);
             break;
-            case MENU:
-                menuMain.render(g);
-            break;    
         }
         
         bs.show();

@@ -71,7 +71,7 @@ public class AStar {
                 int xi = (i%3) - 1;
                 int yi = (i/3) - 1;
                 int pos = (x+xi + ((y+yi) * World.mapWidth));
-                if(pos >= World.mapWidth * World.mapHeight || pos < 0)
+                if(!validPosition(pos))
                     continue;
                 Tile tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
                 
@@ -187,5 +187,9 @@ public class AStar {
         double dy = tile.y - goal.y;
         
         return Math.sqrt(dx*dx + dy*dy);
+    }
+    
+    private static boolean validPosition(int pos){
+        return pos <= World.mapWidth * World.mapHeight || pos >= 0;
     }
 }

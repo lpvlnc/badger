@@ -62,7 +62,10 @@ public class KeyHandler implements KeyListener {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER)
                     player.action = true;
                 
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    Game.state = State.PAUSE;
                 break;
+                
             case GAMEOVER:
                 if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)
                     Game.menuGameOver.up = true;
@@ -85,8 +88,19 @@ public class KeyHandler implements KeyListener {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_SPACE) {
                     Game.menuMain.select = true;
                 }
-                break;    
+                break;
                 
+            case PAUSE:
+                if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)
+                    Game.menuPause.up = true;
+                
+                if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN)
+                    Game.menuPause.down = true;
+                
+                if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    Game.menuPause.select = true;
+                }
+                break;
         }
     }
 

@@ -19,11 +19,11 @@ import main.Game.State;
  *
  * @author Leonardo
  */
-public class Menupause extends Menu {
+public class MenuPause extends Menu {
     
-    public Menupause(){
+    public MenuPause(){
         options = new ArrayList<>();
-    	options.add("Pause");
+    	options.add("Continue");
     	options.add("Main menu");
     	options.add("Exit");
     	maxOption = options.size() - 1;
@@ -52,12 +52,8 @@ public class Menupause extends Menu {
         
         if(select) {
             select = false;
-            if(options.get(currentOption).contentEquals("Pause")) {
-                try {
-                    Game.restart();
-                } catch (IOException ex) {
-                    Logger.getLogger(MenuGameOver.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if(options.get(currentOption).contentEquals("Continue")) {
+                Game.state = State.NORMAL;
             }
             
             if(options.get(currentOption).contentEquals("Main menu")) {
