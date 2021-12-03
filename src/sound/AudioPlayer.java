@@ -20,6 +20,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author Leonardo
  */
 public class AudioPlayer {
+    public static Thread music = new Thread();
+    public static boolean isRunning = false;
     public static synchronized void play(AudioClip sfx, double volume){
  
         Thread thread = new Thread(){
@@ -49,7 +51,7 @@ public class AudioPlayer {
     }
     
     public static synchronized void loop(AudioClip sfx, double volume){
-        Thread thread = new Thread(){
+        music = new Thread(){
             @Override
             public void run(){
                 AudioInputStream stream;
@@ -59,7 +61,6 @@ public class AudioPlayer {
                     Clip clip;
                     
                     try {
-                        
                         clip = AudioSystem.getClip();
                         clip.open(stream);
                         setVolume(clip, volume);
@@ -72,7 +73,12 @@ public class AudioPlayer {
                     Logger.getLogger(AudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }; thread.start();
+        }; 
+        music.start();
+    }
+    
+    public static synchronized void stop() throws InterruptedException{
+        music.stop();
     }
     
     private static void setVolume(Clip clip, double volume){

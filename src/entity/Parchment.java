@@ -7,6 +7,8 @@ package entity;
 
 import java.awt.image.BufferedImage;
 import main.Game;
+import sound.AudioPlayer;
+import sound.Sound;
 import world.World;
 
 /**
@@ -26,6 +28,7 @@ public class Parchment extends Entity {
         
         if(isColliding(this, Game.player))
         {
+            AudioPlayer.play(Sound.collect_item, 1);
             Game.player.parchmentCounter++;
             Entity.addParticle(this);
             Game.entities.remove(this);

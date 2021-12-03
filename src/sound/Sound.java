@@ -11,6 +11,13 @@ package sound;
  */
 public class Sound {
     // musics
-    
+    public static AudioClip menu_music = new AudioClip("./res/music/menu_music.wav");
     // effects
+    public static AudioClip menu_switch = new AudioClip("./res/sound/menu_switch.wav");
+    public static AudioClip menu_select = new AudioClip("./res/sound/menu_select.wav");
+    public static AudioClip collect_item = new AudioClip("./res/sound/collect_item.wav");
+    public static AudioClip use_steroid = new AudioClip("./res/sound/use_steroid.wav");
+    public static AudioClip weak = new AudioClip("./res/sound/weak.wav");
+    public static AudioClip game_over = new AudioClip("./res/sound/game_over.wav");
+    public static AudioClip player_hurt = new AudioClip("./res/sound/player_hurt.wav");
 }

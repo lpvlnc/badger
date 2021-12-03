@@ -7,6 +7,8 @@ package entity;
 
 import java.awt.image.BufferedImage;
 import main.Game;
+import sound.AudioPlayer;
+import sound.Sound;
 import world.World;
 
 /**
@@ -25,6 +27,7 @@ public class Steroid extends Entity{
     @Override
     public void update() {
         if (isColliding(this, Game.player)) {
+            AudioPlayer.play(Sound.collect_item, 1);
             Game.player.steroidCounter++;
             Entity.addParticle(this);
             Game.entities.remove(this);

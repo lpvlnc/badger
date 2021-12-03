@@ -9,6 +9,8 @@ import entity.Entity;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import main.Game;
+import sound.AudioPlayer;
+import sound.Sound;
 import world.Camera;
 import world.World;
 
@@ -47,6 +49,7 @@ public class Life extends Entity {
         
         if(isColliding(this, Game.player) && Game.player.life < 5)
         {
+            AudioPlayer.play(Sound.collect_item, 1);
             Game.player.life++;
             Entity.addParticle(this);
             Game.entities.remove(this);

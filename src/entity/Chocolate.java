@@ -7,6 +7,9 @@ package entity;
 
 import java.awt.image.BufferedImage;
 import main.Game;
+import sound.AudioPlayer;
+import sound.Sound;
+import sound.Volume;
 import world.World;
 
 /**
@@ -28,6 +31,7 @@ public class Chocolate extends Entity {
         if(isColliding(this, Game.player))
         {
             if(Game.player.chocolateCounter < 5) {
+                AudioPlayer.play(Sound.collect_item, Volume.NORMAL);
                 Game.player.chocolateCounter++;
                 Game.player.score += chocolateScore;
                 Game.player.energy = 100;

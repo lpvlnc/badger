@@ -8,6 +8,7 @@ package menu;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import main.Game;
+import sound.Volume;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Menu {
     public int widthPos = ((Game.WIDTH * Game.SCALE) / 2) - 112;
     public int heightPos = ((Game.HEIGHT * Game.SCALE) / 2);
     public int heightOffSet = 60;
+    public double menuVolume = Volume.NORMAL;
     
     public void update() {
         

@@ -22,6 +22,9 @@ import java.util.Collections;
 import menu.MenuGameOver;
 import menu.MenuMain;
 import menu.MenuPause;
+import sound.AudioPlayer;
+import sound.Sound;
+import sound.Volume;
 import world.World;
 
 /**
@@ -77,7 +80,6 @@ public class Game extends Canvas implements Runnable {
     public static MenuPause menuPause;
     public static MenuGameOver menuGameOver;
     
-    
     // Constructor
     public Game() throws IOException{
         kh = new KeyHandler();
@@ -99,7 +101,7 @@ public class Game extends Canvas implements Runnable {
         menuMain = new MenuMain();
         menuPause = new MenuPause();
         menuGameOver = new MenuGameOver();
-        
+        AudioPlayer.loop(Sound.menu_music, Volume.NORMAL);
         // initializing objects end //
     }
     
@@ -133,6 +135,27 @@ public class Game extends Canvas implements Runnable {
         level++;
         player.direction = Entity.Direction.UP;
         world = new World("/map/level"+level+".png");
+    }
+    public static void changeGameState(State state) throws InterruptedException{
+        switch(state){
+            case MENU:
+                AudioPlayer.stop();
+                AudioPlayer.loop(Sound.menu_music, Volume.NORMAL);
+                Game.state = State.MENU;
+                break; 
+            case PAUSE:
+                AudioPlayer.stop();
+                Game.state = State.NORMAL;
+                break; 
+            case NORMAL:
+                AudioPlayer.stop();
+                Game.state = State.PAUSE;
+                break;
+            case GAMEOVER:
+                AudioPlayer.stop();
+                Game.state = State.GAMEOVER;
+                break;
+        }
     }
     
     public void update(){

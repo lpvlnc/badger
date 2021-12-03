@@ -12,6 +12,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import main.Game;
 import main.Game.State;
+import sound.AudioPlayer;
+import sound.Sound;
+import sound.Volume;
 import world.Camera;
 import world.World;
 
@@ -289,6 +292,7 @@ public class Player extends Entity {
     public void weak() {
         
         if(poisonedParticle == null) {
+            AudioPlayer.play(Sound.weak, Volume.NORMAL);
             poisonedParticle = new PoisonedParticle(this.getX(), this.getY(), World.TILE_SIZE, World.TILE_SIZE, null);
             Game.entities.add(poisonedParticle);
         }
@@ -314,6 +318,7 @@ public class Player extends Entity {
     
     public void useSteroid(){
         if(steroidCounter > 0 && !onSteroid && !weak){
+            AudioPlayer.play(Sound.use_steroid, Volume.NORMAL);
             steroidCounter--;
             startRunning();
             onSteroid = true;
@@ -348,8 +353,10 @@ public class Player extends Entity {
     
     public void takeDamage(int damage){
         if(canBeDamaged){
+            AudioPlayer.play(Sound.player_hurt, Volume.NORMAL);
             if(weak) {
                 life = 0;
+                AudioPlayer.play(Sound.game_over, Volume.NORMAL);
                 Game.state = State.GAMEOVER;
             } else {
                 life -= damage;
@@ -371,6 +378,7 @@ public class Player extends Entity {
         if(life <= 0){
             life = 0;
             Game.state = State.GAMEOVER;
+            AudioPlayer.play(Sound.game_over, Volume.NORMAL);
         }
     }
     

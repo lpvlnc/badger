@@ -11,6 +11,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import main.Game;
 import main.Game.State;
+import sound.AudioPlayer;
+import sound.Sound;
 
 /**
  *
@@ -30,6 +32,7 @@ public class MenuPause extends Menu {
         if(up){
             up = false;
             currentOption--;
+            AudioPlayer.play(Sound.menu_switch, menuVolume);
             if(currentOption < 0){
                 currentOption = maxOption;
             }
@@ -38,6 +41,7 @@ public class MenuPause extends Menu {
         if(down){
             down = false;
             currentOption++;
+            AudioPlayer.play(Sound.menu_switch, menuVolume);
             if(currentOption > maxOption){
                 currentOption = 0;
             }
@@ -45,6 +49,7 @@ public class MenuPause extends Menu {
         
         if(select) {
             select = false;
+            AudioPlayer.play(Sound.menu_select, menuVolume);
             if(options.get(currentOption).contentEquals("Continue")) {
                 Game.state = State.NORMAL;
             }

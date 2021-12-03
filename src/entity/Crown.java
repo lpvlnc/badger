@@ -8,6 +8,9 @@ package entity;
 import static entity.Entity.isColliding;
 import java.awt.image.BufferedImage;
 import main.Game;
+import sound.AudioPlayer;
+import sound.Sound;
+import sound.Volume;
 import world.World;
 
 /**
@@ -26,6 +29,7 @@ public class Crown extends Entity {
     @Override
     public void update() {
         if (isColliding(this, Game.player)) {
+            AudioPlayer.play(Sound.collect_item, Volume.NORMAL);
             Game.player.hasCrown = true;
             Game.player.score+=250;
             Entity.addParticle(this);
