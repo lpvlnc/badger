@@ -12,6 +12,9 @@ package sound;
 public class Sound {
     // musics
     public static AudioClip menu_music = new AudioClip("./res/music/menu_music.wav");
+    public static AudioClip level1_music = new AudioClip("./res/music/level1_music.wav");
+    public static AudioClip level2_music = new AudioClip("./res/music/level2_music.wav");
+    
     // effects
     public static AudioClip menu_switch = new AudioClip("./res/sound/menu_switch.wav");
     public static AudioClip menu_select = new AudioClip("./res/sound/menu_select.wav");

@@ -8,8 +8,9 @@ package entity;
 import entity.particle.Particle;
 import entity.particle.PoisonedParticle;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.Game;
 import main.Game.State;
 import sound.AudioPlayer;
@@ -351,13 +352,17 @@ public class Player extends Entity {
         }
     }
     
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
         if(canBeDamaged){
             AudioPlayer.play(Sound.player_hurt, Volume.NORMAL);
             if(weak) {
                 life = 0;
                 AudioPlayer.play(Sound.game_over, Volume.NORMAL);
-                Game.state = State.GAMEOVER;
+                try {
+                    Game.changeGameState(State.GAMEOVER);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 life -= damage;
                 canBeDamaged = false;
@@ -377,8 +382,12 @@ public class Player extends Entity {
         
         if(life <= 0){
             life = 0;
-            Game.state = State.GAMEOVER;
             AudioPlayer.play(Sound.game_over, Volume.NORMAL);
+            try {
+                Game.changeGameState(State.GAMEOVER);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     

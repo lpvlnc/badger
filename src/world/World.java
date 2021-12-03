@@ -85,6 +85,7 @@ public class World {
                         break;
                     case 0xFF9fff9f: // spawn area
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
+                        tiles[pos].spawnArea = true;
                         break;
                     case 0xFF000000: // floor
                         
@@ -181,14 +182,15 @@ public class World {
         }
     }
     
-    public void spawnParchment(){
+    public static void spawnParchment(){
         int parchment = 0;
         int maxParchment = 10;
         Random rand = new Random();
         while (parchment < maxParchment){
             int x = rand.nextInt(mapWidth);
             int y = rand.nextInt(mapHeight - 1);
-            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+            int pos = x + (y * mapWidth);
+            if(tiles[pos] instanceof TileFloor && !tiles[pos].spawnArea) {
                 if(rand.nextInt(100) < 10) {
                     Game.entities.add(new Parchment(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     parchment++;
@@ -197,14 +199,15 @@ public class World {
         }
     }
     
-    public void spawnChocolate(){
+    public static void spawnChocolate(){
         int chocolate = 0;
         int maxChocolate = 5;
         Random rand = new Random();
         while (chocolate < maxChocolate){
             int x = rand.nextInt(mapWidth);
-            int y = rand.nextInt(mapHeight - 1);
-            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+            int y = rand.nextInt(mapHeight);
+            int pos = x + (y * mapWidth);
+            if(tiles[pos] instanceof TileFloor && !tiles[pos].spawnArea) {
                 if(rand.nextInt(100) < 10) {
                     Game.entities.add(new Chocolate(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     chocolate++;
@@ -213,14 +216,15 @@ public class World {
         }
     }
     
-    public void spawnLife(){
+    public static void spawnLife(){
         int life = 0;
         int maxLife = 3;
         Random rand = new Random();
         while (life < maxLife){
             int x = rand.nextInt(mapWidth);
             int y = rand.nextInt(mapHeight - 1);
-            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+            int pos = x + (y * mapWidth);
+            if(tiles[pos] instanceof TileFloor && !tiles[pos].spawnArea) {
                 if(rand.nextInt(100) < 10) {
                     Game.entities.add(new Life(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     life++;
@@ -229,14 +233,15 @@ public class World {
         }
     }
     
-    public void spawnSteroid(){
+    public static void spawnSteroid(){
         int steroid = 0;
         int maxSteroid = 3;
         Random rand = new Random();
         while (steroid < maxSteroid){
             int x = rand.nextInt(mapWidth);
             int y = rand.nextInt(mapHeight - 1);
-            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+            int pos = x + (y * mapWidth);
+            if(tiles[pos] instanceof TileFloor && !tiles[pos].spawnArea) {
                 if(rand.nextInt(100) < 10) {
                     Game.entities.add(new Steroid(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     steroid++;
@@ -245,13 +250,14 @@ public class World {
         }
     }
     
-    public void spawnCrown(){
+    public static void spawnCrown(){
         Random rand = new Random();
         int crown = 0;
         while (crown < 1){
             int x = rand.nextInt((mapWidth));
             int y = rand.nextInt((mapHeight));
-            if(tiles[x + (y * mapWidth)] instanceof TileFloor) {
+            int pos = x + (y * mapWidth);
+            if(tiles[pos] instanceof TileFloor && !tiles[pos].spawnArea) {
                 if(rand.nextInt(100) < 10) {
                     Game.entities.add(new Crown(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     crown++;

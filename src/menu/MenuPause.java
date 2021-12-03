@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Game;
 import main.Game.State;
+import sound.AudioClip;
 import sound.AudioPlayer;
 import sound.Sound;
 
@@ -53,11 +54,8 @@ public class MenuPause extends Menu {
             select = false;
             AudioPlayer.play(Sound.menu_select, menuVolume);
             if(options.get(currentOption).contentEquals("Continue")) {
-                try {
-                    Game.changeGameState(State.NORMAL);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(MenuPause.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                AudioPlayer.resume();
+                Game.state = State.NORMAL;
             }
             
             if(options.get(currentOption).contentEquals("Main menu")) {

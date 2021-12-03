@@ -24,6 +24,7 @@ public class AudioPlayer implements Runnable {
     public static AudioPlayer audioPlayer = new AudioPlayer();
     public static Clip clip;
     public static AudioClip music;
+    public static long musicTimePosition;
     public static Thread thread;
     public static boolean isRunning = false;
     
@@ -64,6 +65,16 @@ public class AudioPlayer implements Runnable {
     public static synchronized void stop() throws InterruptedException{
         thread.join();
         clip.stop();
+    }
+    
+    public static synchronized void pause(){
+        musicTimePosition = clip.getMicrosecondPosition();
+        clip.stop();
+    }
+    
+    public static synchronized void resume(){
+        clip.setMicrosecondPosition(musicTimePosition);
+        clip.start();
     }
     
     private static void setVolume(Clip clip, double volume){

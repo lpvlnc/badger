@@ -136,10 +136,14 @@ public class Game extends Canvas implements Runnable {
     }
     
     public static void nextLevel() throws IOException{
-        state = State.NORMAL;
         entities.clear();
         level++;
         player.direction = Entity.Direction.UP;
+        try {
+            changeGameState(State.NORMAL);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
         world = new World("/map/level"+level+".png");
     }
     public static void changeGameState(State state) throws InterruptedException{
@@ -150,11 +154,16 @@ public class Game extends Canvas implements Runnable {
                 Game.state = State.MENU;
                 break; 
             case PAUSE:
-                AudioPlayer.stop();
+                AudioPlayer.pause();
                 Game.state = State.PAUSE;
                 break; 
             case NORMAL:
                 AudioPlayer.stop();
+                if(Game.level == 1){
+                    AudioPlayer.playMusic(Sound.level1_music);
+                } else {
+                    AudioPlayer.playMusic(Sound.level2_music);
+                }
                 Game.state = State.NORMAL;
                 break;
             case GAMEOVER:

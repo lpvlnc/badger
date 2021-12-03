@@ -62,7 +62,11 @@ public class MenuGameOver extends Menu {
             }
             
             if(options.get(currentOption).contentEquals("Main menu")) {
-                Game.state = State.MENU;
+                try {
+                    Game.changeGameState(State.MENU);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MenuGameOver.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             if(options.get(currentOption).contentEquals("Exit")) {

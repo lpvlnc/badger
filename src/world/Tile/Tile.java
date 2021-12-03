@@ -26,6 +26,7 @@ public class Tile {
     private int height;
     
     public boolean solid = true;
+    public boolean spawnArea = false;
     public int depth = 0;
     
     // Outside Floor

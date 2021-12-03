@@ -62,8 +62,13 @@ public class KeyHandler implements KeyListener {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER)
                     player.action = true;
                 
-                if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-                    Game.state = State.PAUSE;
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    try {
+                        Game.changeGameState(State.PAUSE);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(KeyHandler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 break;
                 
             case GAMEOVER:
