@@ -309,6 +309,7 @@ public class Player extends Entity {
         weakTime++;
         if(weakTime == weakMaxTime) {
             Game.entities.remove(poisonedParticle);
+            poisonedParticle = null;
             weak = false;
             weakTime = 0;
             speed = defaultSpeed;

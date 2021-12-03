@@ -28,6 +28,7 @@ import sound.AudioPlayer;
 import sound.Sound;
 import sound.Volume;
 import world.World;
+import static world.World.TILE_SIZE;
 
 /**
  *
@@ -63,6 +64,10 @@ public class Game extends Canvas implements Runnable {
     
     // Entities
     public static Player player = null;
+    public static int level1Score;
+    public static int level1Lives;
+    public static int level1Energy;
+    public static int level1Steroid;
     
     // Lists
     public static ArrayList<Entity> entities;
@@ -130,12 +135,25 @@ public class Game extends Canvas implements Runnable {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
         entities.clear();
-        player = null;
+        if(level == 1){
+            player = null;
+        } else {
+          Game.player = new Player(0, 0, TILE_SIZE, TILE_SIZE, null);
+          player.life = level1Lives;
+          player.energy = level1Energy;
+          player.score = level1Score;
+          player.steroidCounter = level1Steroid;
+          player.hasCrown = true;
+        }
         world = new World("/map/level"+level+".png");
         
     }
     
     public static void nextLevel() throws IOException{
+        level1Lives = player.life;
+        level1Energy = player.energy;
+        level1Score = player.score;
+        level1Steroid = player.steroidCounter;
         entities.clear();
         level++;
         player.direction = Entity.Direction.UP;
