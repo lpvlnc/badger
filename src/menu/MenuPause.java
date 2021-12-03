@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.Game;
 import main.Game.State;
 import sound.AudioPlayer;
@@ -51,11 +53,19 @@ public class MenuPause extends Menu {
             select = false;
             AudioPlayer.play(Sound.menu_select, menuVolume);
             if(options.get(currentOption).contentEquals("Continue")) {
-                Game.state = State.NORMAL;
+                try {
+                    Game.changeGameState(State.NORMAL);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MenuPause.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
             if(options.get(currentOption).contentEquals("Main menu")) {
-                Game.state = State.MENU;
+                try {
+                    Game.changeGameState(State.MENU);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MenuPause.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             if(options.get(currentOption).contentEquals("Exit")) {

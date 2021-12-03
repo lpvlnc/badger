@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import menu.MenuGameOver;
 import menu.MenuMain;
 import menu.MenuPause;
@@ -79,6 +81,7 @@ public class Game extends Canvas implements Runnable {
     public static MenuMain menuMain;
     public static MenuPause menuPause;
     public static MenuGameOver menuGameOver;
+    AudioPlayer musicPlayer = new AudioPlayer();
     
     // Constructor
     public Game() throws IOException{
@@ -101,8 +104,7 @@ public class Game extends Canvas implements Runnable {
         menuMain = new MenuMain();
         menuPause = new MenuPause();
         menuGameOver = new MenuGameOver();
-        AudioPlayer.loop(Sound.menu_music, Volume.NORMAL);
-        // initializing objects end //
+        AudioPlayer.playMusic(Sound.menu_music);
     }
     
     public static void main(String[] args) throws IOException {
@@ -122,7 +124,11 @@ public class Game extends Canvas implements Runnable {
     }
     
     public static void restart() throws IOException{
-        state = State.NORMAL;
+        try {
+            changeGameState(State.NORMAL);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
         entities.clear();
         player = null;
         world = new World("/map/level"+level+".png");
@@ -140,16 +146,16 @@ public class Game extends Canvas implements Runnable {
         switch(state){
             case MENU:
                 AudioPlayer.stop();
-                AudioPlayer.loop(Sound.menu_music, Volume.NORMAL);
+                AudioPlayer.playMusic(Sound.menu_music);
                 Game.state = State.MENU;
                 break; 
             case PAUSE:
                 AudioPlayer.stop();
-                Game.state = State.NORMAL;
+                Game.state = State.PAUSE;
                 break; 
             case NORMAL:
                 AudioPlayer.stop();
-                Game.state = State.PAUSE;
+                Game.state = State.NORMAL;
                 break;
             case GAMEOVER:
                 AudioPlayer.stop();

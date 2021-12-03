@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Game;
+import main.Game.State;
 import sound.AudioPlayer;
 import sound.Sound;
 
@@ -55,7 +56,7 @@ public class MenuMain extends Menu {
                 try {
                     Game.restart();
                 } catch (IOException ex) {
-                    Logger.getLogger(MenuGameOver.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 

@@ -19,9 +19,14 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author Leonardo
  */
-public class AudioPlayer {
-    public static Thread music = new Thread();
+public class AudioPlayer implements Runnable {
+    
+    public static AudioPlayer audioPlayer = new AudioPlayer();
+    public static Clip clip;
+    public static AudioClip music;
+    public static Thread thread;
     public static boolean isRunning = false;
+    
     public static synchronized void play(AudioClip sfx, double volume){
  
         Thread thread = new Thread(){
@@ -50,40 +55,40 @@ public class AudioPlayer {
         }; thread.start();
     }
     
-    public static synchronized void loop(AudioClip sfx, double volume){
-        music = new Thread(){
-            @Override
-            public void run(){
-                AudioInputStream stream;
-                try {
-                    
-                    stream = sfx.getAudioStream();
-                    Clip clip;
-                    
-                    try {
-                        clip = AudioSystem.getClip();
-                        clip.open(stream);
-                        setVolume(clip, volume);
-                        clip.loop(Clip.LOOP_CONTINUOUSLY);
-                        
-                    } catch (LineUnavailableException ex) {
-                        Logger.getLogger(AudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } catch (UnsupportedAudioFileException | IOException ex) {
-                    Logger.getLogger(AudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }; 
-        music.start();
+    public static synchronized void playMusic(AudioClip audioClip){
+        music = audioClip;
+        thread = new Thread(audioPlayer);
+        thread.start();
     }
     
     public static synchronized void stop() throws InterruptedException{
-        music.stop();
+        thread.join();
+        clip.stop();
     }
     
     private static void setVolume(Clip clip, double volume){
         FloatControl gain = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
         float dB = (float)(Math.log(volume) / Math.log(10) * 20);
         gain.setValue(dB);
+    }
+
+    @Override
+    public void run() {
+        AudioInputStream stream;
+        try {
+            stream = music.getAudioStream();
+
+            try {
+                clip = AudioSystem.getClip();
+                clip.open(stream);
+                setVolume(clip, 1);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(AudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (UnsupportedAudioFileException | IOException ex) {
+            Logger.getLogger(AudioPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
