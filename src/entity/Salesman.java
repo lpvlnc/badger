@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import astar.AStar;
@@ -15,12 +10,8 @@ import main.Game;
 import world.Camera;
 import world.World;
 
-/**
- *
- * @author Leonardo
- */
 public class Salesman extends Entity {
-    public BufferedImage salesMan;
+    
     public BufferedImage[] salesManUp;
     public BufferedImage[] salesManLeft;
     public BufferedImage[] salesManDown;
@@ -29,6 +20,11 @@ public class Salesman extends Entity {
     public boolean down;
     public boolean left;
     public boolean right;
+    
+    public int frames = 0;
+    public int maxFrames = 15;
+    public int index = 0;
+    public int maxIndex = 4;
     
     public int visionCenterX;
     public int visionCenterY;
@@ -39,30 +35,33 @@ public class Salesman extends Entity {
     public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-1);
-        setMask(8, 3, 16, 29);
+        //setMask(8, 3, 16, 29);
         visionCenterX = xMask + (wMask / 2);
         visionCenterY = yMask + (hMask / 2);
         spawnPos = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
         speed = 1;
-        salesMan = Game.spritesheet.getSprite(0, 384, World.TILE_SIZE, World.TILE_SIZE);
+        
+        //salesMan = Game.spritesheet.getSprite(0, 417, World.TILE_SIZE, World.TILE_SIZE);
+        
+        //pronta
         salesManUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManUp[0] = Game.spritesheet.getSprite(32, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManUp[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 417, 32, 32);
         }
-        
+        //pronta
         salesManLeft = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManLeft[0] = Game.spritesheet.getSprite(96, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManLeft[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 480, 32, 32);
         }
-        
+        //pronta
         salesManDown = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManDown[0] = Game.spritesheet.getSprite(0, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManDown[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 385, 32, 32);
         }
-        
+        //pronta
         salesManRight = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
-           salesManRight[0] = Game.spritesheet.getSprite(64, 384 + (i * World.TILE_SIZE), World.TILE_SIZE, World.TILE_SIZE);
+           salesManRight[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 449, 32, 32);
         }
     }
     
@@ -102,6 +101,22 @@ public class Salesman extends Entity {
             path = AStar.findPath(Game.world, start, end);
         }
         
+        //implementar true das posições que está manual
+        //up=true;
+        down=true;
+        //left=true;
+        //right=true;
+        
+        frames++;
+        if(frames >= maxFrames){
+            frames = 0;
+            index++;
+            if(index == maxIndex)
+            {
+                index = 0;
+            }
+        }
+
         if(random.nextInt(100) < 95)
             followPath(path);
         
@@ -112,8 +127,34 @@ public class Salesman extends Entity {
     
     @Override
     public void render(Graphics g) {
-        g.drawImage(salesMan, getX() - Camera.x, getY() - Camera.y, null);
+        
         g.setColor(new Color(100, 100, 200, 200));
+        
+        //pronta
+        if(right) {
+        setMask(8, 1, 16, 29);
+        g.drawImage(salesManRight[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
+        
+        //pronta
+         if(left) {
+        setMask(8, 3, 16, 29);
+        g.drawImage(salesManLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
+    
+        //pronta
+        if(up) {
+        setMask(7, 0, 16, 30);
+        g.drawImage(salesManUp[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
+        
+        //pronta
+        if(down) {
+        setMask(7, 0, 16, 30);
+        g.drawImage(salesManDown[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
+       
         //g.fillOval(getX() + visionCenterX - visionRadius - Camera.x, getY() + visionCenterY - visionRadius - Camera.y, visionRadius * 2, visionRadius * 2);
     }
 }
+
