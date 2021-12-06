@@ -33,12 +33,12 @@ public class Door extends Entity {
     
     public void isCollidingWithPlayer(){
         Rectangle playerRect = new Rectangle(Game.player.getX() + Game.player.xMask, Game.player.getY() + Game.player.yMask, Game.player.wMask, Game.player.hMask);
-        setMask(0, 0, 32, 128);
+        setMask(0, 0, 32, 127);
         Rectangle doorRect = new Rectangle(getX() + xMask, getY() + yMask, wMask, hMask);
         if(playerRect.intersects(doorRect)) {
             Game.player.x+=Game.player.speed;
         }
-        setMask(64, 0, 32, 128);
+        setMask(63, 0, 32, 128);
         doorRect = new Rectangle(getX() + xMask, getY() + yMask, wMask, hMask);
         if(playerRect.intersects(doorRect)) {
             Game.player.x-=Game.player.speed;
@@ -51,7 +51,7 @@ public class Door extends Entity {
     }
     
     public void playerIsOnEntrance(){
-        setMask(33, 97, 30, 30);
+        setMask(0, 98, 96, 30);
         if(closed){
             if(isColliding(this, Game.player))
                 Game.player.y += Game.player.speed;

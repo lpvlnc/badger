@@ -88,7 +88,6 @@ public class World {
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         tiles[pos].spawnArea = true;
                         break;
-                    
                     case 0xFF003800:
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.PYRAMID_DARK_FLOOR);
                         tiles[pos].spawnArea = true;

@@ -24,7 +24,7 @@ public class Salesman extends Entity {
     
     public int visionCenterX;
     public int visionCenterY;
-    public int visionRadius = 300;
+    public int visionRadius = 200;
     Random random = new Random();
     Vector2i spawnPos;
 
@@ -32,7 +32,6 @@ public class Salesman extends Entity {
         super(x, y, width, height, sprite);
         setDepth(-1);
         direction = Direction.DOWN;
-        //setMask(8, 3, 16, 29);
         visionCenterX = xMask + (wMask / 2);
         visionCenterY = yMask + (hMask / 2);
         spawnPos = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
@@ -159,7 +158,6 @@ public class Salesman extends Entity {
             }
         }
         
-       
         //g.fillOval(getX() + visionCenterX - visionRadius - Camera.x, getY() + visionCenterY - visionRadius - Camera.y, visionRadius * 2, visionRadius * 2);
     }
 }

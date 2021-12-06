@@ -8,10 +8,12 @@ package menu;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import main.Game;
 import main.Game.State;
 import sound.AudioPlayer;
@@ -23,11 +25,18 @@ import sound.Sound;
  */
 public class MenuMain extends Menu {
     
+    public BufferedImage logo;
+    
     public MenuMain(){
         options = new ArrayList<>();
     	options.add("Start game");
     	options.add("Exit");
     	maxOption = options.size() - 1;
+        try {
+            logo = ImageIO.read(getClass().getResource("/img/logo.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void update(){
@@ -72,6 +81,7 @@ public class MenuMain extends Menu {
         g2.setColor(new Color(0, 0, 0, 255));
         g2.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
         g2.setColor(new Color(250, 0, 250));
+        g.drawImage(logo, -425, 60, 300, 100, null);
         Game.ui.drawTextCenter("MAIN MENU", heightPos - 90, new Color(250, 0, 0));
         for(int i = 0; i < options.size(); i++) {
             if(i == currentOption)

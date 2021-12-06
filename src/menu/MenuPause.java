@@ -74,7 +74,6 @@ public class MenuPause extends Menu {
                 System.exit(0);
             }
             
-            select = false;
             AudioPlayer.play(Sound.menu_select, menuVolume);
             if(options.get(currentOption).contentEquals("Restart")) {
                 try {
@@ -85,7 +84,6 @@ public class MenuPause extends Menu {
                 
             }
             
-            select = false;
             AudioPlayer.play(Sound.menu_select, menuVolume);
             if(options.get(currentOption).contentEquals("New game")) {
                 try {
@@ -96,15 +94,6 @@ public class MenuPause extends Menu {
                 }
                 
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }
     }
     
