@@ -93,6 +93,7 @@ public class UI {
         
         detectorBack = Game.spritesheet.getSprite(512, 128, World.TILE_SIZE, World.TILE_SIZE);
         detector = Game.spritesheet.getSprite(512, 96, World.TILE_SIZE, World.TILE_SIZE);
+        
     }
     
     public void render(Graphics graphics){
@@ -318,6 +319,53 @@ public class UI {
             g2.setStroke(originalStroke);
             g2.setRenderingHints(originalHints);
             g = (Graphics)g2;
+            
         }
     }
+        
+    public void drawTextCenterTips(String text, int y, Color color) {
+
+        BasicStroke outlineStroke = new BasicStroke(2.0f);
+
+        if (g instanceof Graphics2D) {
+            Graphics2D g2 = (Graphics2D) g;
+            FontMetrics metrics = g.getFontMetrics(g2.getFont());
+            double xx = ((Game.WIDTH * Game.SCALE ) - metrics.stringWidth(text)) / 1.75;
+            AffineTransform tform = AffineTransform.getTranslateInstance(xx, y);
+            tform.scale(0.8, 0.8);
+            g2.setTransform(tform);
+            
+            // remember original settings
+            Color originalColor = g2.getColor();
+            Stroke originalStroke = g2.getStroke();
+            RenderingHints originalHints = g2.getRenderingHints();
+            
+            // create a glyph vector from your text
+            GlyphVector glyphVector = g2.getFont().createGlyphVector(g2.getFontRenderContext(), text);
+            
+            // get the shape object
+            Shape textShape = glyphVector.getOutline();
+            
+            // activate anti aliasing for text rendering (if you want it to look nice)
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setColor(this.fontOutlineColor);
+            g2.setStroke(outlineStroke);
+            g2.draw(textShape); // draw outline
+            
+            if(color == null)
+                g2.setColor(this.fontFillColor);
+            else
+                g2.setColor(color);
+            g2.fill(textShape); // fill the shape
+
+            // reset to original settings after painting
+            g2.setColor(originalColor);
+            g2.setStroke(originalStroke);
+            g2.setRenderingHints(originalHints);
+            g = (Graphics)g2;
+        }
+        
+    }
 }
+

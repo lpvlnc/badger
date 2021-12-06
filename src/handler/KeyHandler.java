@@ -109,6 +109,18 @@ public class KeyHandler implements KeyListener {
                     Game.menuPause.select = true;
                 }
                 break;
+                
+              case END:
+                if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)
+                    Game.menuEnd.up = true;
+                
+                if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN)
+                    Game.menuEnd.down = true;
+                
+                if(e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    Game.menuEnd.select = true;
+                }
+                break;       
         }
     }
 

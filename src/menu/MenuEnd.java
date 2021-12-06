@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package menu;
 
 import java.awt.Color;
@@ -21,11 +17,12 @@ import sound.Sound;
  *
  * @author Leonardo
  */
-public class MenuMain extends Menu {
+public class MenuEnd extends Menu {
     
-    public MenuMain(){
+    public MenuEnd(){
         options = new ArrayList<>();
-    	options.add("Start game");
+    	options.add("Restart");
+    	options.add("Main menu");
     	options.add("Exit");
     	maxOption = options.size() - 1;
     }
@@ -52,11 +49,21 @@ public class MenuMain extends Menu {
         if(select) {
             select = false;
             AudioPlayer.play(Sound.menu_select, menuVolume);
-            if(options.get(currentOption).contentEquals("Start game")) {
+            if(options.get(currentOption).contentEquals("Restart")) {
                 try {
+                    Game.level=1;
                     Game.restart();
                 } catch (IOException ex) {
-                    Logger.getLogger(MenuMain.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MenuGameOver.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if(options.get(currentOption).contentEquals("Main menu")) {
+                try {
+                    Game.level=1; 
+                    Game.changeGameState(State.MENU);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MenuGameOver.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -69,13 +76,13 @@ public class MenuMain extends Menu {
     @Override
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(new Color(0, 0, 0, 255));
+        g2.setColor(new Color(0, 0, 0, 150));
         g2.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
         g2.setColor(new Color(250, 0, 250));
-        Game.ui.drawTextCenter("MAIN MENU", heightPos - 90, new Color(250, 0, 0));
+        Game.ui.drawTextCenter("END GAME", heightPos - 90, new Color(250, 0, 0));
         for(int i = 0; i < options.size(); i++) {
             if(i == currentOption)
-                Game.ui.drawTextCenter(options.get(i),heightPos - heightOffSet + (i * 30), null);
+                Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), null);
                 //Game.ui.drawText(options.get(i), widthPos + 35, heightPos - heightOffSet + (i * 30), null);
             else
                 Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));

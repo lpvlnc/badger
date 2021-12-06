@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import menu.MenuGameOver;
 import menu.MenuMain;
 import menu.MenuPause;
+import menu.MenuEnd;
 import sound.AudioPlayer;
 import sound.Sound;
 import sound.Volume;
@@ -87,6 +88,7 @@ public class Game extends Canvas implements Runnable {
     public static MenuMain menuMain;
     public static MenuPause menuPause;
     public static MenuGameOver menuGameOver;
+    public static MenuEnd menuEnd;
     AudioPlayer musicPlayer = new AudioPlayer();
     
     // Constructor
@@ -110,6 +112,7 @@ public class Game extends Canvas implements Runnable {
         menuMain = new MenuMain();
         menuPause = new MenuPause();
         menuGameOver = new MenuGameOver();
+        menuEnd = new MenuEnd();
         AudioPlayer.playMusic(Sound.menu_music);
     }
     
@@ -212,6 +215,9 @@ public class Game extends Canvas implements Runnable {
             case GAMEOVER:
                 menuGameOver.update();
                 break;
+            case END:
+                menuEnd.update();
+                break;    
         }
     }
     
@@ -269,6 +275,11 @@ public class Game extends Canvas implements Runnable {
             case GAMEOVER:
                 menuGameOver.render(g);
             break;
+             case END:
+                menuEnd.render(g);
+            break;
+            
+            
         }
         
         bs.show();
