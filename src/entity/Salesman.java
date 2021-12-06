@@ -16,10 +16,6 @@ public class Salesman extends Entity {
     public BufferedImage[] salesManLeft;
     public BufferedImage[] salesManDown;
     public BufferedImage[] salesManRight;
-    public boolean up;
-    public boolean down;
-    public boolean left;
-    public boolean right;
     
     public int frames = 0;
     public int maxFrames = 15;
@@ -35,6 +31,7 @@ public class Salesman extends Entity {
     public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-1);
+        direction = Direction.DOWN;
         //setMask(8, 3, 16, 29);
         visionCenterX = xMask + (wMask / 2);
         visionCenterY = yMask + (hMask / 2);
@@ -101,12 +98,6 @@ public class Salesman extends Entity {
             path = AStar.findPath(Game.world, start, end);
         }
         
-        //implementar true das posições que está manual
-        //up=true;
-        down=true;
-        //left=true;
-        //right=true;
-        
         frames++;
         if(frames >= maxFrames){
             frames = 0;
@@ -131,27 +122,27 @@ public class Salesman extends Entity {
         g.setColor(new Color(100, 100, 200, 200));
         
         //pronta
-        if(right) {
-        setMask(8, 1, 16, 29);
-        g.drawImage(salesManRight[index], getX() - Camera.x, getY() - Camera.y, null);
+        if(direction == Direction.RIGHT) {
+            setMask(8, 1, 16, 29);
+            g.drawImage(salesManRight[index], getX() - Camera.x, getY() - Camera.y, null);
         }
         
         //pronta
-         if(left) {
-        setMask(8, 3, 16, 29);
-        g.drawImage(salesManLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+        if(direction == Direction.LEFT) {
+            setMask(8, 3, 16, 29);
+            g.drawImage(salesManLeft[index], getX() - Camera.x, getY() - Camera.y, null);
         }
     
         //pronta
-        if(up) {
-        setMask(7, 0, 16, 30);
-        g.drawImage(salesManUp[index], getX() - Camera.x, getY() - Camera.y, null);
+        if(direction == Direction.UP) {
+            setMask(7, 0, 16, 30);
+            g.drawImage(salesManUp[index], getX() - Camera.x, getY() - Camera.y, null);
         }
         
         //pronta
-        if(down) {
-        setMask(7, 0, 16, 30);
-        g.drawImage(salesManDown[index], getX() - Camera.x, getY() - Camera.y, null);
+        if(direction == Direction.DOWN) {
+            setMask(7, 0, 16, 30);
+            g.drawImage(salesManDown[index], getX() - Camera.x, getY() - Camera.y, null);
         }
        
         //g.fillOval(getX() + visionCenterX - visionRadius - Camera.x, getY() + visionCenterY - visionRadius - Camera.y, visionRadius * 2, visionRadius * 2);

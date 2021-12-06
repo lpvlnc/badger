@@ -145,7 +145,7 @@ public class Game extends Canvas implements Runnable {
           player.score = level1Score;
           player.steroidCounter = level1Steroid;
           player.hasCrown = true;
-          player.hasCrown = level1Detector;
+          player.hasDetector = level1Detector;
         }
         world = new World("/map/level"+level+".png");
         
