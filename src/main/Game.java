@@ -27,7 +27,6 @@ import menu.MenuPause;
 import menu.MenuEnd;
 import sound.AudioPlayer;
 import sound.Sound;
-import sound.Volume;
 import world.World;
 import static world.World.TILE_SIZE;
 

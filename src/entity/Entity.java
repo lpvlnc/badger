@@ -25,7 +25,6 @@ import world.World;
 public class Entity {
     protected double x;
     protected double y;
-    protected int z;
     protected int width;
     protected int height;
     protected int xMask;

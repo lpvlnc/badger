@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.Game;
 import main.Game.State;
-import sound.AudioClip;
 import sound.AudioPlayer;
 import sound.Sound;
 

@@ -26,7 +26,6 @@ public class AudioPlayer implements Runnable {
     public static AudioClip music;
     public static long musicTimePosition;
     public static Thread thread;
-    public static boolean isRunning = false;
     
     public static synchronized void play(AudioClip sfx, double volume){
  
@@ -40,7 +39,6 @@ public class AudioPlayer implements Runnable {
                     Clip clip;
                     
                     try {
-                        
                         clip = AudioSystem.getClip();
                         clip.open(stream);
                         setVolume(clip, volume);

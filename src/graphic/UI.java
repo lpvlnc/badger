@@ -51,8 +51,6 @@ public class UI {
     public int animationFrames = 0;
     public int animationMaxFrames = 10;
     public int animationPos = 0;
-
-    
     
     // font
     public static Font pixelFont;
@@ -140,7 +138,7 @@ public class UI {
         while(score.length() < 6) {
             score = "0" + score;
         }
-            
+        
         drawText("SCORE:" + score, 756, 20, null);
     }
     
@@ -192,7 +190,7 @@ public class UI {
                     animationPos = 0; 
                 }
             }
-        }else {
+        } else {
             for(int i = 0; i < 5; i++) {
                 g.drawImage(energyBack, 101 + (i * 17), -24, null);
             }
@@ -365,7 +363,6 @@ public class UI {
             g2.setRenderingHints(originalHints);
             g = (Graphics)g2;
         }
-        
     }
 }
 
