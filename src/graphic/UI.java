@@ -41,6 +41,10 @@ public class UI {
     public static BufferedImage steroid;
     public static BufferedImage parchmentBack;
     public static BufferedImage parchment;
+    public static BufferedImage crownBack;
+    public static BufferedImage crown;
+    public static BufferedImage detectorBack;
+    public static BufferedImage detector;
     public static boolean updateFps;
     public static int frames = 0;
     
@@ -83,6 +87,12 @@ public class UI {
         
         parchmentBack = Game.spritesheet.getSprite(544, 32, World.TILE_SIZE, World.TILE_SIZE);
         parchment = Game.spritesheet.getSprite(544, 0, World.TILE_SIZE, World.TILE_SIZE);
+        
+        crownBack = Game.spritesheet.getSprite(512, 64, World.TILE_SIZE, World.TILE_SIZE);
+        crown = Game.spritesheet.getSprite(512, 32, World.TILE_SIZE, World.TILE_SIZE);
+        
+        detectorBack = Game.spritesheet.getSprite(512, 128, World.TILE_SIZE, World.TILE_SIZE);
+        detector = Game.spritesheet.getSprite(512, 96, World.TILE_SIZE, World.TILE_SIZE);
     }
     
     public void render(Graphics graphics){
@@ -96,6 +106,8 @@ public class UI {
             renderParchment();
         renderSteroid();
         renderScore();
+        renderCrown();
+        renderDetector();
         showFPS();
     }
     
@@ -103,6 +115,23 @@ public class UI {
         if(Game.showFps) {
             drawText("FPS:" + frames, 854, 606, null);
         }
+    }
+    
+    public void renderCrown() {
+        g.drawImage(crownBack, -753, 0, null);
+        if(Game.player.hasCrown)
+            g.drawImage(crown, -753, 0, null);
+    }
+    
+    public void renderDetector() {
+       g.drawImage(detectorBack, -753, 20, null);
+       if(Game.player.hasDetector) {
+           g.drawImage(detector, -753, 20, null);
+           g.setColor(new Color(128, 128, 128));
+           g.fillRect(-752, 50, (Game.player.detectingMaxCounter / 64) * 5, 5);
+           g.setColor(new Color(0, 206, 209));
+           g.fillRect(-752, 50, (Game.player.detectingCounter / 64) * 5, 5);
+       }
     }
     
     public void renderScore() {

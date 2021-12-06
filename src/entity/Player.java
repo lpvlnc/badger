@@ -79,7 +79,12 @@ public class Player extends Entity {
     public int parchmentCounter = 0;
     public boolean hasCrown = false;
     public boolean hasDetector = false;
-    public boolean xRay;
+    public boolean detecting = false;
+    public int detectingMaxCounter = 400;
+    public int detectingCounter = detectingMaxCounter;
+    public int detectingFrames = 0;
+    public int detectingMaxFrames = 5;
+    public boolean xRay = false;
     public boolean action = false;
     
     public int energyFrames = 0;
@@ -393,6 +398,72 @@ public class Player extends Entity {
         }
     }
     
+    public void detect() {
+        if(detecting){
+            detectingCounter--;
+            if(detectingCounter <= 0){
+                detecting = false;
+            }
+        } else {
+            if(detectingCounter < detectingMaxCounter){
+                detectingFrames++;
+                if(detectingFrames >= detectingMaxFrames){
+                    detectingFrames = 0;
+                    detectingCounter+=10;
+                }
+            }
+        }
+    }
+    
+    @Override
+    public void update(){
+        if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
+        {
+            energyFrames++;
+            if(energyFrames == energyMaxFrames)
+            {
+                energy+=10;
+                energyFrames = 0;
+            }
+        }
+        
+        if(score > highScore){
+            highScore = score;
+        }
+        
+        if(isRunning && !weak && energy > 0) {
+            if(!onSteroid){
+                if(energy <= 0) {
+                    stopRunning();
+                    return;
+                }
+                runningFrames++;
+                if(runningFrames == runningMaxFrames) {
+                    runningFrames = 0;
+                    energy-=10;
+                    if(energy <= 0) {
+                        stopRunning();
+                    }
+                }
+            }
+        }
+        
+        if(onSteroid) {
+            steroid();
+        }else {
+            damage();
+        }
+        
+        if(weak) {
+            weak();
+        }
+        
+        detect();
+        movement();
+        animation();
+        updateCamera();
+    }
+    
     public void renderPlayerUp(Graphics g) {
         if(hasCrown){
             if(canBeDamaged || onSteroid) {
@@ -520,54 +591,6 @@ public class Player extends Entity {
                     g.drawImage(playerRightDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
             }
         }
-    }
-    
-    @Override
-    public void update(){
-        if(energy < maxEnergy && !isRunning && !weak && !onSteroid)
-        {
-            energyFrames++;
-            if(energyFrames == energyMaxFrames)
-            {
-                energy+=10;
-                energyFrames = 0;
-            }
-        }
-        
-        if(score > highScore){
-            highScore = score;
-        }
-        
-        if(isRunning && !weak && energy > 0) {
-            if(!onSteroid){
-                if(energy <= 0) {
-                    stopRunning();
-                    return;
-                }
-                runningFrames++;
-                if(runningFrames == runningMaxFrames) {
-                    runningFrames = 0;
-                    energy-=10;
-                    if(energy <= 0) {
-                        stopRunning();
-                    }
-                }
-            }
-        }
-        
-        if(onSteroid) {
-            steroid();
-        }else {
-            damage();
-        }
-        
-        if(weak) {
-            weak();
-        }
-        
-        movement();
-        animation();
-        updateCamera();
     }
     
     @Override

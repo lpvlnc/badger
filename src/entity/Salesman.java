@@ -36,26 +36,23 @@ public class Salesman extends Entity {
         visionCenterX = xMask + (wMask / 2);
         visionCenterY = yMask + (hMask / 2);
         spawnPos = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
-        speed = 1;
+        speed = 1;  
         
-        //salesMan = Game.spritesheet.getSprite(0, 417, World.TILE_SIZE, World.TILE_SIZE);
-        
-        //pronta
         salesManUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
            salesManUp[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 417, 32, 32);
         }
-        //pronta
+        
         salesManLeft = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
            salesManLeft[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 480, 32, 32);
         }
-        //pronta
+        
         salesManDown = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
            salesManDown[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 385, 32, 32);
         }
-        //pronta
+        
         salesManRight = new BufferedImage[4];
         for(int i = 0; i < 4; i++) {
            salesManRight[i] = Game.spritesheet.getSprite(0 + (i * World.TILE_SIZE), 449, 32, 32);
@@ -78,7 +75,7 @@ public class Salesman extends Entity {
     @Override
     public void update() {
         isMoving = false;
-        if(isSeeingPlayer()){
+        if(isSeeingPlayer() && !Game.player.detecting){
             if(random.nextInt(100) < 90){
                 if(path == null || path.isEmpty()){
                     Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
@@ -111,7 +108,7 @@ public class Salesman extends Entity {
         if(random.nextInt(100) < 95)
             followPath(path);
         
-        if(isColliding(this, Game.player)) {
+        if(isColliding(this, Game.player) && !Game.player.detecting) {
             Game.player.takeDamage(1);
         }
     }

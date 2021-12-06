@@ -185,6 +185,7 @@ public class World {
         if(Game.level == 1) {
             spawnChocolate();
             spawnCrown();
+            spawnDetector();
         }
         
         if(Game.level == 2) {
@@ -271,6 +272,22 @@ public class World {
                 if(rand.nextInt(100) < 10) {
                     Game.entities.add(new Crown(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     crown++;
+                }
+            }
+        }
+    }
+    
+    public static void spawnDetector(){
+        Random rand = new Random();
+        int detector = 0;
+        while (detector < 1){
+            int x = rand.nextInt((mapWidth));
+            int y = rand.nextInt((mapHeight));
+            int pos = x + (y * mapWidth);
+            if(tiles[pos] instanceof TileFloor && !tiles[pos].spawnArea) {
+                if(rand.nextInt(100) < 10) {
+                    Game.entities.add(new Detector(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                    detector++;
                 }
             }
         }
