@@ -373,7 +373,7 @@ public class World {
         } else {
             if(random <= 94){
                 return 0;
-            } else if (random >= 95 && random < 98){
+            } else if (random >= 95 && random <= 98){
                 return 2;
             } else {
                 return 3;

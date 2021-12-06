@@ -317,6 +317,7 @@ public class Player extends Entity {
             Game.entities.remove(poisonedParticle);
             poisonedParticle = null;
             weak = false;
+            energy = 0;
             weakTime = 0;
             speed = defaultSpeed;
             maxFramesChanged = false;
