@@ -59,6 +59,7 @@ public class Tile {
     
     // Pyramid Floor
     public static final BufferedImage PYRAMID_FLOOR = Game.spritesheet.getSprite(0, 576, World.TILE_SIZE, World.TILE_SIZE);
+    public static final BufferedImage PYRAMID_DARK_FLOOR = Game.spritesheet.getSprite(0, 544, World.TILE_SIZE, World.TILE_SIZE);
     
     // Pyramid wall
     public static final BufferedImage PYRAMID_WALL_TOP = Game.spritesheet.getSprite(416, 544, World.TILE_SIZE, World.TILE_SIZE);

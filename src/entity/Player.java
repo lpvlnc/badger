@@ -78,6 +78,7 @@ public class Player extends Entity {
     public int energy = maxEnergy;
     public int parchmentCounter = 0;
     public boolean hasCrown = false;
+    public boolean hasDetector = false;
     public boolean xRay;
     public boolean action = false;
     

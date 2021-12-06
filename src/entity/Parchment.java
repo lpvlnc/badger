@@ -6,7 +6,10 @@
 package entity;
 
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.Game;
+import main.Game.State;
 import sound.AudioPlayer;
 import sound.Sound;
 import world.World;
@@ -32,6 +35,13 @@ public class Parchment extends Entity {
             Game.player.parchmentCounter++;
             Entity.addParticle(this);
             Game.entities.remove(this);
+            if(Game.player.parchmentCounter >= 10){
+                try {
+                    Game.changeGameState(State.END);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Parchment.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 }

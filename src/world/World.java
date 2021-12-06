@@ -87,8 +87,14 @@ public class World {
                         tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                         tiles[pos].spawnArea = true;
                         break;
+                    
+                    case 0xFF003800:
+                        tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.PYRAMID_DARK_FLOOR);
+                        tiles[pos].spawnArea = true;
+                        tilesFloor[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.PYRAMID_DARK_FLOOR);
+                        tilesFloor[pos].spawnArea = true;
+                        break;
                     case 0xFF000000: // floor
-                        
                         int enemy = generateEnemy();
                         switch(enemy){
                             case 0:
@@ -345,9 +351,9 @@ public class World {
                 return 3;
             }
         } else {
-            if(random <= 90){
+            if(random <= 94){
                 return 0;
-            } else if (random >= 91 && random < 98){
+            } else if (random >= 95 && random < 98){
                 return 2;
             } else {
                 return 3;

@@ -68,13 +68,14 @@ public class Game extends Canvas implements Runnable {
     public static int level1Lives;
     public static int level1Energy;
     public static int level1Steroid;
+    public static boolean level1Detector;
     
     // Lists
     public static ArrayList<Entity> entities;
     
     // Game state
     public enum State { 
-        MENU, PAUSE, NORMAL, GAMEOVER
+        MENU, PAUSE, NORMAL, GAMEOVER, END
     }
     public static State state = State.MENU;
     
@@ -144,6 +145,7 @@ public class Game extends Canvas implements Runnable {
           player.score = level1Score;
           player.steroidCounter = level1Steroid;
           player.hasCrown = true;
+          player.hasCrown = level1Detector;
         }
         world = new World("/map/level"+level+".png");
         
@@ -154,6 +156,7 @@ public class Game extends Canvas implements Runnable {
         level1Energy = player.energy;
         level1Score = player.score;
         level1Steroid = player.steroidCounter;
+        level1Detector = player.hasDetector;
         entities.clear();
         level++;
         player.direction = Entity.Direction.UP;
@@ -169,11 +172,11 @@ public class Game extends Canvas implements Runnable {
             case MENU:
                 AudioPlayer.stop();
                 AudioPlayer.playMusic(Sound.menu_music);
-                Game.state = State.MENU;
+                Game.state = state;
                 break; 
             case PAUSE:
                 AudioPlayer.pause();
-                Game.state = State.PAUSE;
+                Game.state = state;
                 break; 
             case NORMAL:
                 AudioPlayer.stop();
@@ -182,11 +185,15 @@ public class Game extends Canvas implements Runnable {
                 } else {
                     AudioPlayer.playMusic(Sound.level2_music);
                 }
-                Game.state = State.NORMAL;
+                Game.state = state;
                 break;
             case GAMEOVER:
                 AudioPlayer.stop();
-                Game.state = State.GAMEOVER;
+                Game.state = state;
+                break;
+            case END:
+                AudioPlayer.stop();
+                Game.state = state;
                 break;
         }
     }
