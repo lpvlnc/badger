@@ -277,10 +277,7 @@ public class Game extends Canvas implements Runnable {
              case END:
                 menuEnd.render(g);
             break;
-            
-            
         }
-        
         bs.show();
     }
     

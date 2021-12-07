@@ -28,7 +28,6 @@ public class Parchment extends Entity {
     
     public void update()
     {
-        
         if(isColliding(this, Game.player))
         {
             AudioPlayer.play(Sound.collect_item, 1);
