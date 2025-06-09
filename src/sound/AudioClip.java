@@ -5,8 +5,8 @@
  */
 package sound;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -16,16 +16,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author Leonardo
  */
 public class AudioClip {
-    private File file;
-    
-    public AudioClip(String path){
-        file = new File(path);
-        if(!file.exists()){
-            System.out.println("ERROR >> AudioClip Not Found!");
+    private URL resource;
+
+    public AudioClip(String path) {
+        resource = getClass().getResource(path);
+        if (resource == null) {
+            System.out.println("ERROR >> AudioClip Not Found at: " + path);
         }
     }
-    
-    public AudioInputStream getAudioStream() throws UnsupportedAudioFileException, IOException{
-        return AudioSystem.getAudioInputStream(file);
+
+    public AudioInputStream getAudioStream() throws UnsupportedAudioFileException, IOException {
+        if (resource == null) return null;
+        return AudioSystem.getAudioInputStream(resource);
     }
 }
