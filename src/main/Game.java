@@ -32,10 +32,11 @@ public class Game extends Canvas implements Runnable {
     public final static int WIDTH = 480;
     public final static int HEIGHT = 320;
     public final static int SCALE =  1;
-    private final BufferedImage backgroundImage;
+    private BufferedImage backgroundImage;
     public static Spritesheet spritesheet;
     public static World world;
     public static Menu menu;
+    public static GameDimensions gameDimensions;
 
     // Configuration
     public static boolean showFps = false;
@@ -67,7 +68,6 @@ public class Game extends Canvas implements Runnable {
         keyHandler = new KeyHandler();
         addKeyListener(keyHandler);
         initializeWindow();
-        backgroundImage =  new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
         spritesheet = new Spritesheet();
         entities = new ArrayList<>();
         world = new World(level);
@@ -75,6 +75,7 @@ public class Game extends Canvas implements Runnable {
         ui = new UI();
         menu = new Menu();
         AudioPlayer.playMusic(Audio.MENU_MUSIC);
+        gameDimensions = new GameDimensions();
     }
 
     public static void main(String[] args) throws IOException, FontFormatException {
@@ -119,6 +120,7 @@ public class Game extends Canvas implements Runnable {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setVisible(true);
     }
 
@@ -165,6 +167,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void update() throws IOException, InterruptedException {
+        gameDimensions = new GameDimensions();
         if (Objects.requireNonNull(state) == State.NORMAL) {
             world.update();
             for (int i = 0; i < entities.size(); i++) {
@@ -182,6 +185,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void render() {
+        backgroundImage =  new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         BufferStrategy bufferStrategy = getBufferStrategy();
         if (bufferStrategy == null) {
             createBufferStrategy(3);
@@ -190,11 +194,12 @@ public class Game extends Canvas implements Runnable {
 
         Graphics graphics = backgroundImage.getGraphics();
         graphics.setColor(new Color(0, 0, 0, 0));
-        graphics.fillRect(window.getX(), window.getHeight(), window.getWidth(), window.getHeight());
+        graphics.fillRect(0, 0, WIDTH, HEIGHT);
 
         world.renderFloor(graphics);
         entities.sort(Entity.nodeSorter);
-        for (Entity entity : entities) {
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
             entity.render(graphics);
             if (showHitBox)
                 entity.showHitBox(graphics);
@@ -202,13 +207,15 @@ public class Game extends Canvas implements Runnable {
         world.renderWall(graphics);
         graphics.dispose();
         graphics = bufferStrategy.getDrawGraphics();
-        graphics.drawImage(backgroundImage, window.getX(), window.getHeight(), window.getWidth(), window.getHeight(), null);
+        graphics.setColor(Color.black);
+        graphics.fillRect(0, 0, window.getWidth(), window.getHeight());
+        graphics.drawImage(backgroundImage, gameDimensions.getX(), gameDimensions.getY(), gameDimensions.getWidth(), gameDimensions.getHeight(), null);
         if(level == 2) {
             graphics.setColor(new Color(0, 0, 0, 50));
-            graphics.fillRect(0, 0, WIDTH, HEIGHT);
+            graphics.fillRect(0, 0, window.getWidth(), window.getHeight());
         }
-        ui.render(graphics);
         menu.render(graphics);
+        ui.render(graphics);
         bufferStrategy.show();
     }
 

@@ -460,8 +460,10 @@ public class World {
     }
 
     public void update() {
-        for (Tile t : tiles)
+        for (int i = 0, tilesLength = tiles.length; i < tilesLength; i++) {
+            Tile t = tiles[i];
             t.update();
+        }
     }
 
     public void renderFloor(Graphics g) {

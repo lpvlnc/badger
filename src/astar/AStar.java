@@ -31,11 +31,14 @@ public class AStar {
         lastTime = System.currentTimeMillis();
         List<Node> openList = new ArrayList<Node>();
         List<Node> closedList = new ArrayList<Node>();
+        int maxIterations = 1000;
+        int iterations = 0;
 
         Node current = new Node(start, null, 0, getDistance(start, end));
 
         openList.add(current);
-        while(!openList.isEmpty()) {
+        while(!openList.isEmpty() && iterations < maxIterations) {
+            iterations++;
             openList.sort(nodeSorter);
             current = openList.getFirst();
             if (current.tile.equals(end)) {

@@ -18,13 +18,16 @@ public class Menu {
     private int maxOption;
     public boolean up, down;
     public boolean select = false;
-    private final int widthPos = ((Game.WIDTH * Game.SCALE) / 2) - 112;
+//    private final int widthPos = ((Game.WIDTH * Game.SCALE) / 2) - 112;
+private final int widthPos = 0;
     private final int heightPos = ((Game.HEIGHT * Game.SCALE) / 2);
     private final int heightOffSet = 60;
     private final BufferedImage logo;
+    private final BufferedImage mainMenuBackground;
 
     public Menu() throws IOException {
         logo = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/logo.png")));
+        mainMenuBackground = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/main_menu_background.png")));
         loadMainMenuOptions();
     }
 
@@ -111,13 +114,10 @@ public class Menu {
     }
     
     public void renderMainMenu(Graphics graphics) {
-        int windowWidth = Game.window.getWidth();
-        int windowHeight = Game.window.getHeight();
         Graphics2D graphics2d = (Graphics2D)graphics;
-        graphics2d.setColor(new Color(0, 0, 0, 255));
-        graphics2d.fillRect(0, 0, windowWidth, windowHeight);
+        graphics2d.fillRect(Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight());
         graphics2d.setColor(new Color(250, 0, 250));
-        graphics.drawImage(logo, -425, 60, 300, 100, null);
+        graphics.drawImage(mainMenuBackground, Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight(), null);
         Game.ui.drawTextCenter("MAIN MENU", heightPos - 90, new Color(250, 0, 0));
         for (int i = 0; i < options.size(); i++) {
             if (i == currentOption)
