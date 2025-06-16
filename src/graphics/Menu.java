@@ -1,4 +1,4 @@
-package menu;
+package graphics;
 
 import audio.Audio;
 import audio.AudioPlayer;
@@ -115,8 +115,8 @@ private final int widthPos = 0;
     
     public void renderMainMenu(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D)graphics;
-        graphics2d.fillRect(Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight());
-        graphics2d.setColor(new Color(250, 0, 250));
+//        graphics2d.fillRect(Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight());
+//        graphics2d.setColor(new Color(250, 0, 250));
         graphics.drawImage(mainMenuBackground, Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight(), null);
         Game.ui.drawTextCenter("MAIN MENU", heightPos - 90, new Color(250, 0, 0));
         for (int i = 0; i < options.size(); i++) {
@@ -130,15 +130,15 @@ private final int widthPos = 0;
     public void renderPauseMenu(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D)graphics;
         graphics2d.setColor(new Color(0, 0, 0, 150));
-        graphics2d.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
+        graphics2d.fillRect(Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight());
         graphics2d.setColor(new Color(250, 0, 250));
-        Game.ui.drawTextCenter("PAUSE", heightPos - 90, new Color(250, 0, 0));
-        Game.ui.drawTextCenter("KEYBOARD TIPS", widthPos - -60, new Color(100, 100, 100));
-        Game.ui.drawTextCenterTips("TO USE STEROIDS: PRESS CTRL", widthPos - -90, new Color(100, 100, 100));
-        Game.ui.drawTextCenterTips("TO USE CROWN: PRESS SPACE", widthPos - -120, new Color(100, 100, 100));
-        Game.ui.drawTextCenterTips("TO RUN USING ENERGY: PRESS SHIFT", widthPos - -150, new Color(100, 100, 100));
-        Game.ui.drawTextCenterTips("TO USE RAFFLE DETECTOR: PRESS E", widthPos - -180, new Color(100, 100, 100));
-        Game.ui.drawTextCenterTips("TO ENTER PYRAMID: PRESS ENTER", widthPos - -210, new Color(100, 100, 100));
+//        Game.ui.drawTextCenter("PAUSE", heightPos - 90, new Color(250, 0, 0));
+//        Game.ui.drawTextCenter("KEYBOARD TIPS", widthPos - -60, new Color(100, 100, 100));
+//        Game.ui.drawTextCenterTips("TO USE STEROIDS: PRESS CTRL", widthPos - -90, new Color(100, 100, 100));
+//        Game.ui.drawTextCenterTips("TO USE CROWN: PRESS SPACE", widthPos - -120, new Color(100, 100, 100));
+//        Game.ui.drawTextCenterTips("TO RUN USING ENERGY: PRESS SHIFT", widthPos - -150, new Color(100, 100, 100));
+//        Game.ui.drawTextCenterTips("TO USE RAFFLE DETECTOR: PRESS E", widthPos - -180, new Color(100, 100, 100));
+//        Game.ui.drawTextCenterTips("TO ENTER PYRAMID: PRESS ENTER", widthPos - -210, new Color(100, 100, 100));
         for (int i = 0; i < options.size(); i++) {
             if (i == currentOption)
                 Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), null);

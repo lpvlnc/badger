@@ -7,7 +7,7 @@ import entities.Player;
 import graphics.Spritesheet;
 import graphics.UI;
 import handlers.KeyHandler;
-import menu.Menu;
+import graphics.Menu;
 import world.World;
 
 import javax.swing.*;
@@ -193,9 +193,6 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics graphics = backgroundImage.getGraphics();
-        graphics.setColor(new Color(0, 0, 0, 0));
-        graphics.fillRect(0, 0, WIDTH, HEIGHT);
-
         world.renderFloor(graphics);
         entities.sort(Entity.nodeSorter);
         for (int i = 0; i < entities.size(); i++) {

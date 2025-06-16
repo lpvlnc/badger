@@ -245,7 +245,7 @@ public class UI {
     public void drawTextCenter(String text, int y, Color color) {
         if (graphics instanceof Graphics2D graphics2d) {
             FontMetrics metrics = graphics.getFontMetrics(graphics2d.getFont());
-            int xx = ((Game.WIDTH * Game.SCALE ) - metrics.stringWidth(text)) / 2;
+            int xx = ((Game.gameDimensions.getX() + Game.gameDimensions.getWidth()) - metrics.stringWidth(text)) / 2;
             AffineTransform affineTransform = AffineTransform.getTranslateInstance(xx, y);
             affineTransform.scale(1, 1);
             graphics = applyTextEffect(graphics2d, affineTransform, text, color);
