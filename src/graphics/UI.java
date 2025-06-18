@@ -20,6 +20,8 @@ import world.World;
 
 public class UI {
     private Graphics graphics;
+    public static final float TEXT_SIZE = 16;
+    public static final int LINE_HEIGHT = 32;
     public static BufferedImage heartBack;
     public static BufferedImage heart;
     public static BufferedImage weakHeartBack;
@@ -48,7 +50,7 @@ public class UI {
 
     public UI() throws IOException, FontFormatException {
         initializeSprites();
-        pixelFont = Font.createFont(Font.TRUETYPE_FONT, Game.inputStream).deriveFont(16f);
+        pixelFont = Font.createFont(Font.TRUETYPE_FONT, Game.inputStream).deriveFont(TEXT_SIZE);
     }
 
     public void initializeSprites() {
@@ -245,7 +247,8 @@ public class UI {
     public void drawTextCenter(String text, int y, Color color) {
         if (graphics instanceof Graphics2D graphics2d) {
             FontMetrics metrics = graphics.getFontMetrics(graphics2d.getFont());
-            int xx = ((Game.gameDimensions.getX() + Game.gameDimensions.getWidth()) - metrics.stringWidth(text)) / 2;
+            int textWidth = metrics.stringWidth(text);
+            int xx = (Game.window.getWidth() - textWidth) / 2;
             AffineTransform affineTransform = AffineTransform.getTranslateInstance(xx, y);
             affineTransform.scale(1, 1);
             graphics = applyTextEffect(graphics2d, affineTransform, text, color);
