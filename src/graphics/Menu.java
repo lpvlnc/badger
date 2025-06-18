@@ -119,12 +119,8 @@ private final int widthPos = 0;
 //        graphics2d.setColor(new Color(250, 0, 250));
         graphics.drawImage(mainMenuBackground, Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight(), null);
         Game.ui.drawTextCenter("MAIN MENU", heightPos - 90, new Color(250, 0, 0));
-        for (int i = 0; i < options.size(); i++) {
-            if (i == currentOption)
-                Game.ui.drawTextCenter(options.get(i),heightPos - heightOffSet + (i * 30), i == currentOption ? null : new Color(100, 100, 100));
-            else
-                Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * 30), new Color(100, 100, 100));
-        }
+        for (int i = 0; i < options.size(); i++)
+            Game.ui.drawTextCenter(options.get(i),heightPos - heightOffSet + (i * 30), i == currentOption ? null : new Color(100, 100, 100));
     }
 
     public void renderPauseMenu(Graphics graphics) {
@@ -139,9 +135,8 @@ private final int widthPos = 0;
 //        Game.ui.drawTextCenterTips("TO RUN USING ENERGY: PRESS SHIFT", widthPos - -150, new Color(100, 100, 100));
 //        Game.ui.drawTextCenterTips("TO USE RAFFLE DETECTOR: PRESS E", widthPos - -180, new Color(100, 100, 100));
 //        Game.ui.drawTextCenterTips("TO ENTER PYRAMID: PRESS ENTER", widthPos - -210, new Color(100, 100, 100));
-        for (int i = 0; i < options.size(); i++) {
+        for (int i = 0; i < options.size(); i++)
             Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
-        }
     }
 
     public void renderGameOverMenu(Graphics graphics) {
@@ -150,9 +145,8 @@ private final int widthPos = 0;
         graphics2d.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
         graphics2d.setColor(new Color(250, 0, 250));
         Game.ui.drawTextCenter("GAME OVER", heightPos - 90, new Color(250, 0, 0));
-        for (int i = 0; i < options.size(); i++) {
+        for (int i = 0; i < options.size(); i++)
             Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
-        }
     }
 
     public void renderEndMenu(Graphics graphics) {
@@ -161,8 +155,7 @@ private final int widthPos = 0;
         graphics2d.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
         graphics2d.setColor(new Color(250, 0, 250));
         Game.ui.drawTextCenter("END GAME", heightPos - 90, new Color(250, 0, 0));
-        for (int i = 0; i < options.size(); i++) {
+        for (int i = 0; i < options.size(); i++)
             Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
-        }
     }
 }
