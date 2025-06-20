@@ -18,15 +18,11 @@ public class Menu {
     private int maxOption;
     public boolean up, down;
     public boolean select = false;
-//    private final int widthPos = ((Game.WIDTH * Game.SCALE) / 2) - 112;
-private final int widthPos = 0;
-    private final int heightPos = ((Game.HEIGHT * Game.SCALE) / 2);
+    private final int heightPos = (Game.window.getHeight() / 2);
     private final int heightOffSet = 60;
-    private final BufferedImage logo;
     private final BufferedImage mainMenuBackground;
 
     public Menu() throws IOException {
-        logo = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/logo.png")));
         mainMenuBackground = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/main_menu_background.png")));
         loadMainMenuOptions();
     }
@@ -36,6 +32,7 @@ private final int widthPos = 0;
         options.add("Start game");
         options.add("Exit");
         maxOption = options.size() - 1;
+        currentOption = 0; // Adicione esta linha
     }
 
     public void loadPauseMenuOptions() {
@@ -77,6 +74,8 @@ private final int widthPos = 0;
         if (select) {
             select = false;
             AudioPlayer.play(Audio.MENU_SELECT, menuVolume);
+            if (currentOption > options.size())
+                currentOption = 0;
 
             if(options.get(currentOption).contentEquals("Start game"))
                 Game.restart();
@@ -105,28 +104,38 @@ private final int widthPos = 0;
     }
 
     public void render(Graphics graphics) {
+        Graphics2D graphics2d = (Graphics2D)graphics;
+        if (Game.state != Game.State.NORMAL) {
+            if (Game.state == Game.State.MENU) {
+                graphics2d.drawImage(mainMenuBackground, Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight(), null);
+            }
+            graphics2d.setColor(new Color(0, 0, 0, 150));
+            graphics2d.fillRect(Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight());
+        }
         switch (Game.state) {
-            case MENU -> renderMainMenu(graphics);
-            case PAUSE -> renderPauseMenu(graphics);
-            case GAMEOVER -> renderGameOverMenu(graphics);
-            case END -> renderEndMenu(graphics);
+            case MENU -> renderMainMenu(graphics2d);
+            case PAUSE -> renderPauseMenu(graphics2d);
+            case GAMEOVER -> renderGameOverMenu(graphics2d);
+            case END -> renderEndMenu(graphics2d);
         }
     }
+
+    public int calculateMenuYStart() {
+        int totalOptions = options.size() + 1;
+        int menuSize = (totalOptions * UI.TEXT_SIZE) + (options.size() * UI.LINE_HEIGHT);
+        return (Game.window.getHeight() / 2) - (menuSize / 2);
+    }
     
-    public void renderMainMenu(Graphics graphics) {
-        Graphics2D graphics2d = (Graphics2D)graphics;
-//        graphics2d.fillRect(Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight());
-//        graphics2d.setColor(new Color(250, 0, 250));
-        graphics.drawImage(mainMenuBackground, Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight(), null);
-        Game.ui.drawTextCenter("MAIN MENU", heightPos - 90, new Color(250, 0, 0));
+    public void renderMainMenu(Graphics2D graphics2d) {
+
+        int menuStart = calculateMenuYStart();
+        Game.ui.drawTextCenter("MAIN MENU", menuStart, new Color(250, 0, 0));
+        menuStart += (UI.LINE_HEIGHT);
         for (int i = 0; i < options.size(); i++)
-            Game.ui.drawTextCenter(options.get(i),heightPos - heightOffSet + (i * 30), i == currentOption ? null : new Color(100, 100, 100));
+            Game.ui.drawTextCenter(options.get(i),menuStart + (i * 30), i == currentOption ? null : new Color(100, 100, 100));
     }
 
-    public void renderPauseMenu(Graphics graphics) {
-        Graphics2D graphics2d = (Graphics2D)graphics;
-        graphics2d.setColor(new Color(100, 0, 0, 150));
-        graphics2d.fillRect(Game.gameDimensions.getX(), Game.gameDimensions.getY(), Game.gameDimensions.getWidth(), Game.gameDimensions.getHeight());
+    public void renderPauseMenu(Graphics2D graphics2d) {
         graphics2d.setColor(new Color(250, 0, 250));
 //        Game.ui.drawTextCenter("PAUSE", heightPos - 90, new Color(250, 0, 0));
 //        Game.ui.drawTextCenter("KEYBOARD TIPS", widthPos - -60, new Color(100, 100, 100));
@@ -135,27 +144,30 @@ private final int widthPos = 0;
 //        Game.ui.drawTextCenterTips("TO RUN USING ENERGY: PRESS SHIFT", widthPos - -150, new Color(100, 100, 100));
 //        Game.ui.drawTextCenterTips("TO USE RAFFLE DETECTOR: PRESS E", widthPos - -180, new Color(100, 100, 100));
 //        Game.ui.drawTextCenterTips("TO ENTER PYRAMID: PRESS ENTER", widthPos - -210, new Color(100, 100, 100));
+        int menuStart = calculateMenuYStart();
+        Game.ui.drawTextCenter("PAUSE", menuStart, new Color(250, 0, 0));
+        menuStart += (UI.LINE_HEIGHT);
         for (int i = 0; i < options.size(); i++)
-            Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
+            Game.ui.drawTextCenter(options.get(i), menuStart + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
     }
 
-    public void renderGameOverMenu(Graphics graphics) {
-        Graphics2D graphics2d = (Graphics2D)graphics;
-        graphics2d.setColor(new Color(0, 0, 0, 150));
+    public void renderGameOverMenu(Graphics2D graphics2d) {
         graphics2d.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
         graphics2d.setColor(new Color(250, 0, 250));
-        Game.ui.drawTextCenter("GAME OVER", heightPos - 90, new Color(250, 0, 0));
+        int menuStart = calculateMenuYStart();
+        Game.ui.drawTextCenter("GAME OVER", menuStart, new Color(250, 0, 0));
+        menuStart += (UI.LINE_HEIGHT);
         for (int i = 0; i < options.size(); i++)
-            Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
+            Game.ui.drawTextCenter(options.get(i), menuStart + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
     }
 
-    public void renderEndMenu(Graphics graphics) {
-        Graphics2D graphics2d = (Graphics2D)graphics;
-        graphics2d.setColor(new Color(0, 0, 0, 150));
+    public void renderEndMenu(Graphics2D graphics2d) {
         graphics2d.fillRect(-756, -19, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
         graphics2d.setColor(new Color(250, 0, 250));
-        Game.ui.drawTextCenter("END GAME", heightPos - 90, new Color(250, 0, 0));
+        int menuStart = calculateMenuYStart();
+        Game.ui.drawTextCenter("END GAME", menuStart, new Color(250, 0, 0));
+        menuStart += (UI.LINE_HEIGHT);
         for (int i = 0; i < options.size(); i++)
-            Game.ui.drawTextCenter(options.get(i), heightPos - heightOffSet + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
+            Game.ui.drawTextCenter(options.get(i), menuStart + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
     }
 }

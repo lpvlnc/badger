@@ -20,7 +20,7 @@ import world.World;
 
 public class UI {
     private Graphics graphics;
-    public static final float TEXT_SIZE = 16;
+    public static final int TEXT_SIZE = 16;
     public static final int LINE_HEIGHT = 32;
     public static BufferedImage heartBack;
     public static BufferedImage heart;
@@ -50,7 +50,7 @@ public class UI {
 
     public UI() throws IOException, FontFormatException {
         initializeSprites();
-        pixelFont = Font.createFont(Font.TRUETYPE_FONT, Game.inputStream).deriveFont(TEXT_SIZE);
+        pixelFont = Font.createFont(Font.TRUETYPE_FONT, Game.inputStream).deriveFont((float)TEXT_SIZE);
     }
 
     public void initializeSprites() {
@@ -81,16 +81,18 @@ public class UI {
     public void render(Graphics g) {
         this.graphics = g;
         graphics.setFont(pixelFont);
-        renderLife();
-        renderEnergy();
-        if(Game.level == 1)
-            renderChocolate();
-        else
-            renderParchment();
-        renderSteroid();
-        renderScore();
-        renderCrown();
-        renderDetector();
+        if (Game.state != Game.State.MENU) {
+            renderLife();
+            renderEnergy();
+            if(Game.level == 1)
+                renderChocolate();
+            else
+                renderParchment();
+            renderSteroid();
+            renderScore();
+            renderCrown();
+            renderDetector();
+        }
         showFPS();
     }
 
@@ -100,19 +102,19 @@ public class UI {
     }
 
     public void renderCrown() {
-        graphics.drawImage(crownBack, -753, 0, null);
+        graphics.drawImage(crownBack, -763, 36, null);
         if(Game.player.hasCrown)
-            graphics.drawImage(crown, -753, 0, null);
+            graphics.drawImage(crown, -763, 36, null);
     }
 
     public void renderDetector() {
-        graphics.drawImage(detectorBack, -753, 20, null);
+        graphics.drawImage(detectorBack, -763, 66, null);
         if(Game.player.hasDetector) {
-            graphics.drawImage(detector, -753, 20, null);
+            graphics.drawImage(detector, -763, 66, null);
             graphics.setColor(new Color(128, 128, 128));
-            graphics.fillRect(-752, 50, (Game.player.detectingMaxCounter / 64) * 5, 5);
+            graphics.fillRect(-762, 96, (Game.player.detectingMaxCounter / 64) * 5, 5);
             graphics.setColor(new Color(0, 206, 209));
-            graphics.fillRect(-752, 50, (Game.player.detectingCounter / 64) * 5, 5);
+            graphics.fillRect(-762, 96, (Game.player.detectingCounter / 64) * 5, 5);
         }
     }
 
@@ -120,17 +122,17 @@ public class UI {
         StringBuilder score = new StringBuilder(String.valueOf(Game.player.score));
         while(score.length() < 6)
             score.insert(0, "0");
-        drawText("SCORE:" + score, 756, 20, null);
+        drawText("SCORE:" + score, Game.gameDimensions.getX() + 776, 26, null);
     }
 
     public void renderSteroid() {
-        graphics.drawImage(steroid, -437, 558, null);
+        graphics.drawImage(steroid, -440, 4, null);
         String zero = Game.player.steroidCounter < 10 ? "0" : "";
-        drawText("x" + zero + Game.player.steroidCounter, 26, 604, null);
+        drawText("x" + zero + Game.player.steroidCounter, Game.gameDimensions.getX() + 34, 56, null);
     }
 
     public void renderChocolate() {
-        drawText("CHOCOLATE:", 437, 20, null);
+        drawText("CHOCOLATE:", Game.gameDimensions.getX() + 447, 26, null);
         for(int i = 0; i < 5; i++)
             graphics.drawImage(chocolateBack, 154 + (i * 30), -24, null);
         for(int i = 0; i < Game.player.chocolateCounter; i++)
@@ -138,7 +140,7 @@ public class UI {
     }
 
     public void renderParchment() {
-        drawText("PARCHMENT:", 437, 20, null);
+        drawText("PARCHMENT:", Game.gameDimensions.getX() + 447, 26, null);
         for(int i = 0; i < 10; i ++) {
             if(i < 5)
                 graphics.drawImage(parchmentBack, 160 + (i * 30), -19, 24, 24, null);
@@ -154,7 +156,7 @@ public class UI {
     }
 
     public void renderEnergy() {
-        drawText("ENERGY:", 221, 20, null);
+        drawText("ENERGY:", Game.gameDimensions.getX() + 231, 26, null);
         if (Game.player.onSteroid) {
             for(int i = 0; i < 5; i++)
                 graphics.drawImage(energyBack, 101 + (i * 17), -24, null);
@@ -177,7 +179,7 @@ public class UI {
     }
 
     public void renderLife() {
-        drawText("LIFE:", 4, 20, null);
+        drawText("LIFE:", Game.gameDimensions.getX() + 10, 26, null);
         if(Game.player.onSteroid) {
             for(int i = 0; i < 5; i++)
                 graphics.drawImage(heartBack, 79 +  (i * 24), -15, null);

@@ -117,6 +117,7 @@ public class Game extends Canvas implements Runnable {
         window.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         window.add(this);
         window.setResizable(true);
+//        window.setUndecorated(true);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -207,7 +208,7 @@ public class Game extends Canvas implements Runnable {
         graphics.setColor(Color.black);
         graphics.fillRect(0, 0, window.getWidth(), window.getHeight());
         graphics.drawImage(backgroundImage, gameDimensions.getX(), gameDimensions.getY(), gameDimensions.getWidth(), gameDimensions.getHeight(), null);
-        if(level == 2) {
+        if (level == 2) {
             graphics.setColor(new Color(0, 0, 0, 50));
             graphics.fillRect(0, 0, window.getWidth(), window.getHeight());
         }
