@@ -1,4 +1,5 @@
 # Badger
+![alt text]([https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png ](https://github.com/lpvlnc/badger/blob/main/res/images/main_menu_background.png) "Badger")
 
 # 🕹️ Java 2D Top-Down Game
 
