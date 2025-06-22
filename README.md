@@ -45,12 +45,12 @@
 
 ---
 
-🏫 Academic Context
+## 🏫 Academic Context
  This project was created as part of our final test for the **Programming C** course. We opted for Java to better utilize object-oriented programming concepts that we have learn during our classes.
 
 ---
 
-🔄 Post-Submission Updates
+## 🔄 Post-Submission Updates
   - Improved screen resolution scaling.
   - Bug fixes and minor performance enhancements.
   - UI polish and improved input responsiveness.
@@ -58,7 +58,7 @@
 
 ---
 
-👨‍💻 Contributors
+## 👨‍💻 Contributors
   - Leonardo Pinheiro Valença
   - Marcos Gabriel Koslovski
   - Thaiane Ribeiro
@@ -76,4 +76,7 @@ Build locally:
 3. Use any IDE that can run the project (It was developed using Intellij)
 
 If you have any trouble running the project get in touch with me through my linkedin page (on profile)
+
+---
+
 ![Badger logo](https://github.com/lpvlnc/badger/blob/main/res/images/icon-big.png)
