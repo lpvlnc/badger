@@ -1,5 +1,5 @@
 # Badger
-![alt text]([https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png ](https://github.com/lpvlnc/badger/blob/main/res/images/main_menu_background.png) "Badger")
+![Badger banner](https://github.com/lpvlnc/badger/blob/main/res/images/main_menu_background.png)
 
 # 🕹️ Java 2D Top-Down Game
 
@@ -74,3 +74,6 @@ Build locally:
 1. Make sure you have Java 8 or higher installed.
 2. Clone this repository:
 3. Use any IDE that can run the project (It was developed using Intellij)
+
+If you have any trouble running the project get in touch with me through my linkedin page (on profile)
+![Badger logo](https://github.com/lpvlnc/badger/blob/main/res/images/icon-big.png)
