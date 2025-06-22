@@ -1,6 +1,7 @@
 package main;
 
 public class GameDimensions {
+
     protected int x;
     protected int y;
     protected int width;

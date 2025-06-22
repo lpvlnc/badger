@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Scarab extends Entity {
+
     public BufferedImage[] scarabUp;
     public BufferedImage[] scarabLeft;
     public BufferedImage[] scarabDown;
@@ -125,7 +126,5 @@ public class Scarab extends Entity {
             setMask(7, 0, 16, 30);
             g.drawImage(scarabDown[index], getX() - Camera.x, getY() - Camera.y, null);
         }
-
-        //g.fillOval(getX() + visionCenterX - visionRadius - Camera.x, getY() + visionCenterY - visionRadius - Camera.y, visionRadius * 2, visionRadius * 2);
     }
 }

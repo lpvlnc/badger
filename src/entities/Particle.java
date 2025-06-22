@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Particle extends Entity {
+
     public BufferedImage[] sparkle;
     public int index = 0;
     public int maxIndex = 5;

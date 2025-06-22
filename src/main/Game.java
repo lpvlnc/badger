@@ -4,7 +4,6 @@ import audio.Audio;
 import audio.AudioPlayer;
 import entities.Entity;
 import entities.Player;
-import entities.Scarab;
 import graphics.Spritesheet;
 import graphics.UI;
 import handlers.KeyHandler;
@@ -27,7 +26,6 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean isRunning;
     public static KeyHandler keyHandler;
-    AudioPlayer musicPlayer = new AudioPlayer();
 
     // Graphics
     public static JFrame window;
@@ -99,7 +97,6 @@ public class Game extends Canvas implements Runnable {
     public static void restart() throws IOException, InterruptedException {
         changeGameState(State.NORMAL);
         entities.clear();
-
         if (level == 1)
             player = null;
         else {
@@ -116,7 +113,7 @@ public class Game extends Canvas implements Runnable {
 
     private void initializeWindow() throws IOException {
         window = new JFrame("Badger");
-        Image icon = ImageIO.read(Game.class.getResource("/images/icon.png"));
+        Image icon = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/images/icon.png")));
         window.setIconImage(icon);
         window.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         window.add(this);
@@ -178,7 +175,6 @@ public class Game extends Canvas implements Runnable {
                 Entity entity = entities.get(i);
                 entity.update();
             }
-
             if (player.chocolateCounter == 100) {
                 level++;
                 if (level > maxLevel)
@@ -195,7 +191,6 @@ public class Game extends Canvas implements Runnable {
             createBufferStrategy(3);
             return;
         }
-
         Graphics graphics = backgroundImage.getGraphics();
         world.renderFloor(graphics);
         entities.sort(Entity.nodeSorter);

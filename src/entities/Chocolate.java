@@ -9,7 +9,9 @@ import world.World;
 import java.awt.image.BufferedImage;
 
 public class Chocolate extends Entity {
+
     public int chocolateScore = 250;
+    
     public Chocolate(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-2);

@@ -1,6 +1,7 @@
 package audio;
 
 public class Audio {
+
     // Musics
     public static final AudioClip MENU_MUSIC = new AudioClip("/music/menu_music.wav");
     public static final AudioClip LEVEL1_MUSIC = new AudioClip("/music/level1_music.wav");

@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class PoisonedParticle extends Entity {
+
     public BufferedImage[] playerWeakParticle;
     public int index = 0;
     public int maxIndex = 4;

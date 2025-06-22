@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Snake extends Entity{
+
     public BufferedImage[] snakeLeft;
     public BufferedImage[] snakeRight;
 

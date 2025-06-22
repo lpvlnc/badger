@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Spritesheet {
+
     private final BufferedImage spritesheet;
 
     public Spritesheet() throws IOException {

@@ -9,6 +9,7 @@ import world.World;
 import java.awt.image.BufferedImage;
 
 public class Crown extends Entity {
+
     public Crown(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setMask(3, 13, 26, 7);

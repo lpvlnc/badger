@@ -6,13 +6,11 @@ import main.Game;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 public class Door extends Entity {
 
     public BufferedImage doorClosed = Game.spritesheet.getSprite(448, 512, 96, 128);
     public BufferedImage doorOpened = Game.spritesheet.getSprite(544, 512, 96, 128);
-
     public boolean closed = true;
     public boolean canEnter = false;
 

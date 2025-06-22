@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
 public class Parchment extends Entity {
+
     public Parchment(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-2);

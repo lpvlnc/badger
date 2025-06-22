@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Player extends Entity {
+
     // Sprites
     public BufferedImage[] playerUp;
     public BufferedImage[] playerLeft;

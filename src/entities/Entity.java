@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Entity {
+
     protected double x;
     protected double y;
     protected int width;
@@ -100,7 +101,6 @@ public class Entity {
                     direction = Direction.LEFT;
                     x-=speed;
                 }
-
                 if (y < target.y * World.TILE_SIZE) {
                     isMoving = true;
                     direction = Direction.DOWN;
@@ -110,7 +110,6 @@ public class Entity {
                     direction = Direction.UP;
                     y-=speed;
                 }
-
                 if (x == target.x * World.TILE_SIZE && y == target.y * World.TILE_SIZE)
                     path.removeLast();
             }

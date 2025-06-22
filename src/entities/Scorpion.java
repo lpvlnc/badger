@@ -8,7 +8,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Scorpion extends Entity{
+public class Scorpion extends Entity {
+
     public BufferedImage[] scorpionUp;
     public BufferedImage[] scorpionDown;
     public boolean up;

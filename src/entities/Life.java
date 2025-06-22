@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Life extends Entity {
+
     public BufferedImage[] life;
     public int index = 0;
     public int maxIndex = 4;

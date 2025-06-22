@@ -1,6 +1,7 @@
 package astar;
 
 public class Node {
+
     public Vector2i tile;
     public Node parent;
     public double fCost, gCost, hCost;

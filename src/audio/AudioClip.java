@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 
 public class AudioClip {
-    private URL resource;
+
+    private final URL resource;
 
     public AudioClip(String path) {
         resource = getClass().getResource(path);

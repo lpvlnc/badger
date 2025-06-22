@@ -13,6 +13,7 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 
 public class Menu {
+
     private ArrayList<String> options;
     private int currentOption = 0;
     private int maxOption;
@@ -30,7 +31,7 @@ public class Menu {
         options.add("Start game");
         options.add("Exit");
         maxOption = options.size() - 1;
-        currentOption = 0; // Adicione esta linha
+        currentOption = 0;
     }
 
     public void loadPauseMenuOptions() {
@@ -125,7 +126,6 @@ public class Menu {
     }
     
     public void renderMainMenu(Graphics2D graphics2d) {
-
         int menuStart = calculateMenuYStart();
         Game.ui.drawTextCenter("MAIN MENU", menuStart, new Color(250, 0, 0));
         menuStart += (UI.LINE_HEIGHT);

@@ -5,11 +5,11 @@ import tiles.TileWall;
 import world.World;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class AStar {
+
     public static double lastTime = System.currentTimeMillis();
 
     private static Comparator<Node> nodeSorter = new Comparator<Node>() {
@@ -33,9 +33,7 @@ public class AStar {
         List<Node> closedList = new ArrayList<Node>();
         int maxIterations = 1000;
         int iterations = 0;
-
         Node current = new Node(start, null, 0, getDistance(start, end));
-
         openList.add(current);
         while(!openList.isEmpty() && iterations < maxIterations) {
             iterations++;
@@ -52,10 +50,8 @@ public class AStar {
                 closedList.clear();
                 return path;
             }
-
             openList.remove(current);
             closedList.add(current);
-
             for(int i = 0; i < 9; i++) {
                 if (i == 4)
                     continue;
@@ -67,13 +63,10 @@ public class AStar {
                 if (!validPosition(pos))
                     return null;
                 Tile tile = World.tiles[ x+xi+ ( (y+yi) * World.mapWidth ) ];
-
                 if (tile == null)
                     continue;
-
                 if (tile instanceof TileWall && tile.solid)
                     continue;
-
                 switch (i) {
                     case 0 -> {
                         Tile test = World.tiles[x + xi + 1 + ((y + yi) * World.mapWidth)];

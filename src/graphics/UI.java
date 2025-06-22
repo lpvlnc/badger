@@ -19,6 +19,7 @@ import main.Game;
 import world.World;
 
 public class UI {
+
     private Graphics graphics;
     public static final int TEXT_SIZE = 16;
     public static final int LINE_HEIGHT = 32;
