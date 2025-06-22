@@ -18,8 +18,6 @@ public class Menu {
     private int maxOption;
     public boolean up, down;
     public boolean select = false;
-    private final int heightPos = (Game.window.getHeight() / 2);
-    private final int heightOffSet = 60;
     private final BufferedImage mainMenuBackground;
 
     public Menu() throws IOException {
@@ -137,18 +135,23 @@ public class Menu {
 
     public void renderPauseMenu(Graphics2D graphics2d) {
         graphics2d.setColor(new Color(250, 0, 250));
-//        Game.ui.drawTextCenter("PAUSE", heightPos - 90, new Color(250, 0, 0));
-//        Game.ui.drawTextCenter("KEYBOARD TIPS", widthPos - -60, new Color(100, 100, 100));
-//        Game.ui.drawTextCenterTips("TO USE STEROIDS: PRESS CTRL", widthPos - -90, new Color(100, 100, 100));
-//        Game.ui.drawTextCenterTips("TO USE CROWN: PRESS SPACE", widthPos - -120, new Color(100, 100, 100));
-//        Game.ui.drawTextCenterTips("TO RUN USING ENERGY: PRESS SHIFT", widthPos - -150, new Color(100, 100, 100));
-//        Game.ui.drawTextCenterTips("TO USE RAFFLE DETECTOR: PRESS E", widthPos - -180, new Color(100, 100, 100));
-//        Game.ui.drawTextCenterTips("TO ENTER PYRAMID: PRESS ENTER", widthPos - -210, new Color(100, 100, 100));
+        renderTips(graphics2d);
         int menuStart = calculateMenuYStart();
         Game.ui.drawTextCenter("PAUSE", menuStart, new Color(250, 0, 0));
         menuStart += (UI.LINE_HEIGHT);
         for (int i = 0; i < options.size(); i++)
             Game.ui.drawTextCenter(options.get(i), menuStart + (i * UI.LINE_HEIGHT), i == currentOption ? null : new Color(100, 100, 100));
+    }
+
+    public void renderTips(Graphics2D graphics) {
+        Game.ui.drawText("Run (SHIFT)", Game.gameDimensions.getX() + 10, 135, null, 0.5);
+        Game.ui.drawText("Show FPS (F)", Game.gameDimensions.getX() + 10, 155, null, 0.5);
+        Game.ui.drawText("Show hitbox (H)", Game.gameDimensions.getX() + 10, 175, null, 0.5);
+        Game.ui.drawText("Enter pyramid (ENTER) - After all chocolates have been collected and the door is opened.", Game.gameDimensions.getX() + 10, 195, null, 0.5);
+        Game.ui.drawText("Collectables:", Game.gameDimensions.getX() + 10, 235, null, 0.5);
+        Game.ui.drawText("Steroids (CTRL) - Invincible and with max speed. After a short period of time become vulnerable.", Game.gameDimensions.getX() + 10, 255, null, 0.5);
+        Game.ui.drawText("Crown (SPACE) - See through walls for a period of time.", Game.gameDimensions.getX() + 10, 275, null, 0.5);
+        Game.ui.drawText("Invisibility Gadget (E) - Becomes invisible to all enemies (still takes damage on contact).", Game.gameDimensions.getX() + 10, 295, null, 0.5);
     }
 
     public void renderGameOverMenu(Graphics2D graphics2d) {

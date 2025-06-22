@@ -93,12 +93,15 @@ public class UI {
             renderCrown();
             renderInvisibilityGadget();
         }
-        showFPS();
+        showFPS(g);
     }
 
-    public void showFPS() {
-        if(Game.showFps)
-            drawText("FPS:" + frames, 854, 606, null);
+    public void showFPS(Graphics g) {
+        if(Game.showFps) {
+            FontMetrics metrics = graphics.getFontMetrics(g.getFont());
+            String text = "FPS: " + frames;
+            drawText(text, Game.gameDimensions.getX() + 10, Game.gameDimensions.getHeight() - 50, null, 1);
+        }
     }
 
     public void renderCrown() {
@@ -127,17 +130,17 @@ public class UI {
         StringBuilder score = new StringBuilder(String.valueOf(Game.player.score));
         while(score.length() < 6)
             score.insert(0, "0");
-        drawText("SCORE:" + score, Game.gameDimensions.getX() + 776, 26, null);
+        drawText("SCORE:" + score, Game.gameDimensions.getX() + 776, 26, null, 1);
     }
 
     public void renderSteroid() {
         graphics.drawImage(steroid, -440, 4, null);
         String zero = Game.player.steroidCounter < 10 ? "0" : "";
-        drawText("x" + zero + Game.player.steroidCounter, Game.gameDimensions.getX() + 34, 56, null);
+        drawText("x" + zero + Game.player.steroidCounter, Game.gameDimensions.getX() + 34, 56, null, 1);
     }
 
     public void renderChocolate() {
-        drawText("CHOCOLATE:", Game.gameDimensions.getX() + 447, 26, null);
+        drawText("CHOCOLATE:", Game.gameDimensions.getX() + 447, 26, null, 1);
         for(int i = 0; i < 5; i++)
             graphics.drawImage(chocolateBack, 154 + (i * 30), -24, null);
         for(int i = 0; i < Game.player.chocolateCounter; i++)
@@ -145,7 +148,7 @@ public class UI {
     }
 
     public void renderParchment() {
-        drawText("PARCHMENT:", Game.gameDimensions.getX() + 447, 26, null);
+        drawText("PARCHMENT:", Game.gameDimensions.getX() + 447, 26, null, 1);
         for(int i = 0; i < 10; i ++) {
             if(i < 5)
                 graphics.drawImage(parchmentBack, 160 + (i * 30), -19, 24, 24, null);
@@ -161,7 +164,7 @@ public class UI {
     }
 
     public void renderEnergy() {
-        drawText("ENERGY:", Game.gameDimensions.getX() + 231, 26, null);
+        drawText("ENERGY:", Game.gameDimensions.getX() + 231, 26, null, 1);
         if (Game.player.onSteroid) {
             for(int i = 0; i < 5; i++)
                 graphics.drawImage(energyBack, 101 + (i * 17), -24, null);
@@ -184,7 +187,7 @@ public class UI {
     }
 
     public void renderLife() {
-        drawText("LIFE:", Game.gameDimensions.getX() + 10, 26, null);
+        drawText("LIFE:", Game.gameDimensions.getX() + 10, 26, null, 1);
         if(Game.player.onSteroid) {
             for(int i = 0; i < 5; i++)
                 graphics.drawImage(heartBack, 79 +  (i * 24), -15, null);
@@ -243,10 +246,10 @@ public class UI {
         return (Graphics)graphics2d;
     }
 
-    public void drawText(String text, int x, int y, Color color) {
+    public void drawText(String text, int x, int y, Color color, double scale) {
         if (graphics instanceof Graphics2D graphics2d) {
             AffineTransform affineTransform = AffineTransform.getTranslateInstance(x, y);
-            affineTransform.scale(1, 1);
+            affineTransform.scale(scale, scale);
             graphics = applyTextEffect(graphics2d, affineTransform, text, color);
         }
     }

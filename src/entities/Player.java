@@ -104,7 +104,7 @@ public class Player extends Entity {
 
     public Player(double x,double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
-        setDepth(0);
+        setDepth(1);
         setMask(8, 6, 24, 17);
         initSprites();
         speed = defaultSpeed;

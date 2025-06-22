@@ -7,8 +7,7 @@ import world.World;
 
 import java.awt.image.BufferedImage;
 
-public class Steroid extends Entity{
-
+public class Steroid extends Entity {
     public Steroid(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-2);
