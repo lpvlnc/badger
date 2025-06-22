@@ -3,7 +3,7 @@
 
 # 🕹️ Java 2D Top-Down Game
 
- This project began as a final test for the **Programming C** discipline, to explore team work, object-oriented programming, and project structure.
+ This project began as a final test for the **Programming C** discipline at Faculdade Dom Bosco de Porto Alegre, to explore team work, object-oriented programming, and project structure.
  We choose to make a game because at the time i was starting my studies in game development, so i had a base for a game engine in Java, presented it to my colleagues and they liked the idea.
  After the version was presented in class, **additional improvements** were made to enhance responsiveness and gameplay experience.
 
@@ -67,15 +67,14 @@
 
 ## 📦 How to Run
 
-Download .exe:
-A .exe build is available to download.
-
+Download the .exe release, run and play!
+or
 Build locally:
-1. Make sure you have Java 8 or higher installed.
-2. Clone this repository:
-3. Use any IDE that can run the project (It was developed using Intellij)
+ 1. Make sure you have Java 8 or higher installed
+ 2. Clone this repository
+ 3. Use any IDE that can run the project (It was developed using IntelliJ)
 
-If you have any trouble running the project get in touch with me through my linkedin page (on profile)
+If you have any trouble running the project get in touch with me through my LinkedIn page (on profile)
 
 ---
 
