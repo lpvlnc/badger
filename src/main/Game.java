@@ -11,6 +11,7 @@ import handlers.KeyHandler;
 import graphics.Menu;
 import world.World;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -113,8 +114,10 @@ public class Game extends Canvas implements Runnable {
         world = new World(level);
     }
 
-    private void initializeWindow() {
+    private void initializeWindow() throws IOException {
         window = new JFrame("Badger");
+        Image icon = ImageIO.read(Game.class.getResource("/images/icon.png"));
+        window.setIconImage(icon);
         window.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         window.add(this);
         window.setResizable(true);
