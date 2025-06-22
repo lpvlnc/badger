@@ -4,6 +4,7 @@ import audio.Audio;
 import audio.AudioPlayer;
 import entities.Entity;
 import entities.Player;
+import entities.Scarab;
 import graphics.Spritesheet;
 import graphics.UI;
 import handlers.KeyHandler;

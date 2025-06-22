@@ -3,13 +3,13 @@ package world;
 import entities.Chocolate;
 import entities.Crown;
 import entities.Detector;
-import entities.Dog;
+import entities.Scorpion;
 import entities.Door;
 import entities.Life;
-import entities.Panda;
+import entities.Snake;
 import entities.Parchment;
 import entities.Player;
-import entities.Salesman;
+import entities.Scarab;
 import entities.Steroid;
 import main.Camera;
 import main.Game;
@@ -81,11 +81,11 @@ public class World {
                             case 0 ->
                                     tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                             case 1 ->
-                                    Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                                    Game.entities.add(new Snake(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                             case 2 ->
-                                    Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                                    Game.entities.add(new Scorpion(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                             case 3 ->
-                                    Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                                    Game.entities.add(new Scarab(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                         }
                     }
                     case 0xFF4e4e4e -> // wall top solid
@@ -127,11 +127,11 @@ public class World {
                     case 0xFF001ed4 ->
                             Game.entities.add(new Detector(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     case 0xFF6e956f ->
-                            Game.entities.add(new Panda(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                            Game.entities.add(new Snake(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     case 0xFFb09898 ->
-                            Game.entities.add(new Dog(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                            Game.entities.add(new Scorpion(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     case 0xFFffa579 ->
-                            Game.entities.add(new Salesman(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                            Game.entities.add(new Scarab(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     default -> // floor
                             tiles[pos] = new TileFloor(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, Tile.FLOOR);
                 }

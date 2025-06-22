@@ -8,41 +8,41 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Panda extends Entity{
-    public BufferedImage[] pandaLeft;
-    public BufferedImage[] pandaRight;
+public class Snake extends Entity{
+    public BufferedImage[] snakeLeft;
+    public BufferedImage[] snakeRight;
 
     public boolean up;
     public boolean right;
     public int frames = 0;
     public int maxFrames = 15;
     public int index = 0;
-    public int maxIndex = 3;
+    public int maxIndex = 4;
     private int initialY;
 
-    public Panda(double x, double y, int width, int height, BufferedImage sprite) {
+    public Snake(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
-
+        setMask(9, 12, 16, 10);
         setDepth(-1);
 
-        pandaLeft = new BufferedImage[3];
-        for (int i = 0; i < 3; i++)
-            pandaLeft[i] = Game.spritesheet.getSprite(96 + (i * World.TILE_SIZE), 288, 32, 32);
+        snakeLeft = new BufferedImage[6];
+        for (int i = 0; i < 6; i++)
+            snakeLeft[i] = Game.spritesheet.getSprite(192 + (i * World.TILE_SIZE), 288, 32, 32);
 
-        pandaRight = new BufferedImage[3];
-        for (int i = 0; i < 3; i++)
-            pandaRight[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 288, 32, 32);
+        snakeRight = new BufferedImage[6];
+        for (int i = 0; i < 6; i++)
+            snakeRight[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 288, 32, 32);
 
         if (getY() <= 64)
             setY(65);
 
         initialY = getY();
         right = ThreadLocalRandom.current().nextInt(0, 2) != 0;
-        setMask(6, 2, 20, 30);
     }
 
     @Override
     public void update() {
+        setMask(9, 12, 16, 10);
         if (getX() <= 0 || !World.isFreeDynamic(getX() + xMask - speed, getY() + yMask, wMask, hMask))
             right = true;
 
@@ -89,10 +89,10 @@ public class Panda extends Entity{
     public void render(Graphics g){
         if (right) {
             setMask(4, 2, 21, 30);
-            g.drawImage(pandaRight[index], getX() - Camera.x, getY() - Camera.y, null);
+            g.drawImage(snakeRight[index], getX() - Camera.x, getY() - Camera.y, null);
         } else {
             setMask(4, 2, 21, 30);
-            g.drawImage(pandaLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+            g.drawImage(snakeLeft[index], getX() - Camera.x, getY() - Camera.y, null);
         }
     }
 }

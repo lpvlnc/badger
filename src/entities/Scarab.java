@@ -10,11 +10,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Salesman extends Entity {
-    public BufferedImage[] salesManUp;
-    public BufferedImage[] salesManLeft;
-    public BufferedImage[] salesManDown;
-    public BufferedImage[] salesManRight;
+public class Scarab extends Entity {
+    public BufferedImage[] scarabUp;
+    public BufferedImage[] scarabLeft;
+    public BufferedImage[] scarabDown;
+    public BufferedImage[] scarabRight;
 
     public int frames = 0;
     public int maxFrames = 10;
@@ -27,7 +27,7 @@ public class Salesman extends Entity {
     Random random = new Random();
     Vector2i spawnPos;
 
-    public Salesman(double x, double y, int width, int height, BufferedImage sprite) {
+    public Scarab(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-1);
         direction = Direction.DOWN;
@@ -36,21 +36,21 @@ public class Salesman extends Entity {
         spawnPos = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
         speed = 1;
 
-        salesManUp = new BufferedImage[4];
+        scarabUp = new BufferedImage[4];
         for(int i = 0; i < 4; i++)
-            salesManUp[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 417, 32, 32);
+            scarabUp[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 417, 32, 32);
 
-        salesManLeft = new BufferedImage[4];
+        scarabLeft = new BufferedImage[4];
         for(int i = 0; i < 4; i++)
-            salesManLeft[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 480, 32, 32);
+            scarabLeft[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 480, 32, 32);
 
-        salesManDown = new BufferedImage[4];
+        scarabDown = new BufferedImage[4];
         for(int i = 0; i < 4; i++)
-            salesManDown[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 385, 32, 32);
+            scarabDown[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 385, 32, 32);
 
-        salesManRight = new BufferedImage[4];
+        scarabRight = new BufferedImage[4];
         for(int i = 0; i < 4; i++)
-            salesManRight[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 449, 32, 32);
+            scarabRight[i] = Game.spritesheet.getSprite((i * World.TILE_SIZE), 449, 32, 32);
     }
 
     public boolean isSeeingPlayer() {
@@ -109,42 +109,42 @@ public class Salesman extends Entity {
         if(isMoving) {
             if(direction == Direction.RIGHT) {
                 setMask(8, 1, 16, 29);
-                g.drawImage(salesManRight[index], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabRight[index], getX() - Camera.x, getY() - Camera.y, null);
             }
 
             if(direction == Direction.LEFT) {
                 setMask(8, 3, 16, 29);
-                g.drawImage(salesManLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabLeft[index], getX() - Camera.x, getY() - Camera.y, null);
             }
 
             if(direction == Direction.UP) {
                 setMask(7, 0, 16, 30);
-                g.drawImage(salesManUp[index], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabUp[index], getX() - Camera.x, getY() - Camera.y, null);
             }
 
             if(direction == Direction.DOWN) {
                 setMask(7, 0, 16, 30);
-                g.drawImage(salesManDown[index], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabDown[index], getX() - Camera.x, getY() - Camera.y, null);
             }
         } else {
             if(direction == Direction.RIGHT) {
                 setMask(8, 1, 16, 29);
-                g.drawImage(salesManRight[0], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabRight[0], getX() - Camera.x, getY() - Camera.y, null);
             }
 
             if(direction == Direction.LEFT) {
                 setMask(8, 3, 16, 29);
-                g.drawImage(salesManLeft[0], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabLeft[0], getX() - Camera.x, getY() - Camera.y, null);
             }
 
             if(direction == Direction.UP) {
                 setMask(7, 0, 16, 30);
-                g.drawImage(salesManUp[0], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabUp[0], getX() - Camera.x, getY() - Camera.y, null);
             }
 
             if(direction == Direction.DOWN) {
                 setMask(7, 0, 16, 30);
-                g.drawImage(salesManDown[0], getX() - Camera.x, getY() - Camera.y, null);
+                g.drawImage(scarabDown[0], getX() - Camera.x, getY() - Camera.y, null);
             }
         }
 
