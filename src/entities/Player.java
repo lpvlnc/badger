@@ -8,7 +8,7 @@ import main.Game;
 import main.Game.State;
 import world.World;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,12 +69,16 @@ public class Player extends Entity {
     public int energyMaxFrames = 60;
     public int parchmentCounter = 0;
     public boolean hasCrown = false;
-    public boolean hasDetector = false;
-    public boolean detecting = false;
-    public int detectingMaxCounter = 400;
-    public int detectingCounter = detectingMaxCounter;
-    public int detectingFrames = 0;
-    public int detectingMaxFrames = 5;
+    public boolean hasInvisibilityGadget = false;
+    public boolean invisible = false;
+    public int invisibleMaxCounter = 400;
+    public int invisibleCounter = invisibleMaxCounter;
+    public int invisibleFrames = 0;
+    public int invisibleMaxFrames = 5;
+    public int xRayMaxCounter = 400;
+    public int xRayCounter = xRayMaxCounter;
+    public int xRayFrames = 0;
+    public int xRayMaxFrames = 5;
     public boolean xRay = false;
     public boolean action = false;
 
@@ -95,6 +99,8 @@ public class Player extends Entity {
     public int weakSpeed = 1;
     public int weakMaxTime = steroidMaxTime;
     public int weakTime = 0;
+
+    AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,  0.5f);
 
     public Player(double x,double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
@@ -369,17 +375,33 @@ public class Player extends Entity {
         }
     }
 
-    public void detect() {
-        if (detecting) {
-            detectingCounter--;
-            if (detectingCounter <= 0)
-                detecting = false;
+    public void invisible() {
+        if (invisible) {
+            invisibleCounter--;
+            if (invisibleCounter <= 0)
+                invisible = false;
         } else {
-            if (detectingCounter < detectingMaxCounter) {
-                detectingFrames++;
-                if (detectingFrames >= detectingMaxFrames) {
-                    detectingFrames = 0;
-                    detectingCounter+=10;
+            if (invisibleCounter < invisibleMaxCounter) {
+                invisibleFrames++;
+                if (invisibleFrames >= invisibleMaxFrames) {
+                    invisibleFrames = 0;
+                    invisibleCounter+=10;
+                }
+            }
+        }
+    }
+
+    public void xRay() {
+        if (xRay) {
+            xRayCounter--;
+            if (xRayCounter <= 0)
+                xRay = false;
+        } else {
+            if (xRayCounter < xRayMaxCounter) {
+                xRayFrames++;
+                if (xRayFrames >= xRayMaxFrames) {
+                    xRayFrames = 0;
+                    xRayCounter+=10;
                 }
             }
         }
@@ -424,7 +446,8 @@ public class Player extends Entity {
         if (weak)
             weak();
 
-        detect();
+        invisible();
+        xRay();
         movement();
         animation();
         updateCamera();
@@ -464,7 +487,6 @@ public class Player extends Entity {
                     g.drawImage(playerUpDamaged[0], getX() - Camera.x, getY() - Camera.y, null);
             }
         }
-
     }
 
     public void renderPlayerLeft(Graphics g) {
@@ -561,16 +583,21 @@ public class Player extends Entity {
 
     @Override
     public void render(Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
+        if (invisible) {
+            g2d.setComposite(alphaComposite);
+        }
         if (this.direction == Direction.UP)
-            renderPlayerUp(g);
+            renderPlayerUp(g2d);
 
         if (this.direction == Direction.LEFT)
-            renderPlayerLeft(g);
+            renderPlayerLeft(g2d);
 
         if (this.direction == Direction.DOWN)
-            renderPlayerDown(g);
+            renderPlayerDown(g2d);
 
         if (this.direction == Direction.RIGHT)
-            renderPlayerRight(g);
+            renderPlayerRight(g2d);
+        g2d.setComposite(AlphaComposite.SrcOver);
     }
 }

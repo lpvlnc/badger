@@ -13,8 +13,7 @@ public class TileWall extends Tile {
     }
 
     @Override
-    public void render(Graphics graphics){
-
+    public void render(Graphics graphics) {
         if(Game.player.xRay) {
             Graphics2D g2 = (Graphics2D)graphics;
             Composite comp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);

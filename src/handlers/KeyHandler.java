@@ -46,8 +46,8 @@ public class KeyHandler implements KeyListener {
             if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE && player.hasCrown)
                 player.xRay = !player.xRay;
 
-            if (keyEvent.getKeyCode() == KeyEvent.VK_E && player.hasDetector)
-                player.detecting = !player.detecting;
+            if (keyEvent.getKeyCode() == KeyEvent.VK_E && player.hasInvisibilityGadget)
+                player.invisible = !player.invisible;
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER)
                 player.action = true;

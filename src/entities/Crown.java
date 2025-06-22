@@ -13,7 +13,7 @@ public class Crown extends Entity {
         super(x, y, width, height, sprite);
         setMask(3, 13, 26, 7);
         setDepth(-2);
-        this.sprite = Game.spritesheet.getSprite(512, 32, World.TILE_SIZE, World.TILE_SIZE);
+        this.sprite = Game.spritesheet.getSprite(416, 96, World.TILE_SIZE, World.TILE_SIZE);
     }
 
     @Override

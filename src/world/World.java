@@ -2,7 +2,7 @@ package world;
 
 import entities.Chocolate;
 import entities.Crown;
-import entities.Detector;
+import entities.InvisibilityGadget;
 import entities.Scorpion;
 import entities.Door;
 import entities.Life;
@@ -125,7 +125,7 @@ public class World {
                     case 0xFF825353 ->
                             Game.entities.add(new Crown(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     case 0xFF001ed4 ->
-                            Game.entities.add(new Detector(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                            Game.entities.add(new InvisibilityGadget(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     case 0xFF6e956f ->
                             Game.entities.add(new Snake(xx * TILE_SIZE, yy * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
                     case 0xFFb09898 ->
@@ -142,7 +142,7 @@ public class World {
         if(Game.level == 1) {
             spawnChocolate();
             spawnCrown();
-            spawnDetector();
+            spawninvisibilityGadget();
         }
 
         if(Game.level == 2)
@@ -233,17 +233,17 @@ public class World {
         }
     }
 
-    public static void spawnDetector() {
+    public static void spawninvisibilityGadget() {
         Random rand = new Random();
-        int detector = 0;
-        while (detector < 1) {
+        int invisibilityGadget = 0;
+        while (invisibilityGadget < 1) {
             int x = rand.nextInt((mapWidth));
             int y = rand.nextInt((mapHeight));
             int pos = x + (y * mapWidth);
             if(tiles[pos] instanceof TileFloor && !tiles[pos].spawnArea) {
                 if(rand.nextInt(100) < 10) {
-                    Game.entities.add(new Detector(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
-                    detector++;
+                    Game.entities.add(new InvisibilityGadget(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE, null));
+                    invisibilityGadget++;
                 }
             }
         }

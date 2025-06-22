@@ -68,7 +68,7 @@ public class Scarab extends Entity {
     @Override
     public void update() {
         isMoving = false;
-        if(isSeeingPlayer() && !Game.player.detecting) {
+        if(isSeeingPlayer() && !Game.player.invisible) {
             if(random.nextInt(100) < 90) {
                 if(path == null || path.isEmpty() && AStar.clear()) {
                     Vector2i start = new Vector2i(getX() / World.TILE_SIZE, getY() / World.TILE_SIZE);
@@ -99,7 +99,7 @@ public class Scarab extends Entity {
         if(random.nextInt(100) < 95)
             followPath(path);
 
-        if(isColliding(this, Game.player) && !Game.player.detecting)
+        if(isColliding(this, Game.player))
             Game.player.takeDamage(1);
     }
 

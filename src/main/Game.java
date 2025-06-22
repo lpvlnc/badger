@@ -57,7 +57,7 @@ public class Game extends Canvas implements Runnable {
     public static int level1Lives;
     public static int level1Energy;
     public static int level1Steroid;
-    public static boolean level1Detector;
+    public static boolean level1InvisibilityGadget;
     public static int level = 1;
     public int maxLevel = 2;
 
@@ -109,7 +109,7 @@ public class Game extends Canvas implements Runnable {
             player.score = level1Score;
             player.steroidCounter = level1Steroid;
             player.hasCrown = true;
-            player.hasDetector = level1Detector;
+            player.hasInvisibilityGadget = level1InvisibilityGadget;
         }
         world = new World(level);
     }
@@ -121,7 +121,6 @@ public class Game extends Canvas implements Runnable {
         window.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         window.add(this);
         window.setResizable(true);
-//        window.setUndecorated(true);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -134,7 +133,7 @@ public class Game extends Canvas implements Runnable {
         level1Energy = player.energy;
         level1Score = player.score;
         level1Steroid = player.steroidCounter;
-        level1Detector = player.hasDetector;
+        level1InvisibilityGadget = player.hasInvisibilityGadget;
         entities.clear();
         level++;
         player.direction = Entity.Direction.UP;

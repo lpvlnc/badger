@@ -35,8 +35,8 @@ public class UI {
     public static BufferedImage parchment;
     public static BufferedImage crownBack;
     public static BufferedImage crown;
-    public static BufferedImage detectorBack;
-    public static BufferedImage detector;
+    public static BufferedImage invisibilityGadgetBack;
+    public static BufferedImage invisibilityGadget;
     public static boolean updateFps;
     public static int frames = 0;
     public int animationFrames = 0;
@@ -54,28 +54,28 @@ public class UI {
     }
 
     public void initializeSprites() {
-        heartBack = Game.spritesheet.getSprite(608, 32, World.TILE_SIZE, World.TILE_SIZE);
-        heart = Game.spritesheet.getSprite(608, 0, World.TILE_SIZE, World.TILE_SIZE);
+        heartBack = Game.spritesheet.getSprite(608, 0, World.TILE_SIZE, World.TILE_SIZE);
+        heart = Game.spritesheet.getSprite(608, 32, World.TILE_SIZE, World.TILE_SIZE);
 
-        weakHeartBack = Game.spritesheet.getSprite(608, 96, World.TILE_SIZE, World.TILE_SIZE);
-        weakHeart = Game.spritesheet.getSprite(608, 64, World.TILE_SIZE, World.TILE_SIZE);
+        weakHeartBack = Game.spritesheet.getSprite(608, 64, World.TILE_SIZE, World.TILE_SIZE);
+        weakHeart = Game.spritesheet.getSprite(608, 96, World.TILE_SIZE, World.TILE_SIZE);
 
-        chocolateBack = Game.spritesheet.getSprite(576, 32, World.TILE_SIZE, World.TILE_SIZE);
-        chocolate = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
+        chocolateBack = Game.spritesheet.getSprite(576, 0, World.TILE_SIZE, World.TILE_SIZE);
+        chocolate = Game.spritesheet.getSprite(576, 32, World.TILE_SIZE, World.TILE_SIZE);
 
-        energyBack = Game.spritesheet.getSprite(416, 32, World.TILE_SIZE, World.TILE_SIZE);
-        energy = Game.spritesheet.getSprite(416, 0, World.TILE_SIZE, World.TILE_SIZE);
+        energyBack = Game.spritesheet.getSprite(416, 0, World.TILE_SIZE, World.TILE_SIZE);
+        energy = Game.spritesheet.getSprite(416, 32, World.TILE_SIZE, World.TILE_SIZE);
 
         steroid = Game.spritesheet.getSprite(512, 0, World.TILE_SIZE, World.TILE_SIZE);
 
-        parchmentBack = Game.spritesheet.getSprite(544, 32, World.TILE_SIZE, World.TILE_SIZE);
-        parchment = Game.spritesheet.getSprite(544, 0, World.TILE_SIZE, World.TILE_SIZE);
+        parchmentBack = Game.spritesheet.getSprite(544, 0, World.TILE_SIZE, World.TILE_SIZE);
+        parchment = Game.spritesheet.getSprite(544, 32, World.TILE_SIZE, World.TILE_SIZE);
 
-        crownBack = Game.spritesheet.getSprite(512, 64, World.TILE_SIZE, World.TILE_SIZE);
-        crown = Game.spritesheet.getSprite(512, 32, World.TILE_SIZE, World.TILE_SIZE);
+        crownBack = Game.spritesheet.getSprite(416, 64, World.TILE_SIZE, World.TILE_SIZE);
+        crown = Game.spritesheet.getSprite(416, 96, World.TILE_SIZE, World.TILE_SIZE);
 
-        detectorBack = Game.spritesheet.getSprite(512, 128, World.TILE_SIZE, World.TILE_SIZE);
-        detector = Game.spritesheet.getSprite(512, 96, World.TILE_SIZE, World.TILE_SIZE);
+        invisibilityGadgetBack = Game.spritesheet.getSprite(416, 128, World.TILE_SIZE, World.TILE_SIZE);
+        invisibilityGadget = Game.spritesheet.getSprite(416, 160, World.TILE_SIZE, World.TILE_SIZE);
     }
 
     public void render(Graphics g) {
@@ -91,7 +91,7 @@ public class UI {
             renderSteroid();
             renderScore();
             renderCrown();
-            renderDetector();
+            renderInvisibilityGadget();
         }
         showFPS();
     }
@@ -103,18 +103,23 @@ public class UI {
 
     public void renderCrown() {
         graphics.drawImage(crownBack, -763, 36, null);
-        if(Game.player.hasCrown)
+        if(Game.player.hasCrown) {
             graphics.drawImage(crown, -763, 36, null);
+            graphics.setColor(new Color(128, 128, 128));
+            graphics.fillRect(-762, 60, (Game.player.xRayMaxCounter / 64) * 5, 5);
+            graphics.setColor(new Color(0, 206, 209));
+            graphics.fillRect(-762, 60, (Game.player.xRayCounter / 64) * 5, 5);
+        }
     }
 
-    public void renderDetector() {
-        graphics.drawImage(detectorBack, -763, 66, null);
-        if(Game.player.hasDetector) {
-            graphics.drawImage(detector, -763, 66, null);
+    public void renderInvisibilityGadget() {
+        graphics.drawImage(invisibilityGadgetBack, -763, 66, null);
+        if(Game.player.hasInvisibilityGadget) {
+            graphics.drawImage(invisibilityGadget, -763, 66, null);
             graphics.setColor(new Color(128, 128, 128));
-            graphics.fillRect(-762, 96, (Game.player.detectingMaxCounter / 64) * 5, 5);
+            graphics.fillRect(-762, 96, (Game.player.invisibleMaxCounter / 64) * 5, 5);
             graphics.setColor(new Color(0, 206, 209));
-            graphics.fillRect(-762, 96, (Game.player.detectingCounter / 64) * 5, 5);
+            graphics.fillRect(-762, 96, (Game.player.invisibleCounter / 64) * 5, 5);
         }
     }
 

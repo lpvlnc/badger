@@ -12,7 +12,7 @@ public class Parchment extends Entity {
     public Parchment(double x, double y, int width, int height, BufferedImage sprite) {
         super(x, y, width, height, sprite);
         setDepth(-2);
-        this.sprite = Game.spritesheet.getSprite(544, 0, World.TILE_SIZE, World.TILE_SIZE);
+        this.sprite = Game.spritesheet.getSprite(544, 32, World.TILE_SIZE, World.TILE_SIZE);
         this.setMask(3, 1, 25, 30);
     }
 
