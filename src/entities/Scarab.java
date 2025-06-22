@@ -106,46 +106,24 @@ public class Scarab extends Entity {
     @Override
     public void render(Graphics g) {
         g.setColor(new Color(100, 100, 200, 200));
-        if(isMoving) {
-            if(direction == Direction.RIGHT) {
-                setMask(8, 1, 16, 29);
-                g.drawImage(scarabRight[index], getX() - Camera.x, getY() - Camera.y, null);
-            }
+        if(direction == Direction.RIGHT) {
+            setMask(8, 1, 16, 29);
+            g.drawImage(scarabRight[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
 
-            if(direction == Direction.LEFT) {
-                setMask(8, 3, 16, 29);
-                g.drawImage(scarabLeft[index], getX() - Camera.x, getY() - Camera.y, null);
-            }
+        if(direction == Direction.LEFT) {
+            setMask(8, 3, 16, 29);
+            g.drawImage(scarabLeft[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
 
-            if(direction == Direction.UP) {
-                setMask(7, 0, 16, 30);
-                g.drawImage(scarabUp[index], getX() - Camera.x, getY() - Camera.y, null);
-            }
+        if(direction == Direction.UP) {
+            setMask(7, 0, 16, 30);
+            g.drawImage(scarabUp[index], getX() - Camera.x, getY() - Camera.y, null);
+        }
 
-            if(direction == Direction.DOWN) {
-                setMask(7, 0, 16, 30);
-                g.drawImage(scarabDown[index], getX() - Camera.x, getY() - Camera.y, null);
-            }
-        } else {
-            if(direction == Direction.RIGHT) {
-                setMask(8, 1, 16, 29);
-                g.drawImage(scarabRight[0], getX() - Camera.x, getY() - Camera.y, null);
-            }
-
-            if(direction == Direction.LEFT) {
-                setMask(8, 3, 16, 29);
-                g.drawImage(scarabLeft[0], getX() - Camera.x, getY() - Camera.y, null);
-            }
-
-            if(direction == Direction.UP) {
-                setMask(7, 0, 16, 30);
-                g.drawImage(scarabUp[0], getX() - Camera.x, getY() - Camera.y, null);
-            }
-
-            if(direction == Direction.DOWN) {
-                setMask(7, 0, 16, 30);
-                g.drawImage(scarabDown[0], getX() - Camera.x, getY() - Camera.y, null);
-            }
+        if(direction == Direction.DOWN) {
+            setMask(7, 0, 16, 30);
+            g.drawImage(scarabDown[index], getX() - Camera.x, getY() - Camera.y, null);
         }
 
         //g.fillOval(getX() + visionCenterX - visionRadius - Camera.x, getY() + visionCenterY - visionRadius - Camera.y, visionRadius * 2, visionRadius * 2);
