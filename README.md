@@ -1,6 +1,6 @@
 # Badger
 
-# 🦂 Java 2D Top-Down Game
+# 🕹️ Java 2D Top-Down Game
 
  This project began as a final test for the **Programming C** discipline, to explore team work, object-oriented programming, and project structure.
  We choose to make a game because at the time i was starting my studies in game development, so i had a base for a game engine in Java, presented it to my colleagues and they liked the idea.
@@ -29,7 +29,7 @@
   - ❤️ **5 health points** (hearts).
   - 🧪 **Steroid power-up (CTRL)**: Grants invincibility and max stamina temporarily, followed by a weakened state (1 heart and slower movement).
   - 👑 **Crown power-up (SPACE)**: Temporarily reveals the map and allows the player to **see through walls**.
-  - 🕵️‍♂️ **Invisibility Gadget (E)**: Temporarily makes the player invisible to enemies (but still vulnerable to contact).
+  - 📱 **Invisibility Gadget (E)**: Temporarily makes the player invisible to enemies (but still vulnerable to contact).
 
 - **Health pickups**: Regain hearts after taking damage.
 - **Responsive resolution**: Maintains aspect ratio across any screen size.
@@ -66,7 +66,7 @@
 
 ## 📦 How to Run
 
-Download .exe
+Download .exe:
 A .exe build is available to download.
 
 Build locally:
