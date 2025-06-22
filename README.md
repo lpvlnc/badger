@@ -46,7 +46,7 @@
 ---
 
 ## 🏫 Academic Context
- This project was created as part of our final test for the **Programming C** course. We opted for Java to better utilize object-oriented programming concepts that we have learn during our classes.
+ This project was created as part of our final project for the **Programming C** discipline. We opted for Java to better utilize object-oriented programming concepts that we have learn during our classes where we used Java multiple times.
 
 ---
 
