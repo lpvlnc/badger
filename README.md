@@ -1,7 +1,7 @@
 # Badger
 ![Badger banner](https://github.com/lpvlnc/badger/blob/main/res/images/main_menu_background.png)
 
-# 🕹️ Java 2D Top-Down Game
+# 🏫 Academic Context
 
  This project began as a final test for the **Programming C** discipline at Faculdade Dom Bosco de Porto Alegre, to explore team work, object-oriented programming, and project structure.
  We choose to make a game because at the time i was starting my studies in game development, so i had a base for a game engine in Java, presented it to my colleagues and they liked the idea.
@@ -42,11 +42,6 @@
   - Some tiles/sprites are randomized for **slightly different experiences** each time.
   - A* algorithm implementation.
 - **Integrated audio system**: Sound effects and music enhance the immersive experience.
-
----
-
-## 🏫 Academic Context
- This project was created as part of our final project for the **Programming C** discipline. We opted for Java to better utilize object-oriented programming concepts that we have learn during our classes where we used Java multiple times.
 
 ---
 
