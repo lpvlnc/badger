@@ -23,7 +23,7 @@
 - **Three enemy types** with different behaviors:
   - 🦂 **Scorpion**: Moves vertically, deals **2 hearts** of damage.
   - 🐍 **Snake**: Moves horizontally in a zigzag pattern, **instantly kills** the player.
-  - 🪲 **Scarab**: Uses **A* pathfinding** to chase the player, deals **1 heart** of damage.
+  - 🪲 **Scarab**: Uses **A\* pathfinding** to chase the player, deals **1 heart** of damage.
 
 - **Player Abilities**:
   - 🏃‍♂️ **Running (SHIFT)** consumes stamina that regenerates when not running.
