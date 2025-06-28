@@ -8,7 +8,6 @@
  After the version was presented in class, **additional improvements** were made to enhance responsiveness and gameplay experience.
 
 ---
-
 ## 🎮 About the Game
 
  It's a simple 2D **top-down game** developed in **Java**, featuring two unique levels. The main objective is to **collect items while avoiding dangerous enemies**.
@@ -17,7 +16,6 @@
   - In **Level 2**, the player must collect **10 ancient parchments** to complete the game.
 
 ---
-
 ## 🧠 Game Features
 
 - **Three enemy types** with different behaviors:
@@ -44,7 +42,6 @@
 - **Integrated audio system**: Sound effects and music enhance the immersive experience.
 
 ---
-
 ## 🔄 Post-Submission Updates
   - Improved screen resolution scaling.
   - Bug fixes and minor performance enhancements.
@@ -52,14 +49,12 @@
   - Changed enemies to animals/insects that exists in Egypt.
 
 ---
-
 ## 👨‍💻 Contributors
   - Leonardo Pinheiro Valença
   - Marcos Gabriel Koslovski
   - Thaiane Ribeiro
 
 ---
-
 ## 📦 How to Run
 
 Download the .exe release, run and play!
