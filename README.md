@@ -58,14 +58,17 @@
 ---
 ## 📦 How to Run
 
-Download the .exe release, run and play!
-or
-Build locally:
- 1. Make sure you have Java 8 or higher installed
- 2. Clone this repository
- 3. Open the project in any IDE that supports Java (It was developed using IntelliJ)
+### Option 1 – Download
 
-If you have any trouble running the project get in touch with me through my LinkedIn page (on profile)
+Download the `.exe` release, run it, and play!
+
+### Option 2 – Build Locally
+
+1. Make sure you have **Java 8** or higher installed.
+2. Clone this repository.
+3. Open the project in any IDE that supports Java (developed using **IntelliJ**).
+
+If you have any trouble running the project, feel free to contact me through my [LinkedIn page](https://www.linkedin.com/in/lpvalenca/).
 
 ---
 
