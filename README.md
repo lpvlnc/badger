@@ -3,7 +3,7 @@
 
 # 🏫 Academic Context
 
- This project began as a final assignment for the Programming in C course at Faculdade Dom Bosco de Porto Alegre. Its main goal was to explore teamwork, object-oriented programming, and project structuring.
+ This project began as a final assignment for the **Programming C** course at Faculdade Dom Bosco de Porto Alegre. Its main goal was to explore teamwork, object-oriented programming, and project structuring.
  We chose to create a game because, at the time, I was beginning my studies in game development. I already had a basic Java game engine, presented it to my colleagues, and they liked the idea.
  After the first version was presented in class, additional improvements were made to enhance responsiveness and the overall gameplay experience.
 
