@@ -29,8 +29,8 @@ public class Game extends Canvas implements Runnable {
 
     // Graphics
     public static JFrame window;
-    public final static int WIDTH = 480;
-    public final static int HEIGHT = 320;
+    public final static int WIDTH = 1920;
+    public final static int HEIGHT = 1080;
     public final static int SCALE =  1;
     private BufferedImage backgroundImage;
     public static Spritesheet spritesheet;
